@@ -1,0 +1,8 @@
+build*/
+benchmark/third_party/
+benchmark/instances/
+benchmark/raw/
+*.o
+*.a
+compile_commands.json
+__pycache__/

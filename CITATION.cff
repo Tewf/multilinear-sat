@@ -1,0 +1,11 @@
+cff-version: 1.2.0
+title: "multilinear-sat: a native GPU/CPU SAT solver by continuous relaxation"
+message: "If you use this software, please cite it as below, together with FourierSAT (Kyrillidis, Shrivastava, Vardi, Zhang, AAAI 2020), whose relaxation it implements."
+type: software
+authors:
+  - family-names: Hamlil
+    given-names: Mohamed Ali Tewfik
+repository-code: "https://github.com/Tewf/multilinear-sat"
+license: MIT
+version: 0.1.0
+date-released: 2026-08-28
