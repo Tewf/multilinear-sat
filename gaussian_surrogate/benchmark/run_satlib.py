@@ -22,7 +22,7 @@ INSTANCES_DIRECTORY = PACKAGE.parent / "benchmark" / "instances"
 RESULTS_PATH = Path(__file__).resolve().parent / "satlib_results.jsonl"
 TIME_CAP_SECONDS = {"uf50-218": 5.0, "uf100-430": 15.0, "uf250-1065": 30.0}  # never cut to fit a budget
 NUM_INSTANCES = 100        # the first N files by sorted name
-SEEDS = (0, 1)
+SEEDS = (0,)               # seeds {0, 1} estimated 2.9 h from the calibration; the budget is 2.5 h
 WARM_UP_SECONDS = 2.0
 
 
