@@ -7,3 +7,4 @@ benchmark/raw/
 compile_commands.json
 __pycache__/
 .cache/
+.worktrees/
