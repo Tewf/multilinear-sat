@@ -22,6 +22,14 @@ public.
   approach to constraint satisfaction. Nature Physics 7, 2011.
 - L. H. Y. Chen, Q.-M. Shao. Normal approximation under local dependence. Annals of
   Probability 32(3), 2004.
+- R. Arratia, L. Goldstein, L. Gordon. Two moments suffice for Poisson approximations: the
+  Chen-Stein method. Annals of Probability 17(1), 1989. (the bound in regimes.md)
+- H. E. Daniels. Saddlepoint approximations in statistics. Annals of Mathematical Statistics
+  25, 1954.
+- R. Lugannani, S. Rice. Saddle point approximation for the distribution of the sum of
+  independent random variables. Advances in Applied Probability 12, 1980.
+- T. Plefka. Convergence condition of the TAP equation for the infinite-ranged Ising spin glass
+  model. Journal of Physics A 15, 1982. (the expansion around the product measure)
 - J. S. Yedidia, W. T. Freeman, Y. Weiss. Constructing free-energy approximations and
   generalized belief propagation algorithms. IEEE Transactions on Information Theory 51(7),
   2005. (the Bethe / pair approximation)
