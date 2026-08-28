@@ -8,7 +8,8 @@ if(NOT CMAKE_BUILD_TYPE)
 endif()
 
 option(MULTILINEAR_SAT_CUDA "Build the CUDA backend if a CUDA compiler is found" ON)
-option(MULTILINEAR_SAT_TESTS "Build the unit tests" ON)
+option(MULTILINEAR_SAT_TESTS "Build the unit tests" ${PROJECT_IS_TOP_LEVEL})
+option(MULTILINEAR_SAT_CLI "Build the command line" ${PROJECT_IS_TOP_LEVEL})
 
 include(CheckLanguage)
 set(MULTILINEAR_SAT_HAVE_CUDA OFF)
@@ -43,8 +44,10 @@ if(MULTILINEAR_SAT_HAVE_CUDA)
     set_target_properties(multilinear_sat PROPERTIES CUDA_SEPARABLE_COMPILATION OFF)
 endif()
 
-add_executable(multilinear-sat cli/main.cpp)
-target_link_libraries(multilinear-sat PRIVATE multilinear_sat)
+if(MULTILINEAR_SAT_CLI)
+    add_executable(multilinear-sat cli/main.cpp)
+    target_link_libraries(multilinear-sat PRIVATE multilinear_sat)
+endif()
 
 if(MULTILINEAR_SAT_TESTS)
     enable_testing()

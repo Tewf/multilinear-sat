@@ -51,6 +51,10 @@ if (result.status == Status::Satisfiable) {
 Every tunable (batch size, step size, momentum, kick, Luby unit, seed) lives in
 `solver/configuration.hpp` and has a command-line flag of the same name.
 
+To embed it in another CMake project, `add_subdirectory(multilinear-sat)` (or FetchContent)
+and `target_link_libraries(your_target PRIVATE multilinear_sat)`; the tests and the command
+line are built only when this is the top-level project.
+
 ## Layout
 
 | directory | role |
