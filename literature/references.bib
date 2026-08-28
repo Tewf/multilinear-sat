@@ -1,0 +1,315 @@
+% References for literature/review.md
+% Compiled 2026-08-27/28. DOIs and arXiv IDs included where the underlying
+% sources (six internal reviews written on 2026-08-26, unpublished) or a
+% direct DBLP/arXiv/Crossref/gh fetch gave them.
+
+@inproceedings{kyrillidis2020fouriersat,
+  author    = {Kyrillidis, Anastasios and Shrivastava, Anshumali and Vardi, Moshe Y. and Zhang, Zhiwei},
+  title     = {{FourierSAT}: A {Fourier} Expansion-Based Algebraic Framework for Solving Hybrid {Boolean} Constraints},
+  booktitle = {Proceedings of the AAAI Conference on Artificial Intelligence},
+  year      = {2020},
+  eprint    = {1912.01032},
+  archiveprefix = {arXiv},
+  note      = {Code: github.com/vardigroup/FourierSAT (MIT license, verified via gh repo view 2026-08-27)}
+}
+
+@inproceedings{kyrillidis2021gradsat,
+  author    = {Kyrillidis, Anastasios and Vardi, Moshe Y. and Zhang, Zhiwei},
+  title     = {On Continuous Local {BDD}-Based Search for Hybrid {SAT} Solving},
+  booktitle = {Proceedings of the AAAI Conference on Artificial Intelligence (AAAI-21)},
+  year      = {2021},
+  eprint    = {2012.07983},
+  archiveprefix = {arXiv},
+  note      = {CPU, 4-optimizer portfolio (SLSQP, MMA, CG, BFGS) on up to 16 cores; code not public}
+}
+
+@inproceedings{cen2025fastfouriersat,
+  author    = {Cen, Yunuo and Zhang, Zhiwei and Fong, Xuanyao},
+  title     = {Massively Parallel Continuous Local Search for Hybrid {SAT} Solving on {GPUs}},
+  booktitle = {Proceedings of the AAAI Conference on Artificial Intelligence},
+  volume    = {39},
+  number    = {11},
+  pages     = {11140--11149},
+  year      = {2025},
+  doi       = {10.1609/aaai.v39i11.33211},
+  eprint    = {2308.15020},
+  archiveprefix = {arXiv},
+  note      = {AAAI-25 Oral. Code: github.com/seeder-research/FastFourierSAT (Python, JAX + JAXopt, CC0-1.0 license, verified via gh repo view 2026-08-27/28)}
+}
+
+@misc{wang2017mixing,
+  author = {Wang, Po-Wei and Chang, Wei-Cheng and Kolter, J. Zico},
+  title  = {The Mixing method: low-rank coordinate descent for semidefinite programming with diagonal constraints},
+  year   = {2017},
+  eprint = {1706.00476},
+  archiveprefix = {arXiv},
+  note   = {Code: github.com/locuslab/mixing}
+}
+
+@article{gu1994unisat,
+  author  = {Gu, Jun},
+  title   = {Global Optimization for Satisfiability ({SAT}) Problem},
+  journal = {IEEE Transactions on Knowledge and Data Engineering},
+  volume  = {6},
+  number  = {3},
+  pages   = {361--381},
+  year    = {1994},
+  doi     = {10.1109/69.334864}
+}
+
+@article{kanao2023simulatedbifurcation,
+  author  = {Kanao, Taro and Goto, Hayato},
+  title   = {Simulated Bifurcation for Higher-Order Cost Functions},
+  journal = {Applied Physics Express},
+  volume  = {16},
+  pages   = {014501},
+  year    = {2023},
+  eprint  = {2211.09296},
+  archiveprefix = {arXiv}
+}
+
+@inproceedings{selman1994walksat,
+  author    = {Selman, Bart and Kautz, Henry A. and Cohen, Bram},
+  title     = {Noise Strategies for Improving Local Search},
+  booktitle = {Proceedings of the Twelfth National Conference on Artificial Intelligence (AAAI-94)},
+  pages     = {337--343},
+  year      = {1994}
+}
+
+@inproceedings{balint2012probsat,
+  author    = {Balint, Adrian and Sch{\"o}ning, Uwe},
+  title     = {Choosing Probability Distributions for Stochastic Local Search and the Role of Make versus Break},
+  booktitle = {Theory and Applications of Satisfiability Testing (SAT 2012)},
+  series    = {LNCS},
+  volume    = {7317},
+  pages     = {16--29},
+  year      = {2012},
+  doi       = {10.1007/978-3-642-31612-8_3},
+  note      = {Code: github.com/adrianopolus/probSAT (author-affiliated account not independently confirmed)}
+}
+
+@inproceedings{cai2015ccanr,
+  author    = {Cai, Shaowei and Luo, Chuan and Su, Kaile},
+  title     = {{CCAnr}: A Configuration Checking Based Local Search Solver for Non-random Satisfiability},
+  booktitle = {Theory and Applications of Satisfiability Testing (SAT 2015)},
+  pages     = {1--8},
+  year      = {2015},
+  doi       = {10.1007/978-3-319-24318-4_1},
+  note      = {Code: github.com/shaowei-cai-group/CCAnr}
+}
+
+@misc{biere_cadical,
+  author = {Biere, Armin},
+  title  = {{CaDiCaL} {SAT} Solver},
+  howpublished = {\url{https://github.com/arminbiere/cadical}},
+  note   = {Software, GitHub repository, accessed 2026-08-26}
+}
+
+@misc{biere_kissat,
+  author = {Biere, Armin},
+  title  = {{Kissat} {SAT} Solver},
+  howpublished = {\url{https://github.com/arminbiere/kissat}},
+  note   = {Software, GitHub repository. src/rephase.c implements a WalkSAT-style rephasing walk (kissat\_walk()); read directly, accessed 2026-08-26}
+}
+
+@book{williamson2011approx,
+  author    = {Williamson, David P. and Shmoys, David B.},
+  title     = {The Design of Approximation Algorithms},
+  publisher = {Cambridge University Press},
+  year      = {2011},
+  isbn      = {9780521195270},
+  note      = {Free edition: designofapproxalgs.com/book.pdf, ch. 5.1--5.2 (derandomization by conditional expectations)}
+}
+
+@article{bensasson2010pc,
+  author  = {Ben-Sasson, Eli and Impagliazzo, Russell},
+  title   = {Random {CNF}'s are Hard for the Polynomial Calculus},
+  journal = {Computational Complexity},
+  volume  = {19},
+  number  = {4},
+  pages   = {501--519},
+  year    = {2010},
+  doi     = {10.1007/s00037-010-0293-1},
+  note    = {Preliminary version: FOCS 1999, DOI 10.1109/SFFCS.1999.814613}
+}
+
+@inproceedings{schoenebeck2008sos,
+  author    = {Schoenebeck, Grant},
+  title     = {Linear Level Lasserre Lower Bounds for Certain k-{CSPs}},
+  booktitle = {Proceedings of the 49th Annual IEEE Symposium on Foundations of Computer Science (FOCS 2008)},
+  pages     = {593--602},
+  year      = {2008},
+  doi       = {10.1109/FOCS.2008.74}
+}
+
+@article{hastad2001optimal,
+  author  = {H{\aa}stad, Johan},
+  title   = {Some Optimal Inapproximability Results},
+  journal = {Journal of the ACM},
+  volume  = {48},
+  number  = {4},
+  pages   = {798--859},
+  year    = {2001},
+  doi     = {10.1145/502090.502098},
+  note    = {Preliminary version: STOC 1997, DOI 10.1145/258533.258536}
+}
+
+@inproceedings{karloff1997sdp,
+  author    = {Karloff, Howard J. and Zwick, Uri},
+  title     = {A 7/8-Approximation Algorithm for {MAX} 3{SAT}?},
+  booktitle = {Proceedings of the 38th Annual Symposium on Foundations of Computer Science (FOCS 1997)},
+  pages     = {406--415},
+  year      = {1997},
+  doi       = {10.1109/SFCS.1997.646129}
+}
+
+@misc{bresler2021ogp,
+  author = {Bresler, Guy and Huang, Brice},
+  title  = {The Algorithmic Phase Transition of Random k-{SAT} for Low Degree Polynomials},
+  year   = {2021},
+  eprint = {2106.02129},
+  archiveprefix = {arXiv},
+  note   = {Overlap-gap-property result, asymptotic in k, not stated at k=3}
+}
+
+@misc{kizildag2023ogp,
+  author = {K{\i}z{\i}lda{\u{g}}, Eren C.},
+  title  = {Sharp Thresholds for the Overlap Gap Property: {Ising} p-Spin Glass and Random k-{SAT}},
+  year   = {2023},
+  eprint = {2309.09913},
+  archiveprefix = {arXiv},
+  note   = {Overlap-gap-property result, asymptotic in k, not stated at k=3}
+}
+
+@inproceedings{schoning1999,
+  author    = {Sch{\"o}ning, Uwe},
+  title     = {A Probabilistic Algorithm for k-{SAT} and Constraint Satisfaction Problems},
+  booktitle = {Proceedings of the 40th Annual Symposium on Foundations of Computer Science (FOCS 1999)},
+  pages     = {410--414},
+  year      = {1999},
+  doi       = {10.1109/SFFCS.1999.814612},
+  note      = {Las Vegas 3-SAT upper bound (4/3)^n, about 1.334^n; does not transfer to continuous dynamics (not addressed in this source)}
+}
+
+@inproceedings{paturi1998ppsz,
+  author    = {Paturi, Ramamohan and Pudl{\'a}k, Pavel and Saks, Michael E. and Zane, Francis},
+  title     = {An Improved Exponential-Time Algorithm for k-{SAT}},
+  booktitle = {Proceedings of the 39th Annual Symposium on Foundations of Computer Science (FOCS 1998)},
+  pages     = {628--637},
+  year      = {1998},
+  doi       = {10.1109/SFCS.1998.743513},
+  note      = {Journal version: J. ACM 52(3), 2005, DOI 10.1145/1066100.1066101. Las Vegas 3-SAT upper bound about 1.307^n}
+}
+
+@article{luby1993,
+  author  = {Luby, Michael and Sinclair, Alistair and Zuckerman, David},
+  title   = {Optimal Speedup of {Las Vegas} Algorithms},
+  journal = {Information Processing Letters},
+  volume  = {47},
+  number  = {4},
+  pages   = {173--180},
+  year    = {1993},
+  doi     = {10.1016/0020-0190(93)90029-9}
+}
+
+@article{mezard2002science,
+  author  = {M{\'e}zard, Marc and Parisi, Giorgio and Zecchina, Riccardo},
+  title   = {Analytic and Algorithmic Solution of Random Satisfiability Problems},
+  journal = {Science},
+  volume  = {297},
+  number  = {5582},
+  pages   = {812--815},
+  year    = {2002},
+  doi     = {10.1126/science.1073287}
+}
+
+@article{braunstein2005survey,
+  author  = {Braunstein, Alfredo and M{\'e}zard, Marc and Zecchina, Riccardo},
+  title   = {Survey Propagation: An Algorithm for Satisfiability},
+  journal = {Random Structures \& Algorithms},
+  volume  = {27},
+  pages   = {201--226},
+  year    = {2005},
+  eprint  = {cs/0212002},
+  archiveprefix = {arXiv},
+  note    = {SP-guided decimation (SID) solves random 3-SAT to alpha about 4.21--4.24; does not converge near alpha\_c about 4.267}
+}
+
+@article{chavas2005reinforcement,
+  author  = {Chavas, Joel and Furtlehner, Cyril and M{\'e}zard, Marc and Zecchina, Riccardo},
+  title   = {Survey-Propagation Decimation Through Distributed Local Computations},
+  journal = {Journal of Statistical Mechanics: Theory and Experiment},
+  volume  = {2005},
+  pages   = {P11016},
+  year    = {2005},
+  eprint  = {cond-mat/0512002},
+  archiveprefix = {arXiv},
+  note    = {SP reinforcement: about 5x wall-clock speedup over hard-decimation SID at N=1e5, better asymptotic scaling}
+}
+
+@inproceedings{zhang2003backbone,
+  author    = {Zhang, Weixiong and Rangan, Ananda and Looks, Moshe},
+  title     = {Backbone Guided Local Search for Maximum Satisfiability},
+  booktitle = {Proceedings of the 18th International Joint Conference on Artificial Intelligence (IJCAI 2003)},
+  pages     = {1179--1186},
+  year      = {2003}
+}
+
+@inproceedings{zhang2020nlocalsat,
+  author    = {Zhang, Wenjie and Sun, Zeyu and Zhu, Qihao and Li, Ge and Cai, Shaowei and Xiong, Yingfei and Zhang, Lu},
+  title     = {{NLocalSAT}: Boosting Local Search with Solution Prediction},
+  booktitle = {Proceedings of the 29th International Joint Conference on Artificial Intelligence (IJCAI 2020)},
+  year      = {2020},
+  eprint    = {2001.09398},
+  archiveprefix = {arXiv},
+  note      = {Reports 27--62\% improvement over unmodified CCAnr, Sparrow, CPSparrow, YalSAT, probSAT on SAT Competition 2018 random track (abstract-level metric, not independently re-derived)}
+}
+
+@inproceedings{amizadeh2019pdp,
+  author    = {Amizadeh, Saeed and Matusevych, Sergiy and Weimer, Markus},
+  title     = {{PDP}: A General Neural Framework for Learning Constraint Satisfaction Solvers},
+  booktitle = {Proceedings of the 36th International Conference on Machine Learning (ICML 2019)},
+  year      = {2019},
+  eprint    = {1903.01969},
+  archiveprefix = {arXiv}
+}
+
+@incollection{smale1986alpha,
+  author    = {Smale, Steve},
+  title     = {Newton's Method Estimates from Data at One Point},
+  booktitle = {The Merging of Disciplines: New Directions in Pure, Applied, and Computational Mathematics},
+  publisher = {Springer},
+  year      = {1986},
+  doi       = {10.1007/978-1-4612-4984-9_13},
+  note      = {Origin of Smale's alpha-theory; certifies a root and quadratic Newton convergence from one Jacobian evaluation}
+}
+
+@misc{ge2015escaping,
+  author = {Ge, Rong and Huang, Furong and Jin, Chi and Yuan, Yang},
+  title  = {Escaping From Saddle Points --- Online Stochastic Gradient for Tensor Decomposition},
+  year   = {2015},
+  eprint = {1503.02101},
+  archiveprefix = {arXiv}
+}
+
+@inproceedings{jin2017escaping,
+  author    = {Jin, Chi and Ge, Rong and Netrapalli, Praneeth and Kakade, Sham M. and Jordan, Michael I.},
+  title     = {How to Escape Saddle Points Efficiently},
+  booktitle = {Proceedings of the 34th International Conference on Machine Learning (ICML 2017)},
+  year      = {2017},
+  eprint    = {1703.00887},
+  archiveprefix = {arXiv},
+  note      = {Perturbed gradient descent; assumes non-degenerate (strict) saddles, an assumption FourierSAT's own text says fails for the multilinear objective}
+}
+
+@article{ercseyravasz2011ctds,
+  author  = {Ercsey-Ravasz, Maria and Toroczkai, Zoltan},
+  title   = {Optimization Hardness as Transient Chaos in an Analog Approach to Constraint Satisfaction},
+  journal = {Nature Physics},
+  volume  = {7},
+  pages   = {966--970},
+  year    = {2011},
+  eprint  = {1208.0526},
+  archiveprefix = {arXiv},
+  note    = {Single deterministic continuous-time trajectory per instance, not many random restarts; basins turn fractal above the constraint-density threshold}
+}
