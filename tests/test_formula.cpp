@@ -41,3 +41,23 @@ TEST_CASE("malformed formulas are rejected") {
     CHECK_THROWS(make_formula(2, {{1, 3}}));
     CHECK_THROWS(make_formula(2, {{}}));
 }
+
+static Formula parse(const std::string& text) {
+    std::istringstream input(text);
+    return parse_dimacs(input);
+}
+
+TEST_CASE("the parser accepts the SATLIB trailer, CRLF endings and zero clauses") {
+    CHECK(parse("p cnf 2 1\n1 2 0\n%\n0\n").clause_count() == 1);
+    CHECK(parse("p cnf 2 2\r\n1 2 0\r\n-1 0\r\n").clause_count() == 2);
+    Formula empty = parse("p cnf 3 0\n");
+    CHECK(empty.clause_count() == 0);
+    CHECK(satisfies(empty, {1, 1, 1}));
+}
+
+TEST_CASE("the parser rejects a truncated file, a missing header and a wrong clause count") {
+    CHECK_THROWS_WITH_AS(parse("p cnf 2 1\n1 2\n"), doctest::Contains("terminating 0"), std::runtime_error);
+    CHECK_THROWS_WITH_AS(parse("1 2 0\n"), doctest::Contains("header"), std::runtime_error);
+    CHECK_THROWS_WITH_AS(parse("p cnf 2 3\n1 2 0\n"), doctest::Contains("declares 3"), std::runtime_error);
+    CHECK_THROWS_WITH_AS(parse("p dnf 2 1\n1 2 0\n"), doctest::Contains("malformed header"), std::runtime_error);
+}

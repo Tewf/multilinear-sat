@@ -48,7 +48,7 @@ Formula make_formula(int variable_count, const std::vector<std::vector<int32_t>>
 }
 
 Formula parse_dimacs(std::istream& input) {
-    int variable_count = 0;
+    int variable_count = 0, declared_clauses = -1;
     std::vector<std::vector<int32_t>> clauses;
     std::vector<int32_t> current;
     std::string line;
@@ -56,22 +56,27 @@ Formula parse_dimacs(std::istream& input) {
         if (line.empty() || line[0] == 'c' || line[0] == '%') continue;
         std::istringstream tokens(line);
         if (line[0] == 'p') {
-            std::string p, cnf;
-            int declared_clauses;
-            tokens >> p >> cnf >> variable_count >> declared_clauses;
+            std::string p, format;
+            if (!(tokens >> p >> format >> variable_count >> declared_clauses) || format != "cnf" || variable_count < 0 || declared_clauses < 0) {
+                throw std::runtime_error("malformed header: " + line);
+            }
             continue;
         }
+        if (declared_clauses < 0) throw std::runtime_error("clause line before the p cnf header: " + line);
         int32_t literal;
         while (tokens >> literal) {
-            if (literal == 0) {
+            if (literal != 0) current.push_back(literal);
+            else if (!current.empty()) {          // a lone 0 (the SATLIB trailer) is not a clause
                 clauses.push_back(current);
                 current.clear();
-            } else {
-                current.push_back(literal);
             }
         }
     }
-    if (!current.empty()) clauses.push_back(current);
+    if (declared_clauses < 0) throw std::runtime_error("missing p cnf header");
+    if (!current.empty()) throw std::runtime_error("last clause has no terminating 0 (truncated file?)");
+    if (static_cast<int>(clauses.size()) != declared_clauses) {
+        throw std::runtime_error("header declares " + std::to_string(declared_clauses) + " clauses, file has " + std::to_string(clauses.size()));
+    }
     return make_formula(variable_count, clauses);
 }
 

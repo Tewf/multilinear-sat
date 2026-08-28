@@ -46,7 +46,10 @@ inline Arguments parse_arguments(int argc, char** argv) {
         else if (flag == "--verbose") c.verbose = true;
         else if (flag == "--backend") {
             const std::string kind = value(i);
-            c.backend = kind == "cpu" ? BackendKind::Cpu : kind == "cuda" ? BackendKind::Cuda : BackendKind::Auto;
+            if (kind == "cpu") c.backend = BackendKind::Cpu;
+            else if (kind == "cuda") c.backend = BackendKind::Cuda;
+            else if (kind == "auto") c.backend = BackendKind::Auto;
+            else throw std::invalid_argument("unknown backend " + kind + " (cpu, cuda or auto)");
         } else if (flag.rfind("--", 0) == 0) throw std::invalid_argument("unknown flag " + flag);
         else arguments.path = flag;
     }

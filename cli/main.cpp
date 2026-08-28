@@ -33,7 +33,9 @@ int main(int argc, char** argv) {
         std::printf("c multilinear-sat: %d variables, %d clauses, max length %d\n", formula.variable_count,
                     formula.clause_count(), formula.max_clause_length());
         const SolveResult result = solve(formula, arguments.configuration);
-        const bool satisfiable = result.status == Status::Satisfiable && satisfies(formula, result.assignment);
+        const bool certified = satisfies(formula, result.assignment);
+        if (result.status == Status::Satisfiable && !certified) std::fprintf(stderr, "c certificate rejected: reporting UNKNOWN\n");
+        const bool satisfiable = result.status == Status::Satisfiable && certified;
         std::printf("c json {\"status\": \"%s\", \"backend\": \"%s\", \"iterations\": %lld, \"restarts\": %lld, "
                     "\"best_violated\": %d, \"elapsed_seconds\": %.3f, \"batch_size\": %d, \"seed\": %llu}\n",
                     satisfiable ? "SATISFIABLE" : "UNKNOWN", result.backend_name.c_str(),

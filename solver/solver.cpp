@@ -24,6 +24,10 @@ SolveResult solve_with(const Formula& formula, const SolverConfiguration& config
     const auto start = clock::now();
     const int batch = configuration.batch_size;
     if (batch <= 0) throw std::invalid_argument("batch_size must be positive");
+    if (configuration.luby_unit <= 0) throw std::invalid_argument("luby_unit must be positive");
+    if (configuration.stall_patience < 0) throw std::invalid_argument("stall_patience must not be negative");
+    if (configuration.step.step_size <= 0.0f) throw std::invalid_argument("step_size must be positive");
+    if (configuration.step.kick_sigma < 0.0f || configuration.step.kick_decay <= 0.0f) throw std::invalid_argument("kick_sigma must not be negative and kick_decay must be positive");
     backend.initialise(formula, batch, configuration.seed);
 
     SolveResult result;
