@@ -1,11 +1,14 @@
-// Counter-based random numbers: a value is a pure function of (seed, epoch, slot,
-// coordinate), so a run is reproducible from its seed on any backend and no random
-// state has to live on the device. splitmix64 finaliser, then Box-Muller.
+// Counter-based random numbers: a value is a pure function of (seed, stream, epoch,
+// slot, coordinate), so a run is reproducible from its seed on any backend and no random
+// state lives on the device. Restarts and kicks draw from two separate streams, so a
+// restart position can never repeat a kick, and the seed is mixed before the epoch so
+// that (seed, epoch) pairs with the same XOR do not share a stream. splitmix64 finaliser,
+// then Box-Muller.
 #pragma once
-#include <cstdint>
 #include <cmath>
+#include <cstdint>
 
-#include "energy_math.hpp"
+#include "device_inline.hpp"
 
 namespace multilinear_sat {
 
@@ -16,8 +19,11 @@ MULTILINEAR_SAT_INLINE uint64_t hash_mix(uint64_t z) {
     return z ^ (z >> 31);
 }
 
-MULTILINEAR_SAT_INLINE uint64_t hash_combine(uint64_t seed, uint64_t epoch, uint64_t slot, uint64_t coordinate) {
-    return hash_mix(hash_mix(hash_mix(seed ^ epoch) ^ slot) ^ coordinate);
+constexpr uint64_t restart_stream = 0x52455354ull;   // "REST"
+constexpr uint64_t kick_stream = 0x4b49434bull;      // "KICK"
+
+MULTILINEAR_SAT_INLINE uint64_t hash_combine(uint64_t seed, uint64_t stream, uint64_t epoch, uint64_t slot, uint64_t coordinate) {
+    return hash_mix(hash_mix(hash_mix(hash_mix(hash_mix(seed) ^ stream) ^ epoch) ^ slot) ^ coordinate);
 }
 
 // Uniform in [0, 1) from the top 24 bits, exact in float.
@@ -25,13 +31,19 @@ MULTILINEAR_SAT_INLINE float uniform_from_hash(uint64_t hash) {
     return static_cast<float>(hash >> 40) * (1.0f / 16777216.0f);
 }
 
+// The restart stream: a fresh coordinate for (epoch, slot, coordinate).
 MULTILINEAR_SAT_INLINE float uniform_random(uint64_t seed, uint64_t epoch, uint64_t slot, uint64_t coordinate) {
-    return uniform_from_hash(hash_combine(seed, epoch, slot, coordinate));
+    return uniform_from_hash(hash_combine(seed, restart_stream, epoch, slot, coordinate));
 }
 
-// Standard normal from two independent uniforms (Box-Muller, one output kept).
+// The first uniform behind a kick (exposed so tests can check the streams never meet).
+MULTILINEAR_SAT_INLINE float kick_uniform(uint64_t seed, uint64_t epoch, uint64_t slot, uint64_t coordinate) {
+    return uniform_from_hash(hash_combine(seed, kick_stream, epoch, slot, coordinate));
+}
+
+// Standard normal for the kick stream (Box-Muller, one output kept).
 MULTILINEAR_SAT_INLINE float gaussian_random(uint64_t seed, uint64_t epoch, uint64_t slot, uint64_t coordinate) {
-    const uint64_t first = hash_combine(seed, epoch, slot, coordinate);
+    const uint64_t first = hash_combine(seed, kick_stream, epoch, slot, coordinate);
     const float u1 = uniform_from_hash(first) + 1e-7f;
     const float u2 = uniform_from_hash(hash_mix(first));
     return sqrtf(-2.0f * logf(u1)) * cosf(6.2831853f * u2);

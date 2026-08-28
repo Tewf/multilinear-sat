@@ -13,6 +13,20 @@ TEST_CASE("the Luby sequence starts 1 1 2 1 1 2 4 1 1 2 1 1 2 4 8") {
     CHECK(luby(32) == 1);
 }
 
+TEST_CASE("restart draws, kick draws and different seeds never share a stream") {
+    int collisions = 0;
+    for (uint64_t epoch = 1; epoch < 51; ++epoch) {      // epoch 0 would compare (9, 0) with itself
+        for (uint64_t slot = 0; slot < 4; ++slot) {
+            for (uint64_t coordinate = 0; coordinate < 20; ++coordinate) {
+                collisions += uniform_random(9, epoch, slot, coordinate) == kick_uniform(9, epoch, slot, coordinate);
+                collisions += uniform_random(9, epoch, slot, coordinate) == uniform_random(9 ^ epoch, 0, slot, coordinate);
+                collisions += uniform_random(1, epoch, slot, coordinate) == uniform_random(3, epoch ^ 2, slot, coordinate);
+            }
+        }
+    }
+    CHECK(collisions == 0);
+}
+
 TEST_CASE("hash randomness is deterministic, uniform and Gaussian") {
     CHECK(uniform_random(1, 2, 3, 4) == uniform_random(1, 2, 3, 4));
     CHECK(uniform_random(1, 2, 3, 4) != uniform_random(1, 2, 3, 5));
