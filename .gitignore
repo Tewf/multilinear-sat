@@ -6,3 +6,4 @@ benchmark/raw/
 *.a
 compile_commands.json
 __pycache__/
+.cache/
