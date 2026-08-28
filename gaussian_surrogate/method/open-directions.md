@@ -21,8 +21,9 @@ were independent, which is also the top coefficient of the generating function i
 
 `pair` is the pair (Kirkwood, or Bethe) approximation of P(all satisfied): the joint law of the
 indicators is approximated by the product of the one-clause laws times a correction factor
-S_jk / (S_j S_k) for each dependent pair. It is exact when the dependency graph is a tree, its
-first-order expansion is `logsum`, and its second-order term is the same covariance
+S_jk / (S_j S_k) for each dependent pair. It is exact for a single pair and not on a chain of
+three clauses (0.3 % off at p = 0, [pair-expansion.md](pair-expansion.md)); its error is third
+order in the U's, its first-order expansion is `logsum`, and its second-order term is the same covariance
 U_jk - U_j U_k that sigma^2 uses, but as an additive log-probability with a bounded, Poisson-
 like tail, and without Phi or a division by sigma. If `pair` matches or beats `F`, the gain of
 F comes from the pair information; if it does not, it comes from the Gaussian's appetite for
