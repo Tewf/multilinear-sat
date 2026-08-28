@@ -6,7 +6,7 @@ import torch
 from adjacency import ClauseAdjacency, build_clause_adjacency
 from brute_force_reference import exact_moments
 from dimacs import Formula, formula_from_clauses
-from instances import random_3sat
+from random_instances import random_3sat
 from moments import expected_satisfied, pair_unsat_probability, unsat_probability, variance
 
 

@@ -9,7 +9,7 @@ import torch
 from adjacency import build_clause_adjacency
 from configuration import Configuration
 from dimacs import formula_from_clauses
-from instances import planted_3sat, random_3sat
+from random_instances import planted_3sat, random_3sat
 from methods import METHODS, build_method
 from relaxation import BoxRelaxation
 from rounding import count_unsatisfied, count_unsatisfied_python
