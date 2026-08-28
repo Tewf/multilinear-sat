@@ -1,6 +1,8 @@
 // What a backend must provide: a batch of points on its device and one iteration of
 // the dynamics over the whole batch. The restart policy, the time limit and the
-// certificate check live in the solver loop, which is backend-independent.
+// certificate check live in the solver loop, which is backend-independent. Each backend
+// is bit-exact with itself from a seed; the two backends agree with each other only to
+// float tolerance (their transcendental functions differ in the last bits).
 #pragma once
 #include <cstdint>
 #include <memory>
@@ -38,5 +40,11 @@ public:
 std::unique_ptr<Backend> make_cpu_backend();
 std::unique_ptr<Backend> make_cuda_backend();   // throws if built without CUDA or no device
 bool cuda_available();
+
+inline std::vector<int> every_slot(int batch_size) {
+    std::vector<int> slots(batch_size);
+    for (int slot = 0; slot < batch_size; ++slot) slots[slot] = slot;
+    return slots;
+}
 
 }  // namespace multilinear_sat

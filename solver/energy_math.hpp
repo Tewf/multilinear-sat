@@ -11,16 +11,16 @@
 #pragma once
 #include <cstdint>
 
-#ifdef __CUDACC__
-#define MULTILINEAR_SAT_INLINE __host__ __device__ inline
-#else
-#define MULTILINEAR_SAT_INLINE inline
-#endif
+#include "device_inline.hpp"
 
 namespace multilinear_sat {
 
 MULTILINEAR_SAT_INLINE int variable_of(int32_t literal) { return (literal > 0 ? literal : -literal) - 1; }
 MULTILINEAR_SAT_INLINE float sign_of(int32_t literal) { return literal > 0 ? 1.0f : -1.0f; }
+
+// The one rounding rule: a coordinate rounds to true iff it is non-negative. Counting
+// violated clauses and building the certificate must use the same rule.
+MULTILINEAR_SAT_INLINE bool rounds_true(float coordinate) { return coordinate >= 0.0f; }
 
 MULTILINEAR_SAT_INLINE float literal_value(int32_t literal, const float* point) {
     return sign_of(literal) * point[variable_of(literal)];
@@ -49,8 +49,7 @@ MULTILINEAR_SAT_INLINE float clause_energy(const int32_t* literals, int length, 
 // Whether the vertex nearest to the point (sign rounding, ties to true) falsifies the clause.
 MULTILINEAR_SAT_INLINE bool clause_violated_by_rounding(const int32_t* literals, int length, const float* point) {
     for (int j = 0; j < length; ++j) {
-        const float value = point[variable_of(literals[j])];
-        const bool variable_true = value >= 0.0f;
+        const bool variable_true = rounds_true(point[variable_of(literals[j])]);
         const bool literal_true = (literals[j] > 0) ? variable_true : !variable_true;
         if (literal_true) return false;
     }

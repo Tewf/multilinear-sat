@@ -53,7 +53,7 @@ if(MULTILINEAR_SAT_TESTS)
     enable_testing()
     add_executable(unit_tests
         tests/main.cpp tests/test_formula.cpp tests/test_energy.cpp tests/test_random_and_luby.cpp
-        tests/test_solver.cpp tests/test_backends.cpp)
+        tests/test_solver.cpp tests/test_backends.cpp tests/test_certificate.cpp)
     target_include_directories(unit_tests PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/tests)
     target_link_libraries(unit_tests PRIVATE multilinear_sat)
     add_test(NAME unit_tests COMMAND unit_tests)

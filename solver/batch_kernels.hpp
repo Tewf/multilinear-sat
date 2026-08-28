@@ -2,6 +2,7 @@
 // CUDA kernels: mark a clause as violated by the rounded point, and update one
 // variable of one slot (gradient over its occurrences, focused kick, momentum, clip).
 #pragma once
+#include <cmath>
 #include <cstdint>
 
 #include "configuration.hpp"
@@ -9,6 +10,11 @@
 #include "random_hash.hpp"
 
 namespace multilinear_sat {
+
+// The kick's standard deviation at a given iteration (decay applied per iteration).
+inline float kick_sigma_at(const StepParameters& step, int64_t iteration) {
+    return step.kick_sigma * powf(step.kick_decay, static_cast<float>(iteration));
+}
 
 MULTILINEAR_SAT_INLINE uint8_t mark_clause_violated(const int32_t* literals, const int32_t* clause_offsets,
                                                     int clause, const float* point) {

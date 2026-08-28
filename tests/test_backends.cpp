@@ -8,7 +8,7 @@
 
 using namespace multilinear_sat;
 
-TEST_CASE("cpu and cuda backends agree on initial points, counts and one step") {
+TEST_CASE("cpu and cuda backends agree on initial points, counts and 200 steps with a restart") {
     if (!cuda_available()) {
         MESSAGE("no CUDA device: backend agreement test skipped");
         return;
@@ -21,19 +21,26 @@ TEST_CASE("cpu and cuda backends agree on initial points, counts and one step") 
     cuda->initialise(planted.formula, batch, 42);
     StepParameters step;
     std::vector<int> cpu_violated, cuda_violated;
-    for (int iteration = 0; iteration < 3; ++iteration) {
+    int count_disagreements = 0;
+    float largest = 0.0f;
+    for (int iteration = 0; iteration < 200; ++iteration) {
+        if (iteration == 50) {            // a restart in the middle must keep the two in step
+            cpu->restart_slots({1, 4}, 7);
+            cuda->restart_slots({1, 4}, 7);
+            CHECK(cpu->point(1) == cuda->point(1));
+        }
         cpu->iterate(step, iteration, cpu_violated);
         cuda->iterate(step, iteration, cuda_violated);
-        CHECK(cpu_violated == cuda_violated);
+        count_disagreements += (cpu_violated != cuda_violated);
         for (int slot = 0; slot < batch; slot += 3) {
             const std::vector<float> a = cpu->point(slot), b = cuda->point(slot);
             REQUIRE(a.size() == b.size());
-            float largest = 0.0f;
             for (size_t i = 0; i < a.size(); ++i) largest = std::max(largest, std::fabs(a[i] - b[i]));
-            CHECK(largest < 1e-4f);
         }
     }
-    cpu->restart_slots({1, 4}, 7);
-    cuda->restart_slots({1, 4}, 7);
-    CHECK(cpu->point(1) == cuda->point(1));
+    // The transcendental functions differ in the last bits between host and device, so the
+    // trajectories agree to float tolerance; a coordinate within that of zero may round
+    // differently once, which is why a handful of count disagreements is tolerated.
+    CHECK(largest < 1e-3f);
+    CHECK(count_disagreements <= 5);
 }
