@@ -2,10 +2,10 @@
 
 ## Provenance
 
-- Date: 2026-08-28 18:42 (local, Europe/Paris)
-- Solver git commit: HEAD e107795f20 (clean)
-- Prebuilt binary: `build-cuda/multilinear-sat`, last built 2026-08-28 12:08:30
-- All recorded runs used the single binary build at mtime 2026-08-28 12:08:30, matching the commit above.
+- Date: 2026-08-28 22:29 (local, Europe/Paris)
+- Solver git commit: HEAD 692d2ef4de (clean)
+- Prebuilt binary: `build-cuda/multilinear-sat`, built from commit 06ba842, last built 2026-08-28 12:08:30; commits after 06ba842 touch neither `solver/` nor `cli/`
+- All recorded runs used the single binary build at mtime 2026-08-28 12:08:30.
 - GPU: NVIDIA GeForce RTX 4060 Laptop GPU
 - CPU: 12th Gen Intel(R) Core(TM) i5-12450H
 - CUDA: Cuda compilation tools, release 12.9, V12.9.86
@@ -71,4 +71,3 @@ Where multilinear-sat did not solve within its cap, the fewest violated clauses 
 ## Issues
 
 - 2026-08-28 main run: a ComfyUI server (pid 26518, 1.9 GB resident, 0 % utilisation) stayed on the GPU throughout. Its memory never changed across the 686 samples of `raw/gpu-monitor.log` (one every 15 s) and every interval of non-zero utilisation coincides with a multilinear-sat run, so no cell is affected.
-- 2026-08-28 main run: the binary was built from commit 06ba842; commits after it up to the report touch neither `solver/` nor `cli/`.

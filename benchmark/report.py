@@ -136,7 +136,8 @@ def provenance_section(results, sweep_results):
     lines = ["## Provenance", ""]
     lines.append(f"- Date: {datetime.now().strftime('%Y-%m-%d %H:%M')} (local, Europe/Paris)")
     lines.append(f"- Solver git commit: {git_provenance()}")
-    lines.append(f"- Prebuilt binary: `build-cuda/multilinear-sat`, last built {binary_mtime()}")
+    lines.append(f"- Prebuilt binary: `build-cuda/multilinear-sat`, built from commit {BINARY_COMMIT}, "
+                 f"last built {binary_mtime()}; commits after {BINARY_COMMIT} touch neither `solver/` nor `cli/`")
     versions = binary_versions_used(results, sweep_results)
     if len(versions) > 1:
         lines.append(f"- **WARNING: results were collected against {len(versions)} different binary builds** "
@@ -145,8 +146,7 @@ def provenance_section(results, sweep_results):
                       f"results.json / sweep_results.json carries its own `solver_binary_mtime`; treat runs "
                       f"stamped with different mtimes as not directly comparable.")
     elif versions:
-        lines.append(f"- All recorded runs used the single binary build at mtime {versions[0]}, "
-                      f"matching the commit above.")
+        lines.append(f"- All recorded runs used the single binary build at mtime {versions[0]}.")
     lines.append(f"- GPU: {gpu_name()}")
     lines.append(f"- CPU: {cpu_model()}")
     lines.append(f"- CUDA: {cuda_version()}")
@@ -294,12 +294,12 @@ def reading_section(results):
     return lines
 
 
+BINARY_COMMIT = "06ba842"   # the commit the frozen binaries were built from; later commits touch neither solver/ nor cli/
+
 RUN_NOTES = [
     "- 2026-08-28 main run: a ComfyUI server (pid 26518, 1.9 GB resident, 0 % utilisation) stayed on the GPU "
     "throughout. Its memory never changed across the 686 samples of `raw/gpu-monitor.log` (one every 15 s) "
     "and every interval of non-zero utilisation coincides with a multilinear-sat run, so no cell is affected.",
-    "- 2026-08-28 main run: the binary was built from commit 06ba842; commits after it up to the report "
-    "touch neither `solver/` nor `cli/`.",
 ]
 
 
