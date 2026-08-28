@@ -2,7 +2,7 @@
 
 A research branch, in Python and PyTorch, that asks one question of the continuous
 relaxation: does the *variance* of the satisfied-clause count help gradient ascent find a
-satisfying assignment, or is its mean enough? The C++ library in `../solver` is untouched.
+satisfying assignment, or is its mean enough? The C++ library in `../solver` is untouched; the objective's origin and derivation are in `method/`.
 
 Variables x in {-1, 1}^n are relaxed to independent means p in [-1, 1]^n. For a clause j
 with literals (i, s), U_j(p) = (1/8) prod (1 - s p_i) is the probability that it is
@@ -64,10 +64,10 @@ rounding steps and NaN otherwise.
 ## Two choices that are not tunables
 
 **The ascent maximises log F, not F.** At a random start sum_j U_j is about m/8, so on
-uf250-1065 the argument of Phi is z = (1/2 - sum U_j) / sigma of order -12, and Phi(z)
-underflows to exactly 0 in float32: F is flat and its gradient is 0. log Phi (via
-`torch.special.log_ndtr`) has the same maximiser and a finite gradient everywhere. F itself
-is still computed and logged.
+uf250-1065 the argument of Phi is z = (1/2 - sum U_j) / sigma of order -12. There torch's Phi
+is exactly 0 from z = -10 on, and where it is not, its derivative (2e-32 at z = -12) is far below
+Adam's epsilon: an ascent on F does not move. log Phi (`torch.special.log_ndtr`) has the same
+maximiser and a derivative of order |z|. F itself is still computed and logged.
 
 **The covariance sum runs over unordered pairs and is doubled.** The definition of var above
 sums over ordered pairs (j, k); `adjacency.py` stores each pair once with j < k, and
