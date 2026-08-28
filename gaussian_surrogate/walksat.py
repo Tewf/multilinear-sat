@@ -1,5 +1,7 @@
-"""A short WalkSAT/SKC polish of one +-1 assignment, in numpy, with incremental true-literal counts."""
+"""A short WalkSAT/SKC polish of one +-1 assignment, in numpy, with incremental true-literal counts,
+and the helper that applies it to the best rounded slots of a batch."""
 import numpy as np
+import torch
 
 
 def build_occurrence_lists(variable_index, sign, num_variables):
@@ -35,3 +37,28 @@ def walksat_polish(assignment, variable_index, sign, occurrence_clauses, occurre
         x[variable] = -x[variable]
         true_count[clauses] += np.where(was_true, -1, 1)
     return x, int((true_count == 0).sum())
+
+
+class BestSlotPolisher:
+    """Holds what WalkSAT needs about the formula, and polishes the best rounded slots."""
+
+    def __init__(self, formula, configuration, seed):
+        self.variable_index = formula.variable_index.cpu().numpy()
+        self.sign = formula.sign.cpu().numpy()
+        self.occurrence_clauses, self.occurrence_signs = build_occurrence_lists(
+            self.variable_index, self.sign, formula.num_variables)
+        self.max_flips = configuration.walksat_flips_per_variable * formula.num_variables
+        self.noise = configuration.walksat_noise
+        self.top_slots = configuration.polish_top_slots
+        self.rng = np.random.default_rng(seed)
+
+    def __call__(self, assignment, unsat):
+        """The first satisfying assignment among the best slots, polished if needed, else None."""
+        for slot in torch.argsort(unsat)[: self.top_slots].tolist():
+            x, remaining = assignment[slot].cpu().numpy(), int(unsat[slot])
+            if remaining > 0:
+                x, remaining = walksat_polish(x, self.variable_index, self.sign, self.occurrence_clauses,
+                                              self.occurrence_signs, self.max_flips, self.noise, self.rng)
+            if remaining == 0:
+                return [int(value) for value in x]
+        return None
