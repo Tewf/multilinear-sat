@@ -1,0 +1,72 @@
+# gaussian_surrogate
+
+A research branch, in Python and PyTorch, that asks one question of the continuous
+relaxation: does the *variance* of the satisfied-clause count help gradient ascent find a
+satisfying assignment, or is its mean enough? The C++ library in `../solver` is untouched.
+
+Variables x in {-1, 1}^n are relaxed to independent means p = tanh(theta) in (-1, 1)^n. For a
+clause j with literals (i, s), U_j(p) = (1/8) prod (1 - s p_i) is the probability that it is
+unsatisfied. For two clauses that share a variable, U_jk(p) is the probability that both are:
+a shared variable with the same sign appears once (factor 2 (1 - s p_i) against the 1/64),
+with opposite signs the pair can never be jointly unsatisfied (U_jk = 0). Then
+
+    mu(p)  = m - sum_j U_j                                       expected satisfied clauses
+    var(p) = sum_j U_j (1 - U_j) + sum_{j != k sharing} (U_jk - U_j U_k)
+    F(p)   = Phi((mu - m + 1/2) / sqrt(max(var, 1e-6)))          Gaussian surrogate of P(all satisfied)
+
+The solver runs Adam on theta for a batch of random restarts at once; every K steps it rounds
+x = sign(p), counts violated clauses, and gives the best slot a short WalkSAT/SKC polish. A
+reported SATISFIABLE is checked clause by clause in plain Python before it is printed.
+
+## Run
+
+    conda activate flappy_bird                    # torch 2.13 + CUDA, numpy, pysat, pytest
+    cd gaussian_surrogate
+    python solve.py ../benchmark/instances/uf50-218/uf50-01.cnf --obj F --seed 0 \
+        --log-trajectory trajectory.csv          # --device cpu|cuda, --time-limit SECONDS
+
+Output is SAT-competition style: `c` lines (one of them `c json {...}` with the run's
+statistics), then `s SATISFIABLE` and a `v` line (exit code 10) or `s UNKNOWN` (exit 0).
+`--obj mu` and `--obj fourier` are accepted by the parser and not yet implemented.
+
+The trajectory CSV has one row per Adam step for restart slot 0: `step, restart, mu, var,
+log_F, F, min_unsat_at_rounding`; the last column is the batch minimum on rounding steps and
+NaN otherwise.
+
+SATLIB instances go under `../benchmark/instances/` (ignored by git):
+
+    curl -sL https://www.cs.ubc.ca/~hoos/SATLIB/Benchmarks/SAT/RND3SAT/uf50-218.tar.gz \
+        | tar xz -C ../benchmark/instances/uf50-218/      # flat: uf50-01.cnf ... uf50-01000.cnf
+
+## Layout
+
+| File | Role |
+|---|---|
+| `configuration.py` | every tunable, one dataclass |
+| `dimacs.py` | DIMACS reader (SATLIB `%` trailer included) and the `Formula` tensors |
+| `adjacency.py` | clause pairs sharing a variable, laid out for a vectorised U_jk |
+| `moments.py` | U_j, U_jk, mu, var, batched over restarts |
+| `objective.py` | log F from the moments |
+| `rounding.py` | sign(p) and the vectorised / plain-Python violated-clause counts |
+| `walksat.py` | the WalkSAT/SKC polish in numpy |
+| `solver.py` | the restart loop, rounding checks, polish, trajectory log |
+| `solve.py` | the command line |
+
+## Two choices that are not tunables
+
+**The ascent maximises log F, not F.** At a random start sum_j U_j is about m/8, so on
+uf250-1065 the argument of Phi is z = (1/2 - sum U_j) / sigma of order -12, and Phi(z)
+underflows to exactly 0 in float32: F is flat and its gradient is 0. log Phi (via
+`torch.special.log_ndtr`) has the same maximiser and a finite gradient everywhere. F itself
+is still computed and logged.
+
+**The covariance sum runs over unordered pairs and is doubled.** The definition of var above
+sums over ordered pairs (j, k); `adjacency.py` stores each pair once with j < k, and
+`moments.py` multiplies the pair sum by 2. Pairs sharing no variable are independent and
+contribute nothing.
+
+## Scope
+
+3-SAT only: the reader rejects any other clause length, duplicate or tautological literals.
+Everything here is measured against the same scaffolding with other objectives before any
+claim is made; the benchmark and its table are the record.
