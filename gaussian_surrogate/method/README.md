@@ -20,5 +20,5 @@ Reading order:
 5. [references.md](references.md).
 
 The measurements are in [../benchmark/results.md](../benchmark/results.md); their reading, once
-the table is complete, is `findings.md` (forthcoming). The code is described in
+the table is complete, is [../findings.md](../findings.md). The code is described in
 [../README.md](../README.md).

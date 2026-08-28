@@ -2,7 +2,7 @@
 
 A research branch, in Python and PyTorch, that asks one question of the continuous
 relaxation: does the *variance* of the satisfied-clause count help gradient ascent find a
-satisfying assignment, or is its mean enough? The C++ library in `../solver` is untouched; the objective's origin and derivation are in `method/`.
+satisfying assignment, or is its mean enough? The C++ library in `../solver` is untouched; the origin and derivation are in `method/`, the results in `findings.md`.
 
 Variables x in {-1, 1}^n are relaxed to independent means p in [-1, 1]^n. For a clause j
 with literals (i, s), U_j(p) = (1/8) prod (1 - s p_i) is the probability that it is
