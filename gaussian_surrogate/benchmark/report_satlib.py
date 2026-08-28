@@ -76,12 +76,15 @@ def reading_lines(rows):
 
 
 RUN_NOTES = [
-    "- 2026-08-28 run: the GPU was shared from 19:14 to the end (20:29) with an image-generation server "
-    "(ComfyUI, 4.8 GB resident, memory constant); uf50 and uf100 finished before it started, uf250 ran from "
-    "18:59 to 20:29. In the sampled part of the overlap (19:51-20:29, 302 samples at 15 s) GPU utilisation "
-    "averaged 80 % against about 66 % for this benchmark alone, so the co-tenant computed at times; its share "
-    "cannot be separated from the log. Under a 30 s cap that costs steps, rounding events and polishes to "
-    "every method in the same way; treat the uf250 solve rates and medians as a lower bound, and the "
+    "- This record (run 2, 2026-08-28 23:37 to 2026-08-29 01:02) supersedes run 1 (commit 28dc078), which "
+    "computed the clause products with torch's prod; its CUDA backward is slow on rows holding an exact zero, "
+    "which the box relaxation produces, so run 1's fourier column had a 24x per-step handicap. The moments "
+    "are identical; only speed changed.",
+    "- An image-generation server (ComfyUI, pid 50779, 4.8 GB resident) was on the GPU from the start of run "
+    "2 to its end. It was idle when the run started (0 % utilisation) and was seen computing at least once "
+    "during the uf250 phase (95 % total utilisation at 00:14 against about 66 % for this benchmark alone); "
+    "no sampler ran, so its share is unknown. Under a 30 s cap that costs steps, rounding events and polishes "
+    "to every method in the same way; treat the uf250 solve rates and medians as a lower bound and the "
     "per-instance minimum #unsat as the more robust column.",
 ]
 
