@@ -7,15 +7,24 @@ def literal_false_factors(p, variable_index, sign):
     return 1.0 - sign * p[:, variable_index]
 
 
+def product_of_slots(factors):
+    """The product over the last axis, written out: `prod` is exact here too, but its CUDA backward
+    takes a slow path whenever a row holds an exact zero, and on the box relaxation most rows do."""
+    product = factors[..., 0]
+    for slot in range(1, factors.shape[-1]):
+        product = product * factors[..., slot]
+    return product
+
+
 def unsat_probability(p, formula):
     """U_j(p) = P(clause j unsatisfied) = (1/8) prod (1 - s p_i), shape [B, m]."""
-    return literal_false_factors(p, formula.variable_index, formula.sign).prod(dim=-1) / 8.0
+    return product_of_slots(literal_false_factors(p, formula.variable_index, formula.sign)) / 8.0
 
 
 def pair_unsat_probability(p, adjacency):
     """U_jk(p) = P(clauses j and k both unsatisfied) for every pair sharing a variable, [B, P]."""
     factors = literal_false_factors(p, adjacency.slot_variable, adjacency.slot_sign)
-    return adjacency.pair_scale * factors.prod(dim=-1)
+    return adjacency.pair_scale * product_of_slots(factors)
 
 
 def expected_satisfied(unsat, num_clauses):
