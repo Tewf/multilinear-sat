@@ -10,7 +10,7 @@
 
 `mu` and `fourier` maximise the same function: FourierSAT's clause polynomial on ±1 with
 independent means is exactly 1 - U_j, so its sum is mu up to the constant m. What separates
-them is the relaxation — an unconstrained theta through tanh, or a projected ascent on the
+them is the relaxation: an unconstrained theta through tanh, or a projected ascent on the
 box. `F` differs from `mu` only in the function.
 
 Everything else is one code path (`solver.py`), so a difference in the table can only come

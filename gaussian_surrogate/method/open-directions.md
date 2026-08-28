@@ -5,8 +5,8 @@ Nothing on this page is built. Each item is stated so that it can be built as on
 
 ## A ladder of objectives
 
-The Gaussian surrogate combines two ingredients — the pair probabilities U_jk and a normal
-tail — and the benchmark cannot tell which one earns its cost. A ladder would:
+The Gaussian surrogate combines two ingredients (the pair probabilities U_jk and a normal
+tail) and the benchmark cannot tell which one earns its cost. A ladder would:
 
     mu       sum_j (1 - U_j)                                 first order, no pairs
     logsum   sum_j log (1 - U_j)                             exact top coefficient of G(z)
@@ -23,7 +23,7 @@ were independent, which is also the top coefficient of the generating function i
 indicators is approximated by the product of the one-clause laws times a correction factor
 S_jk / (S_j S_k) for each dependent pair. It is exact when the dependency graph is a tree, its
 first-order expansion is `logsum`, and its second-order term is the same covariance
-U_jk - U_j U_k that sigma^2 uses — but as an additive log-probability with a bounded, Poisson-
+U_jk - U_j U_k that sigma^2 uses, but as an additive log-probability with a bounded, Poisson-
 like tail, and without Phi or a division by sigma. If `pair` matches or beats `F`, the gain of
 F comes from the pair information; if it does not, it comes from the Gaussian's appetite for
 variance (point 2 of [objective.md](objective.md)).
@@ -31,16 +31,16 @@ variance (point 2 of [objective.md](objective.md)).
 ## The count distribution
 
 The Poisson-binomial law of the satisfied count under clause independence is computable in
-O(m log^2 m) by inverting G(z). Comparing its P[N = m] — which is `logsum`, so the inversion
-is only needed for the rest of the law — with the Gaussian F and with the truth by
+O(m log^2 m) by inverting G(z). Comparing its P[N = m] (which is `logsum`, so the inversion
+is only needed for the rest of the law) with the Gaussian F and with the truth by
 enumeration on small instances would put a number on what the normal approximation costs.
 
 ## A correction to one proposed direction
 
 The author's notes list a tempered objective E[exp(beta S)], annealed in beta, as closed-form
 under the product measure. It is not: exp(beta S) = prod_j (1 + (e^beta - 1)(1 - I_j)) is a
-product over dependent clauses, the same object as P(all satisfied) — which it becomes as
-beta -> infinity — and its expectation expands over all subsets of clauses. It is closed-form
+product over dependent clauses, the same object as P(all satisfied) (which it becomes as
+beta -> infinity) and its expectation expands over all subsets of clauses. It is closed-form
 only if the clauses are treated as independent, which is `logsum` again.
 
 ## Further directions from the author's notes

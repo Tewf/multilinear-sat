@@ -30,8 +30,8 @@ After the reduction the product is multilinear again and its expectation is its 
                 0 for the whole product if any variable is shared with opposite signs,
                 (1 - s p_i)     otherwise.
 
-`adjacency.py` lays this out as six (variable, sign) slots per pair — the three of j and the
-three of k, with k's shared slots padded to a factor of 1 — and one scalar per pair,
+`adjacency.py` lays this out as six (variable, sign) slots per pair (the three of j and the
+three of k, with k's shared slots padded to a factor of 1) and one scalar per pair,
 2^(number of same-sign shared variables) / 64, or 0. A pair sharing two variables follows the
 same rule; two identical clauses give U_jk = U_j. Clauses sharing nothing have U_jk = U_j U_k.
 
@@ -50,7 +50,7 @@ doubly-shared pairs.
 ## The surrogate
 
 The I_j are dependent only through shared variables: the dependency graph is the
-clause–variable graph, and in uniform random 3-SAT at ratio alpha a clause shares a variable
+clause-variable graph, and in uniform random 3-SAT at ratio alpha a clause shares a variable
 with about 9 alpha others, a bounded neighbourhood in a graph of m = alpha n nodes. Under such
 local dependence the sum is approximately normal (Chen and Shao, 2004). With a continuity
 correction, P(S = m) = P(S >= m - 1/2) is approximated by

@@ -5,11 +5,11 @@ Condensed from the author's working notes (August 2026); the derivations are re-
 
 ## From Las Vegas algorithms to a relaxation
 
-The thread began with Las Vegas algorithms — always correct, random running time — and the
-classical randomised SAT solvers in that class: Papadimitriou's random walk for 2-SAT,
+The thread began with Las Vegas algorithms, always correct and random in their running time,
+and the classical randomised SAT solvers in that class: Papadimitriou's random walk for 2-SAT,
 Schöning's (4/3)^n walk for 3-SAT, then WalkSAT and probSAT, which flip variables of violated
 clauses. From there it reached FourierSAT (Kyrillidis, Shrivastava, Vardi and Zhang, 2020):
-encode x_i in {-1, 1}, write each clause indicator as a multilinear (Walsh–Fourier) polynomial,
+encode x_i in {-1, 1}, write each clause indicator as a multilinear (Walsh-Fourier) polynomial,
 relax the cube's vertices to the cube, and maximise the sum of clause polynomials by
 box-constrained gradient ascent. Its strength is hybrid instances (clauses with XOR and
 cardinality constraints), where a product tree over prod_j (1 + y_j z) evaluates symmetric
@@ -42,8 +42,8 @@ What survived:
 
   is the generating function of the number of satisfied clauses *if the clauses were
   independent*; inverting it (evaluate at roots of unity, product tree, O(m log^2 m)) gives
-  that Poisson-binomial law. Its top coefficient is prod_j f_j = prod_j (1 - U_j) — so the
-  probability that all clauses are satisfied, under clause independence, needs no inversion.
+  that Poisson-binomial law. Its top coefficient is prod_j f_j = prod_j (1 - U_j), which is the
+  probability that all clauses are satisfied, under clause independence, and needs no inversion.
 
 What did not survive, as four caveats:
 
@@ -58,7 +58,7 @@ What did not survive, as four caveats:
 
 Two salvage directions were named: the log-sum objective sum_j log f_j(p), and correlated
 parameterisations where sampling earns its place. The follow-up dropped the transform step
-altogether — the clause polynomial *is* its Fourier expansion — took the sum of clause
+altogether (the clause polynomial *is* its Fourier expansion), took the sum of clause
 indicators as the object, and used the sparsity of its dependency graph to write its mean and
 variance in closed form and justify a Gaussian surrogate by the central limit theorem for
 locally dependent sums. That surrogate is the objective of this branch.
