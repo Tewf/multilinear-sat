@@ -1,0 +1,22 @@
+name: build and test (CPU backend)
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  cpu:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: configure
+        run: cmake -S . -B build -DMULTILINEAR_SAT_CUDA=OFF -DCMAKE_BUILD_TYPE=Release
+      - name: build
+        run: cmake --build build -j
+      - name: test
+        run: ctest --test-dir build --output-on-failure
+      - name: solve a planted instance end to end
+        run: |
+          python3 benchmark/generate_instances.py --out ci_instances --n 150 --ratios 4.0 --seeds 1
+          ./build/multilinear-sat ci_instances/uf150_r4.00_s0.cnf --backend cpu --time-limit 60 --batch-size 128 --no-model || test $? -eq 10
