@@ -24,6 +24,12 @@ class SolveResult:
     num_rounding_events: int
 
 
+def certify_solution(formula, solution):
+    """Raise unless the reported assignment (or None) satisfies every clause under the plain-Python check."""
+    if solution is not None and count_unsatisfied_python(formula.clauses.cpu().tolist(), solution) != 0:
+        raise RuntimeError("the solver reported an assignment that the independent check rejects")
+
+
 def solve(formula, objective, relaxation, configuration, seed, trajectory_path=None):
     """objective(p, with_diagnostics) returns an ObjectiveValue whose ascent_target [B] is
     maximised; relaxation maps the optimised parameters to p and keeps them feasible. The
@@ -67,8 +73,7 @@ def solve(formula, objective, relaxation, configuration, seed, trajectory_path=N
             optimizer.step()
             relaxation.project(parameters)
 
-    if solution is not None and count_unsatisfied_python(formula.clauses.cpu().tolist(), solution) != 0:
-        raise RuntimeError("the solver reported an assignment that the independent check rejects")
+    certify_solution(formula, solution)
     if log_trajectory:
         with open(trajectory_path, "w", newline="") as handle:
             writer = csv.writer(handle)
