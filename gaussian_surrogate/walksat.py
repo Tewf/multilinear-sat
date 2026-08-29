@@ -12,6 +12,14 @@ def build_occurrence_lists(variable_index, sign, num_variables):
     return np.split(clause_of[order], boundaries), np.split(sign.ravel()[order], boundaries)
 
 
+def flip_variable(x, true_count, variable, occurrence_clauses, occurrence_signs):
+    """Flip one variable in place and update the true-literal counts of the clauses it occurs in."""
+    clauses, signs = occurrence_clauses[variable], occurrence_signs[variable]
+    was_true = x[variable] * signs > 0
+    x[variable] = -x[variable]
+    true_count[clauses] += np.where(was_true, -1, 1)
+
+
 def walksat_polish(assignment, variable_index, sign, occurrence_clauses, occurrence_signs,
                    max_flips, noise, rng):
     """Flip until every clause is satisfied or the budget is spent; returns (assignment, num_unsat)."""
@@ -32,10 +40,7 @@ def walksat_polish(assignment, variable_index, sign, occurrence_clauses, occurre
             variable = candidates[rng.integers(candidates.size)]
         else:
             variable = candidates[break_counts.argmin()]
-        clauses, signs = occurrence_clauses[variable], occurrence_signs[variable]
-        was_true = x[variable] * signs > 0
-        x[variable] = -x[variable]
-        true_count[clauses] += np.where(was_true, -1, 1)
+        flip_variable(x, true_count, variable, occurrence_clauses, occurrence_signs)
     return x, int((true_count == 0).sum())
 
 
