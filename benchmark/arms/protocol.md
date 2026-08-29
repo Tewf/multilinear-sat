@@ -32,8 +32,15 @@ and the two-factor arms the one-factor results suggested are listed as such in `
 21:40): the base arm found nothing there in 200n flips per slot, p = 0 on every one of its 20
 runs at 22.7 s a run, so every one-factor arm at n = 5000 would carry the same zero and price
 nothing. The base's zero stands for all of them (`rejected.md` says so with the base's cells
-and probSAT's beside them), and the long-walk arm is the one n = 5000 test, run after the
-one-factor stages. The one-factor arms run on uf250 and n = 1000 at both ratios.
+and probSAT's beside them). **At n = 5000 only the base arm was measured**: the long-walk arm
+(`polish_100n`, 100n flips per unit, 400n per slot over three Luby runs, about 230 s a run) is
+defined in `arms.py` and was not run on 2026-08-29 (Mohamed's call, 23:38); it runs later with
+the runner's own command, from `benchmark/`:
+
+    python3 arms/run_arms.py --stages long_walk --families n5000-r4.20
+
+and `python3 arms/dominance.py` then folds its cell into `front.md` and `rejected.md`. The
+one-factor arms ran on uf250 and n = 1000 at both ratios.
 
 ## The instances
 
