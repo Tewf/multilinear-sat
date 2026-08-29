@@ -10,21 +10,25 @@ named). The design as proposed is [anytime-las-vegas.md](anytime-las-vegas.md) a
 
 ## The front
 
-Four arms no other dominates: the plain uniform walk (**base**), the same walk from a 10- or
-30-step ascent (**ascent_10**, **ascent_30**), and the same walk at 16384 slots
-(**batch_16384**). Nothing beats the plain uniform walk beyond noise on any family it was
-measured on; the batch size wins on uf250 alone and loses at n = 1000, and the short ascent is
-not distinguishable from a uniform start on expected time anywhere and better on p on one
-family. So the algorithm is the plain uniform walk with restarts and a posterior, with two
-knobs the front keeps.
+Five arms no other dominates: the plain uniform walk (**base**), the same walk from a 10- or
+30-step ascent (**ascent_10**, **ascent_30**), the same walk at 16384 slots
+(**batch_16384**), and the same walk with 100n flips per unit at n = 1000 (**polish_100n**).
+Nothing beats the plain uniform walk beyond noise on any family it was measured on at the
+same walk length; the batch size wins on uf250 alone and loses at n = 1000; the short ascent
+is not distinguishable from a uniform start on expected time anywhere and better on p on one
+family; and the walk's length is the one lever that moves the order of magnitude, 35x at
+n = 1000. So the algorithm is the plain uniform walk with restarts and a posterior, whose
+unit grows with n, with the batch size and the short ascent as the two knobs the front keeps.
 
     solve(F with n variables, m rows, time limit T):
         B <- 16384 while B (n + 9 m) bytes fit the card's cache, else 4096
               uf250: 0.117 ms per solution at 16384 against 0.224 at 4096 (1.9x);
               n = 1000 at 4.26: 67.6 against 39.1 (1.7x the other way), 4.20: not distinguished
-        unit <- 10 n flips per slot
+        unit <- 10 n flips per slot at n <= 250, 100 n at n = 1000
               uf250: 5n 0.257, 10n 0.224, 20n 0.247 (10n and 20n not distinguished on time;
-              20n has p 0.38 against 0.23); n = 1000: 100n, see "what remains"
+              20n has p 0.38 against 0.23); n = 1000 at 4.20: 10n 9007 (seven satisfied
+              slot-runs in 229 376), 100n 256 (2451 of them), probSAT 1849: the walk needs
+              thousands of n flips uninterrupted there, and the batch wins 7x once it gets them
         for run k = 1, 2, ... while the clock is under T:
             L <- luby(k) * unit
               Luby against a fixed cutoff of one unit: 0.224 against 0.224, p 0.23 against 0.14;
@@ -72,8 +76,10 @@ and the number is what a caller gets instead of a verdict.
 ## Against probSAT on one core
 
 uf50 0.006 against 10.4 ms; uf100 0.029 against 11.7; uf250 0.117 (16384 slots) against 24.2;
-n = 1000 at 4.20: 9.0 s against 1.85 s (the walk loses: seven satisfied slot-runs in 229 376,
-the 10n cutoff hundreds of times shorter than the 10 600n flips probSAT spends per solution);
+n = 1000 at 4.20: 9.0 s against 1.85 s at 10n flips per unit (the walk loses: seven satisfied
+slot-runs in 229 376, the cutoff hundreds of times shorter than the 10 600n flips probSAT
+spends per solution) and 0.256 s at 100n (the walk wins 7x, at 16 M flips per solution
+against probSAT's 10.6 M: the batch's throughput, not a better walk);
 n = 1000 at 4.26: 35 to 39 ms against a 2.9 s mean and 76 ms median on the three decided
 instances; n = 5000 at 4.20: nothing in 200n flips per slot against 2.06 s. The batch wins
 where a restart of 10n flips has a per-restart success above about 1e-4 and loses where the
@@ -81,10 +87,10 @@ walk needs thousands of n flips uninterrupted.
 
 ## What remains
 
-The long-walk arm (100n flips per unit) at n = 1000 and n = 5000, and the two crosses the
-one-factor results suggested (the 10-step ascent with the long walk at n = 1000, the 16384
-batch with the 20n polish on uf250): their cells go into `front.md` and this file when they
-land; the first long-walk run at n = 1000, 4.20 reached p = 0.0069 in 78 s, about 0.4 s per
-solution against base's 9.0 s and probSAT's 1.85 s. n = 5000 at 4.26 has no decided
-instance (probSAT capped at 120 s on all five, CaDiCaL without a verdict), so no arm is
-priced there.
+The long-walk arm at n = 5000 (400n flips per slot over three Luby runs, 230 s a run) and
+the two crosses the one-factor results suggested (the 10-step ascent with the long walk at
+n = 1000, the 16384 batch with the 20n polish on uf250): their cells go into `front.md` and
+this file when they land. The long walk was priced at n = 1000, 4.20 only; at 4.26 and on
+uf250 the unit that pays is not measured, and the rule "10n at n <= 250, 100n at n = 1000"
+is two points, not a law. n = 5000 at 4.26 has no decided instance (probSAT capped at 120 s
+on all five, CaDiCaL without a verdict), so no arm is priced there.

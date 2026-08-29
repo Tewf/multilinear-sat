@@ -10,6 +10,7 @@
 - **ascent_10** (seed=ascent_10, rule=probsat, batch=4096, schedule=luby, polish_per_variable=10, rigorous=0.0), measured on uf250-1065, n1000-r4.20, n1000-r4.26
 - **ascent_30** (seed=ascent_30, rule=probsat, batch=4096, schedule=luby, polish_per_variable=10, rigorous=0.0), measured on uf250-1065, n1000-r4.20, n1000-r4.26
 - **batch_16384** (seed=uniform, rule=probsat, batch=16384, schedule=luby, polish_per_variable=10, rigorous=0.0), measured on uf250-1065, n1000-r4.20, n1000-r4.26
+- **polish_100n** (seed=uniform, rule=probsat, batch=4096, schedule=luby, polish_per_variable=100, rigorous=0.0), measured on n1000-r4.20
 
 ## Per family: every arm on the family's front, then probSAT beside it
 
@@ -47,10 +48,7 @@
 
 | family | arm | runs | satisfied slot-runs | p | cost / restart (ms) | expected time (ms) | flips per solution | median first solution (ms) | package C |
 |---|---|---|---|---|---|---|---|---|---|
-| n1000-r4.20 | base | 8 on 4 instances | 7 | 3.052e-05 | 0.2749 | 9006.857 | 561729861 | 7957.0 | 48 to 67 |
-| n1000-r4.20 | ascent_10 | 8 on 4 instances | 10 | 4.36e-05 | 0.2984 | 6845.400 | 393208969 | 8604.5 | 55 to 64 |
-| n1000-r4.20 | ascent_30 | 8 on 4 instances | 6 | 2.616e-05 | 0.3454 | 13205.167 | 655349646 | 9990.0 | 64 to 77 |
-| n1000-r4.20 | ascent_50 | 8 on 4 instances | 14 | 6.104e-05 | 0.3930 | 6438.571 | 280858840 | 11317.0 | 67 to 91 |
+| n1000-r4.20 | polish_100n | 8 on 4 instances | 2451 | 0.01069 | 2.7385 | 256.283 | 15937564 | 6639.0 | 47 to 65 |
 
 | family | arm | runs | | | wall ms per solution | flips per solution | |
 |---|---|---|---|---|---|---|---|
