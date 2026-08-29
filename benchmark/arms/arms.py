@@ -42,7 +42,10 @@ ARMS = {
     "polish_5n": dict(polish_per_variable=5),
     "polish_20n": dict(polish_per_variable=20),
     "rigorous_half": dict(rigorous=0.5),
-    # two-factor arms, added after the one-factor results (run_arms.py --stages two_factor)
+    # arms added after the one-factor results (run_arms.py --stages two_factor long_walk): at
+    # n = 1000 the base arm's 10n cutoff finds nothing in 120n flips per slot where probSAT's
+    # one chain needs about 14 000n, so the walk's length is the factor to price there
+    "polish_100n": dict(polish_per_variable=100),
     "batch_16384+polish_20n": dict(batch=16384, polish_per_variable=20),
     "skc+polish_20n": dict(rule="skc", polish_per_variable=20),
 }
@@ -74,6 +77,7 @@ STAGES = [
     ("schedule_and_polish", ["fixed_cutoff", "no_restart", "polish_5n", "polish_20n"], ["uf250-1065"]),
     ("rigorous", ["rigorous_half"], ["uf250-1065"]),
     ("two_factor", ["batch_16384+polish_20n", "skc+polish_20n"], ["uf250-1065"] + N1000),
+    ("long_walk", ["polish_100n"], ["n1000-r4.20"]),
 ]
 
 

@@ -24,7 +24,7 @@ RUN_LINE = re.compile(r"c run (\d+) elapsed ([\d.]+) best (\d+) restarts \d+ heu
 
 def parse_arguments():
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    parser.add_argument("--stages", nargs="*", default=[name for name, _, _ in arms.STAGES if name != "two_factor"],
+    parser.add_argument("--stages", nargs="*", default=[name for name, _, _ in arms.STAGES if name not in ("two_factor", "long_walk")],
                         choices=[name for name, _, _ in arms.STAGES])
     parser.add_argument("--families", nargs="*", default=None, help="restrict every stage to these families")
     parser.add_argument("--build", default="build-cuda")
