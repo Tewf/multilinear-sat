@@ -1,0 +1,21 @@
+{"kind": "provenance", "timestamp": "2026-08-29T13:09:46", "commit": "23789c39f1", "phase": "kissat", "device": "cuda", "torch": "2.13.0+cu130", "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU", "beta_prior": [1.0, 1.0], "beta_prior_how": "uniform: no seed comparison record to fit on", "arguments": {"phase": "kissat", "device": "cuda", "instances": "20", "cap": "60.0", "slots_per_group": "32", "groups": "16", "flips_per_variable": "10.0", "rigorous_fraction": "0.5", "prior_satisfiable": "0.5", "beta_prior": "None", "seed_comparison": "~/Desktop/Etude/multilinear-sat/.worktrees/gaussian-surrogate/gaussian_surrogate/experiments/seed_comparison.jsonl", "kissat_runs": "3", "output": "~/Desktop/Etude/multilinear-sat/.worktrees/gaussian-surrogate/gaussian_surrogate/experiments/posterior_calibration.jsonl"}}
+{"kind": "kissat", "family": "uuf250-1065", "instance": "uuf250-01.cnf", "seconds": [1.9775, 1.9815, 1.9804], "fastest": 1.9775, "exit_codes": [20, 20, 20]}
+{"kind": "kissat", "family": "uuf250-1065", "instance": "uuf250-010.cnf", "seconds": [2.4914, 2.489, 2.4713], "fastest": 2.4713, "exit_codes": [20, 20, 20]}
+{"kind": "kissat", "family": "uuf250-1065", "instance": "uuf250-0100.cnf", "seconds": [3.64, 3.6235, 3.6387], "fastest": 3.6235, "exit_codes": [20, 20, 20]}
+{"kind": "kissat", "family": "uuf250-1065", "instance": "uuf250-011.cnf", "seconds": [2.9967, 3.0436, 2.913], "fastest": 2.913, "exit_codes": [20, 20, 20]}
+{"kind": "kissat", "family": "uuf250-1065", "instance": "uuf250-012.cnf", "seconds": [2.6684, 2.6411, 2.6738], "fastest": 2.6411, "exit_codes": [20, 20, 20]}
+{"kind": "kissat", "family": "uuf250-1065", "instance": "uuf250-013.cnf", "seconds": [2.4716, 2.5143, 2.5657], "fastest": 2.4716, "exit_codes": [20, 20, 20]}
+{"kind": "kissat", "family": "uuf250-1065", "instance": "uuf250-014.cnf", "seconds": [3.491, 3.5192, 3.4361], "fastest": 3.4361, "exit_codes": [20, 20, 20]}
+{"kind": "kissat", "family": "uuf250-1065", "instance": "uuf250-015.cnf", "seconds": [2.6082, 2.5628, 2.6066], "fastest": 2.5628, "exit_codes": [20, 20, 20]}
+{"kind": "kissat", "family": "uuf250-1065", "instance": "uuf250-016.cnf", "seconds": [1.9647, 2.0423, 2.0208], "fastest": 1.9647, "exit_codes": [20, 20, 20]}
+{"kind": "kissat", "family": "uuf250-1065", "instance": "uuf250-017.cnf", "seconds": [2.532, 2.479, 2.3595], "fastest": 2.3595, "exit_codes": [20, 20, 20]}
+{"kind": "kissat", "family": "uuf250-1065", "instance": "uuf250-018.cnf", "seconds": [2.6655, 2.6921, 2.6663], "fastest": 2.6655, "exit_codes": [20, 20, 20]}
+{"kind": "kissat", "family": "uuf250-1065", "instance": "uuf250-019.cnf", "seconds": [1.8431, 1.8538, 1.8317], "fastest": 1.8317, "exit_codes": [20, 20, 20]}
+{"kind": "kissat", "family": "uuf250-1065", "instance": "uuf250-02.cnf", "seconds": [3.1626, 3.1427, 3.1463], "fastest": 3.1427, "exit_codes": [20, 20, 20]}
+{"kind": "kissat", "family": "uuf250-1065", "instance": "uuf250-020.cnf", "seconds": [3.3321, 3.3886, 3.2997], "fastest": 3.2997, "exit_codes": [20, 20, 20]}
+{"kind": "kissat", "family": "uuf250-1065", "instance": "uuf250-021.cnf", "seconds": [4.233, 4.2743, 4.3384], "fastest": 4.233, "exit_codes": [20, 20, 20]}
+{"kind": "kissat", "family": "uuf250-1065", "instance": "uuf250-022.cnf", "seconds": [3.8754, 3.7977, 3.8071], "fastest": 3.7977, "exit_codes": [20, 20, 20]}
+{"kind": "kissat", "family": "uuf250-1065", "instance": "uuf250-023.cnf", "seconds": [1.1898, 1.1619, 1.235], "fastest": 1.1619, "exit_codes": [20, 20, 20]}
+{"kind": "kissat", "family": "uuf250-1065", "instance": "uuf250-024.cnf", "seconds": [1.851, 1.8092, 1.7793], "fastest": 1.7793, "exit_codes": [20, 20, 20]}
+{"kind": "kissat", "family": "uuf250-1065", "instance": "uuf250-025.cnf", "seconds": [2.4279, 2.4275, 2.4685], "fastest": 2.4275, "exit_codes": [20, 20, 20]}
+{"kind": "kissat", "family": "uuf250-1065", "instance": "uuf250-026.cnf", "seconds": [1.2094, 1.2026, 1.1962], "fastest": 1.1962, "exit_codes": [20, 20, 20]}
