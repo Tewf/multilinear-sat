@@ -1,4 +1,4 @@
-"""The tilted sampling-gradient loop (method/sampling-gradient-loop.md): B slots in G groups
+"""The tilted sampling-gradient loop (../method/sampling-gradient-loop.md): B slots in G groups
 sharing one theta each. Per step: raw draws from q_theta, a move of each sample, importance
 weights, the merged gradient, a step on theta, the beta schedule, Luby restarts per group, a
 certificate check of every sample, and the trajectory log. The move is one of two (walk_mode):

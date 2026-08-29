@@ -1,5 +1,5 @@
 // The tilted seed's two per-slot operations, shared by the CPU loops and the CUDA kernels
-// (method/sampling-gradient-loop.md on branch gaussian-surrogate): a draw of q_theta, the
+// (method/sampling-gradient-loop.md): a draw of q_theta, the
 // product measure with P(x_i = true) = (1 + tanh theta_i) / 2, and the annealed-importance-
 // sampling ladder (Neal 2001) toward q_theta(x) exp(beta S(x)), S the satisfied-row count.
 // From the draw (exact at beta_0 = 0), rung k proposes a uniform variable of the formula

@@ -23,7 +23,7 @@ any SATISFIABLE before it is printed):
 | `F` | log F | p = tanh(theta), theta free |
 | `mu` | mu | p = tanh(theta), theta free |
 | `fourier` | mu, which is FourierSAT's multilinear energy up to an affine map | x on the box [-1, 1]^n, clipped after each step |
-| `tilted` | log E[exp(beta S)] by sampling (`method/sampling-gradient-loop.md`), its own loop | p = tanh(theta), one theta per group of slots |
+| `tilted` | log E[exp(beta S)] by sampling (`../method/sampling-gradient-loop.md`), its own loop | p = tanh(theta), one theta per group of slots |
 
 `mu` and `fourier` optimise the same function: FourierSAT's clause polynomial on +-1 with
 independent means is exactly 1 - U_j. What separates them is the relaxation.

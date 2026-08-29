@@ -1,6 +1,6 @@
 # What the tilted loop does not build, and why
 
-Companion to [sampling-gradient-loop.md](sampling-gradient-loop.md). The loop as coded
+Companion to [sampling-gradient-loop.md](../../method/sampling-gradient-loop.md). The loop as coded
 (`tilted_loop.py`, 2026-08-29) leaves two pieces of the design note out on purpose and builds
 one in two forms, one of them labelled biased.
 

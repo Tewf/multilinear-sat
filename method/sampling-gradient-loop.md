@@ -1,6 +1,8 @@
 # Gradient and sampling as one loop: the tilted objective, estimated and corrected
 
-Design note, 2026-08-29, nothing built. Mohamed's idea: not gradient against sampling but the
+Design note, 2026-08-29, the design as proposed: the loop was built as `--obj tilted` in the Python
+record (`../gaussian_surrogate/`), then as the `tilted` seed of the library, and measured in
+`../benchmark/findings-walk/`; [algorithm.md](algorithm.md) says what survived. Mohamed's idea: not gradient against sampling but the
 two feeding each other, the gradient shaping the sampling distribution and the samples making
 the gradient more accurate than mean field, so that the guide improves and the formula can be
 simplified. Under the product parametrisation this has an exact form.
@@ -18,7 +20,7 @@ the current means. Its two limits are the two methods of this branch:
 
 - beta -> 0:  (E_tilted[x] - p) / beta -> Cov_p(x, S) = d mu / d theta, the mean-field gradient
   that `mu` ascends (linear response). Its second order in beta is the mean-variance objective
-  of [tilted-objective.md](tilted-objective.md), whose implicit beta the Gaussian F follows.
+  of [tilted-objective.md](../gaussian_surrogate/method/tilted-objective.md), whose implicit beta the Gaussian F follows.
 - beta -> infinity: E[x | x satisfies F] - p, the mean of the solutions minus p: the
   cross-entropy update with the satisfying assignments as the elite set, and the exact gradient
   of log P(all satisfied), the weighted model count.

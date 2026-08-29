@@ -1,6 +1,6 @@
 # 4. Positioning: the design note, section by section
 
-`gaussian_surrogate/method/anytime-las-vegas.md`, every claim labelled **theorem**, **measured
+`method/anytime-las-vegas.md`, every claim labelled **theorem**, **measured
 elsewhere**, **open** or **wrong**, with the wrong ones quoted.
 
 ## Piece 1, Seed. Wrong.

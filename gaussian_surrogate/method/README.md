@@ -23,9 +23,9 @@ Reading order:
    byte, and the cost asymmetry between a step of F and a step of mu.
 7. [open-directions.md](open-directions.md), the ladder of objectives that would separate the
    ingredients, and the author's further directions; none of it is built.
-8. [anytime-las-vegas.md](anytime-las-vegas.md), the Las Vegas hybrid with an UNSAT posterior: seed,
+8. [anytime-las-vegas.md](../../method/anytime-las-vegas.md), the Las Vegas hybrid with an UNSAT posterior: seed,
    polish, restarts, a rigorous half and what can and cannot be claimed.
-9. [sampling-gradient-loop.md](sampling-gradient-loop.md), the tilted objective whose gradient is
+9. [sampling-gradient-loop.md](../../method/sampling-gradient-loop.md), the tilted objective whose gradient is
    the tilted mean minus p, estimated by annealed samples and corrected by a control variate;
    built as `--obj tilted`.
 10. [not-built.md](not-built.md), what the loop leaves out (decimation) and what it builds in two

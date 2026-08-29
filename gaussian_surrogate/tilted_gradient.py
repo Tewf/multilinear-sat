@@ -1,5 +1,5 @@
 """The ascent direction of the tilted objective log E_theta[exp(beta S)] in theta coordinates
-(method/sampling-gradient-loop.md): the weighted mean of the annealed samples minus p, corrected
+(../method/sampling-gradient-loop.md): the weighted mean of the annealed samples minus p, corrected
 by a control variate whose expectation under the raw draws is the closed form beta d mu / d theta."""
 import torch
 

@@ -7,7 +7,7 @@ and `.md` (kissat on the CPU at 13:15; the loop's half on the GPU, 17:21 to 17:4
 was on the card at the start of any phase; the uniform arm's polish time, the contention detector,
 spread over 0.151 to 0.173 s on uf50, 0.30 to 0.47 s on uf100 and 0.77 to 1.28 s on uf250, and the
 tables use medians. What was built and left out is in `method/not-built.md`; the design is
-`method/sampling-gradient-loop.md` as corrected by its review. The Python package is now the
+`../method/sampling-gradient-loop.md` as corrected by its review. The Python package is now the
 record: the implementation moved to C++ on branch `sampling-walk`.
 
 ## Table 1: is the sampled tilted mean an estimate of anything? (n = 12, enumeration)

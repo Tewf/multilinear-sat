@@ -42,7 +42,7 @@ of 2n Metropolis proposals toward q_theta exp(beta S) (S the satisfied-row count
 variable accepted with min(1, exp(beta_k dS - 2 theta_i x_i)), log weights summed along the
 ladder), and steps theta by the self-normalised weighted mean of the samples minus p, which
 is the exact ascent direction of log E_theta[exp(beta S)] (the identity of
-`sampling-gradient-loop.md` on branch gaussian-surrogate, checked there by enumeration and
+[sampling-gradient-loop.md](sampling-gradient-loop.md), checked in the Python record by enumeration and
 here by `tests/test_tilted.cpp`). The step decreases as eta_0 / (1 + t / half_life), beta
 rises by a factor while the effective sample size holds above a floor, groups restart on the
 Luby schedule in steps, and no control variate is used. After the seed steps a fresh draw

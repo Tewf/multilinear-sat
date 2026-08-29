@@ -71,5 +71,5 @@ exponentials and decays more slowly than any single satisfiable instance's
 - [references.bib](references.bib): one entry per work, each with its verification note.
 
 Contract: `2026-08-28_gaussian-surrogate-sat/review-contract.md`. Question:
-`q6-brief.md` there. Design note tested: `../../gaussian_surrogate/method/anytime-las-vegas.md`.
+`q6-brief.md` there. Design note tested: `../../method/anytime-las-vegas.md`.
 No code outside this folder was changed and nothing was committed.

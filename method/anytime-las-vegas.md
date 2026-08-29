@@ -1,7 +1,9 @@
 # The algorithm the reviews point to: a Las Vegas hybrid with an anytime UNSAT posterior
 
-Design note, 2026-08-29, written before its literature review (`../../literature/anytime-unsat-confidence/`
-when it lands). Nothing here is built. Mohamed's requirement: good performance on satisfiable
+Design note, 2026-08-29, written before its literature review (`../literature/anytime-unsat-confidence/`,
+which tests it claim by claim in its `4-positioning.md`). This is the design as proposed; the
+algorithm as built is [README.md](README.md) and [walk-and-posterior.md](walk-and-posterior.md),
+and the algorithm as measured is [algorithm.md](algorithm.md). Mohamed's requirement: good performance on satisfiable
 instances (polynomial or subexponential where that is possible), and on unsatisfiable ones an
 algorithm that never stops but whose probability of "UNSAT" rises with the time spent.
 
@@ -14,7 +16,7 @@ algorithm that never stops but whose probability of "UNSAT" rises with the time 
    combination as future work (Q2, Q6).
 2. **Polish.** A stochastic local search from that seed: probSAT on clauses, xnfSAT where
    parities exist (native XOR is the one ingredient the literature shows to matter on Brent
-   equations). The polish is where solutions are found on uf250 today (findings.md).
+   equations). The polish is where solutions are found on uf250 today (`../gaussian_surrogate/findings.md`).
 3. **Restarts on the Luby schedule** (Luby, Sinclair, Zuckerman 1993), each restart's outcome
    recorded; the run-length distribution of the restarts is estimated online. On hard random
    3-SAT a well-tuned SLS has an exponential, memoryless run-length distribution (Hoos and
@@ -44,7 +46,7 @@ algorithm that never stops but whose probability of "UNSAT" rises with the time 
   running time: the certificate is exact and exponential. Subexponential worst-case time for
   3-SAT contradicts the exponential time hypothesis, and the local reasoning here does nothing
   to escape the resolution-width and degree lower bounds
-  (`subexponential-sat-map.md` states the test any candidate must pass).
+  (a private note outside this repository states the test any candidate must pass).
 - **Typical case, satisfiable side.** Polynomial time on random k-SAT below the algorithmic
   barrier is a theorem for other algorithms of this family: WalkSAT in polynomial time up to a
   density of order 2^k / k (Coja-Oghlan and Frieze 2014), Fix up to (1 - epsilon) 2^k ln k / k
