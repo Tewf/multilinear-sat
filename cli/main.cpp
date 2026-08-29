@@ -22,7 +22,7 @@ static void print_model(const std::vector<int8_t>& assignment) {
 }
 
 static const char* seed_kind_name(SeedKind kind) {
-    return kind == SeedKind::Uniform ? "uniform" : kind == SeedKind::AllFalse ? "all-false" : "ascent";
+    return kind == SeedKind::Uniform ? "uniform" : kind == SeedKind::AllFalse ? "all-false" : kind == SeedKind::Ascent ? "ascent" : "tilted";
 }
 
 static const char* walk_rule_name(WalkRule rule) {

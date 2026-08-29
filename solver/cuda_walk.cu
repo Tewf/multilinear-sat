@@ -50,6 +50,9 @@ void CudaBackend::allocate_walk() {
     table_length_ = formula_->max_occurrence_count() + 1;
     probsat_weight_ = static_cast<uint32_t*>(allocate(table_length_ * sizeof(uint32_t), "allocate probsat weights"));
     metropolis_threshold_ = static_cast<uint32_t*>(allocate(table_length_ * sizeof(uint32_t), "allocate metropolis thresholds"));
+    log_weights_ = static_cast<float*>(allocate(batch_size_ * sizeof(float), "allocate log weights"));
+    found_ = static_cast<uint8_t*>(allocate(batch_size_, "allocate found flags"));
+    saved_ = static_cast<uint8_t*>(allocate((size_t)batch_size_ * variable_count_, "allocate saved assignments"));
 }
 
 void CudaBackend::begin_walk(const std::vector<WalkSlotPlan>& plan, const WalkParameters& walk, uint64_t epoch) {

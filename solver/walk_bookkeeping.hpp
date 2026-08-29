@@ -79,9 +79,11 @@ MULTILINEAR_SAT_INLINE void remove_violated(WalkSlot& slot, int row) {
 }
 
 // The start of a walk: the rounding of the slot's continuous point (SeedKind::Ascent, 2),
-// the rounding of a fresh restart-stream point (Uniform, 0), or all false (AllFalse, 1).
+// the rounding of a fresh restart-stream point (Uniform, 0), all false (AllFalse, 1), or the
+// assignment already in the slot, the tilted seed's last draw (Tilted, 3).
 MULTILINEAR_SAT_INLINE void set_walk_start(const WalkFormula& formula, WalkSlot& slot, uint8_t start, const float* point,
                                            uint64_t seed, uint64_t epoch, int slot_index) {
+    if (start == 3) return;
     for (int v = 0; v < formula.variable_count; ++v) {
         bool value = false;
         if (start == 2) value = rounds_true(point[v]);

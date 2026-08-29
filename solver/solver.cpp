@@ -7,6 +7,7 @@
 #include "polish_phase.hpp"
 #include "posterior.hpp"
 #include "seed_phase.hpp"
+#include "tilted_phase.hpp"
 
 namespace multilinear_sat {
 
@@ -24,7 +25,16 @@ SolveResult solve(const Formula& formula, const SolverConfiguration& configurati
 static void validate(const SolverConfiguration& c, const Formula& formula) {
     if (c.batch_size <= 0) throw std::invalid_argument("batch_size must be positive");
     if (c.seed_steps < 0 || c.polish_flips < 0 || c.run_limit < 0) throw std::invalid_argument("seed_steps, polish_flips and run_limit must not be negative");
-    if ((c.seed_kind != SeedKind::Ascent || c.seed_steps == 0) && c.polish_flips == 0) throw std::invalid_argument("a run needs gradient steps or walk flips: set seed_steps with the ascent, or polish_flips");
+    const bool seed_runs = (c.seed_kind == SeedKind::Ascent || c.seed_kind == SeedKind::Tilted) && c.seed_steps > 0;
+    if (!seed_runs && c.polish_flips == 0) throw std::invalid_argument("a run needs seed steps (ascent or tilted) or walk flips");
+    if (c.seed_kind == SeedKind::Tilted) {
+        const TiltedParameters& t = c.tilted;
+        if (t.tilted_groups <= 0 || c.batch_size % t.tilted_groups != 0) throw std::invalid_argument("batch_size must be a positive multiple of tilted_groups");
+        if (t.tilted_rungs_per_variable < 0.0f || t.tilted_learning_rate <= 0.0f || t.tilted_learning_rate_half_life <= 0.0f || t.tilted_init_scale < 0.0f)
+            throw std::invalid_argument("tilted_rungs_per_variable and tilted_init_scale must not be negative, the learning rate and its half life must be positive");
+        if (t.beta_initial < 0.0f || t.beta_growth_factor < 1.0f || t.beta_max < t.beta_initial || t.ess_floor_fraction < 0.0f || t.tilted_luby_unit_steps <= 0)
+            throw std::invalid_argument("the beta schedule needs 0 <= beta_initial <= beta_max, beta_growth_factor >= 1, ess_floor_fraction >= 0 and positive tilted_luby_unit_steps");
+    }
     if (c.stall_patience < 0) throw std::invalid_argument("stall_patience must not be negative");
     if (c.step.step_size <= 0.0f) throw std::invalid_argument("step_size must be positive");
     if (c.step.kick_sigma < 0.0f || c.step.kick_decay <= 0.0f) throw std::invalid_argument("kick_sigma must not be negative and kick_decay must be positive");
@@ -57,7 +67,8 @@ SolveResult solve_with(const Formula& formula, const SolverConfiguration& config
     update_posteriors(state);
     for (int64_t run = 1; !state.stop; ++run) {
         const int64_t scale = luby(run);
-        run_seed_phase(state, configuration.seed_steps * scale);
+        if (configuration.seed_kind == SeedKind::Tilted) run_tilted_seed_phase(state, configuration.seed_steps * scale);
+        else run_seed_phase(state, configuration.seed_steps * scale);
         run_polish_phase(state, configuration.polish_flips * scale);
         if (state.stop) break;
         ++state.result.runs;

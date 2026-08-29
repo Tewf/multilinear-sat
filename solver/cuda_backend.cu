@@ -117,10 +117,12 @@ void CudaBackend::release() {
                           (const void*)device_.occurrence_literals, (const void*)device_.clause_is_parity}) cudaFree((void*)p);
     for (void* p : {(void*)points_, (void*)next_, (void*)velocity_, (void*)flags_, (void*)counts_, (void*)slots_,
                     (void*)assignment_, (void*)true_count_, (void*)violated_list_, (void*)violated_position_, (void*)violated_count_,
-                    (void*)flips_done_, (void*)plan_, (void*)probsat_weight_, (void*)metropolis_threshold_}) cudaFree(p);
+                    (void*)flips_done_, (void*)plan_, (void*)probsat_weight_, (void*)metropolis_threshold_,
+                    (void*)theta_, (void*)beta_, (void*)log_weights_, (void*)found_, (void*)saved_}) cudaFree(p);
     device_ = {}; points_ = next_ = velocity_ = nullptr; flags_ = nullptr; counts_ = slots_ = nullptr;
     assignment_ = true_count_ = nullptr; violated_list_ = violated_position_ = violated_count_ = flips_done_ = nullptr;
     plan_ = nullptr; probsat_weight_ = metropolis_threshold_ = nullptr;
+    theta_ = beta_ = log_weights_ = nullptr; found_ = saved_ = nullptr; theta_capacity_ = beta_capacity_ = 0;
 }
 
 bool cuda_available() {

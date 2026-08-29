@@ -6,7 +6,7 @@
 namespace multilinear_sat {
 
 enum class BackendKind { Cpu, Cuda, Auto };
-enum class SeedKind { Uniform, AllFalse, Ascent };            // where each run's walk starts
+enum class SeedKind { Uniform, AllFalse, Ascent, Tilted };    // where each run's walk starts
 enum class WalkRule { Skc, ProbSat, Schoening, Metropolis };  // how the walk picks a variable
 
 struct StepParameters {
@@ -24,6 +24,23 @@ struct WalkParameters {
     float probsat_eps = 0.9f;         //          (Balint and Schoning 2012, their 3-SAT values)
     float metropolis_beta = 1.0f;     // metropolis: accept a flip losing d satisfied rows with probability exp(-beta d)
     int walk_flips_per_launch = 32;   // flips per slot between two certificate checks (one CUDA launch)
+};
+
+// The tilted seed (seed_kind tilted): groups of slots share a natural parameter vector theta,
+// each step draws the group's slots from q_theta, anneals them toward q_theta exp(beta S) and
+// steps theta by the weighted sample mean minus tanh theta. Set once from the Python
+// record's calibration, never tuned: PROVISIONAL.
+struct TiltedParameters {
+    int tilted_groups = 16;                          // the batch splits evenly into this many groups
+    float tilted_rungs_per_variable = 2.0f;          // rungs of the annealing ladder per step, times n
+    float tilted_learning_rate = 0.1f;               // eta_0 of the step on theta
+    float tilted_learning_rate_half_life = 100.0f;   // eta_t = eta_0 / (1 + t / this), t steps since the group's restart
+    float tilted_init_scale = 1.0f;                  // theta ~ Uniform(-scale, scale) at a group's start
+    float beta_initial = 0.05f;
+    float beta_growth_factor = 1.05f;                // applied while the group's effective sample size stays above the floor
+    float beta_max = 5.0f;
+    float ess_floor_fraction = 0.25f;                // raise beta while ESS >= this * slots per group, else hold
+    int tilted_luby_unit_steps = 50;                 // a group's restart budget = luby(i) * this, in steps
 };
 
 struct SolverConfiguration {
@@ -44,6 +61,7 @@ struct SolverConfiguration {
     double beta_prior_b = 1.0;        // until fitted on the family (posterior.hpp)
     StepParameters step;
     WalkParameters walk;
+    TiltedParameters tilted;
     bool verbose = false;
 };
 

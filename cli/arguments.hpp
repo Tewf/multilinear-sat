@@ -19,11 +19,13 @@ struct Arguments {
 inline const char* usage() {
     return "usage: multilinear-sat <file.cnf|file.xnf> [--time-limit S] [--iteration-limit N] [--run-limit N] [--seed N]\n"
            "         [--batch-size B] [--backend cpu|cuda|auto] [--step-size X] [--momentum X] [--kick-sigma X]\n"
-           "         [--kick-decay X] [--focused-kick 0|1] [--seed-kind uniform|all-false|ascent] [--seed-steps N]\n"
+           "         [--kick-decay X] [--focused-kick 0|1] [--seed-kind uniform|all-false|ascent|tilted] [--seed-steps N]\n"
            "         [--polish-flips N] [--stall-patience N] [--walk-rule skc|probsat|schoening|metropolis]\n"
            "         [--walk-noise X] [--probsat-cb X] [--probsat-eps X] [--metropolis-beta X] [--walk-flips-per-launch N]\n"
            "         [--rigorous-fraction X] [--prior-satisfiable X] [--beta-prior-a X] [--beta-prior-b X]\n"
-           "         [--no-model] [--verbose]\n"
+           "         [--tilted-groups N] [--tilted-rungs-per-variable X] [--tilted-learning-rate X]\n"
+           "         [--tilted-learning-rate-half-life X] [--tilted-init-scale X] [--beta-initial X] [--beta-growth-factor X]\n"
+           "         [--beta-max X] [--ess-floor-fraction X] [--tilted-luby-unit-steps N] [--no-model] [--verbose]\n"
            "prints s SATISFIABLE and a v line (exit 10) or s UNKNOWN (exit 0); never claims UNSAT\n";
 }
 
@@ -31,7 +33,8 @@ inline SeedKind parse_seed_kind(const std::string& kind) {
     if (kind == "uniform") return SeedKind::Uniform;
     if (kind == "all-false") return SeedKind::AllFalse;
     if (kind == "ascent") return SeedKind::Ascent;
-    throw std::invalid_argument("unknown seed kind " + kind + " (uniform, all-false or ascent)");
+    if (kind == "tilted") return SeedKind::Tilted;
+    throw std::invalid_argument("unknown seed kind " + kind + " (uniform, all-false, ascent or tilted)");
 }
 
 inline WalkRule parse_walk_rule(const std::string& rule) {
@@ -82,6 +85,16 @@ inline Arguments parse_arguments(int argc, char** argv) {
         else if (flag == "--prior-satisfiable") c.prior_satisfiable = std::stod(value(i));
         else if (flag == "--beta-prior-a") c.beta_prior_a = std::stod(value(i));
         else if (flag == "--beta-prior-b") c.beta_prior_b = std::stod(value(i));
+        else if (flag == "--tilted-groups") c.tilted.tilted_groups = std::stoi(value(i));
+        else if (flag == "--tilted-rungs-per-variable") c.tilted.tilted_rungs_per_variable = std::stof(value(i));
+        else if (flag == "--tilted-learning-rate") c.tilted.tilted_learning_rate = std::stof(value(i));
+        else if (flag == "--tilted-learning-rate-half-life") c.tilted.tilted_learning_rate_half_life = std::stof(value(i));
+        else if (flag == "--tilted-init-scale") c.tilted.tilted_init_scale = std::stof(value(i));
+        else if (flag == "--beta-initial") c.tilted.beta_initial = std::stof(value(i));
+        else if (flag == "--beta-growth-factor") c.tilted.beta_growth_factor = std::stof(value(i));
+        else if (flag == "--beta-max") c.tilted.beta_max = std::stof(value(i));
+        else if (flag == "--ess-floor-fraction") c.tilted.ess_floor_fraction = std::stof(value(i));
+        else if (flag == "--tilted-luby-unit-steps") c.tilted.tilted_luby_unit_steps = std::stoi(value(i));
         else if (flag == "--no-model") arguments.print_model = false;
         else if (flag == "--verbose") c.verbose = true;
         else if (flag == "--backend") c.backend = parse_backend(value(i));

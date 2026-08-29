@@ -47,6 +47,19 @@ public:
     virtual void walk(const WalkParameters& walk, std::vector<int>& violated) = 0;
     virtual std::vector<int8_t> walk_assignment(int slot) const = 0;
     virtual void walk_flips_done(std::vector<int32_t>& flips) const = 0;
+
+    // The tilted seed (tilted_anneal.hpp). draw_tilted sets every slot's assignment to a
+    // draw of its group's q_theta (theta is groups x variables, group = slot / slots_per_group)
+    // from the restart stream at epoch, and recounts. anneal runs the ladder of `rungs`
+    // proposals on every slot, leaving the annealed samples as the walk's state; it writes
+    // each slot's log weight, its violated count and whether it passed through a satisfying
+    // assignment, which saved_assignment then returns. walk_assignments downloads the whole
+    // batch's assignments (batch x variables, 1 = true) in one copy.
+    virtual void draw_tilted(const std::vector<float>& theta, int slots_per_group, uint64_t epoch) = 0;
+    virtual void anneal(const std::vector<float>& theta, const std::vector<float>& beta, int slots_per_group, int rungs, uint64_t epoch,
+                        std::vector<float>& log_weights, std::vector<int>& violated, std::vector<uint8_t>& found) = 0;
+    virtual void walk_assignments(std::vector<uint8_t>& assignments) const = 0;
+    virtual std::vector<int8_t> saved_assignment(int slot) const = 0;
 };
 
 std::unique_ptr<Backend> make_cpu_backend();

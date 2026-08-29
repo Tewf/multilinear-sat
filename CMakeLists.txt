@@ -30,7 +30,7 @@ endif()
 find_package(OpenMP)
 
 if(MULTILINEAR_SAT_HAVE_CUDA)
-    set(MULTILINEAR_SAT_DEVICE_SOURCES solver/cuda_backend.cu solver/cuda_walk.cu)
+    set(MULTILINEAR_SAT_DEVICE_SOURCES solver/cuda_backend.cu solver/cuda_walk.cu solver/cuda_tilted.cu)
 else()
     set(MULTILINEAR_SAT_DEVICE_SOURCES solver/cuda_unavailable.cpp)
 endif()
@@ -39,6 +39,7 @@ add_library(multilinear_sat STATIC
     solver/formula.cpp
     solver/cpu_backend.cpp
     solver/cpu_walk.cpp
+    solver/cpu_tilted.cpp
     solver/solver.cpp
     ${MULTILINEAR_SAT_DEVICE_SOURCES})
 target_include_directories(multilinear_sat PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/solver)
@@ -61,7 +62,7 @@ if(MULTILINEAR_SAT_TESTS)
     add_executable(unit_tests
         tests/main.cpp tests/test_formula.cpp tests/test_energy.cpp tests/test_random_and_luby.cpp
         tests/test_solver.cpp tests/test_backends.cpp tests/test_certificate.cpp
-        tests/test_walk.cpp tests/test_parity.cpp tests/test_posterior.cpp)
+        tests/test_walk.cpp tests/test_parity.cpp tests/test_posterior.cpp tests/test_tilted.cpp)
     target_include_directories(unit_tests PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/tests)
     target_link_libraries(unit_tests PRIVATE multilinear_sat)
     add_test(NAME unit_tests COMMAND unit_tests)

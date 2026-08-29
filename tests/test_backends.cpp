@@ -83,3 +83,38 @@ TEST_CASE("cpu and cuda walks agree bit for bit under every rule, from every sta
         }
     }
 }
+
+TEST_CASE("cpu and cuda tilted draws agree exactly and their annealing ladders agree to float tolerance") {
+    if (!cuda_available()) {
+        MESSAGE("no CUDA device: tilted agreement test skipped");
+        return;
+    }
+    auto planted = testing::planted_3sat(120, 4.0, 14);
+    const int batch = 64, groups = 4;
+    std::vector<float> theta(static_cast<size_t>(groups) * planted.formula.variable_count);
+    uint64_t state = 8;
+    for (float& value : theta) value = static_cast<float>(testing::next_random(state) % 1000) / 500.0f - 1.0f;
+    const std::vector<float> beta = {0.1f, 0.5f, 1.0f, 2.0f};
+    auto cpu = make_cpu_backend();
+    auto cuda = make_cuda_backend();
+    cpu->initialise(planted.formula, batch, 91);
+    cuda->initialise(planted.formula, batch, 91);
+    cpu->draw_tilted(theta, batch / groups, 3);
+    cuda->draw_tilted(theta, batch / groups, 3);
+    std::vector<uint8_t> cpu_draws, cuda_draws;
+    cpu->walk_assignments(cpu_draws);
+    cuda->walk_assignments(cuda_draws);
+    CHECK(cpu_draws == cuda_draws);
+    std::vector<float> cpu_weights, cuda_weights;
+    std::vector<int> cpu_violated, cuda_violated;
+    std::vector<uint8_t> cpu_found, cuda_found;
+    cpu->anneal(theta, beta, batch / groups, 200, 3, cpu_weights, cpu_violated, cpu_found);
+    cuda->anneal(theta, beta, batch / groups, 200, 3, cuda_weights, cuda_violated, cuda_found);
+    // logf differs in the last bits between host and device, so one acceptance in a few
+    // thousand may go the other way and the chains diverge from there: the weights agree
+    // closely on most slots and the counts stay in the same range.
+    int weight_disagreements = 0;
+    for (int slot = 0; slot < batch; ++slot) weight_disagreements += std::fabs(cpu_weights[slot] - cuda_weights[slot]) > 1e-3f * std::fabs(cpu_weights[slot]) + 1e-2f;
+    CHECK(weight_disagreements <= 8);
+    CHECK(cpu_found == cuda_found);
+}

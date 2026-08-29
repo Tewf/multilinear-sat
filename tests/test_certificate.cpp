@@ -59,6 +59,13 @@ public:
     void walk(const WalkParameters&, std::vector<int>& violated) override { violated.assign(1, 0); }
     std::vector<int8_t> walk_assignment(int) const override { return std::vector<int8_t>(variables_, -1); }
     void walk_flips_done(std::vector<int32_t>& flips) const override { flips.assign(1, 0); }
+    void draw_tilted(const std::vector<float>&, int, uint64_t) override {}
+    void anneal(const std::vector<float>&, const std::vector<float>&, int, int, uint64_t, std::vector<float>& log_weights,
+                std::vector<int>& violated, std::vector<uint8_t>& found) override {
+        log_weights.assign(1, 0.0f); violated.assign(1, 0); found.assign(1, 0);
+    }
+    void walk_assignments(std::vector<uint8_t>& assignments) const override { assignments.assign(variables_, 0); }
+    std::vector<int8_t> saved_assignment(int) const override { return std::vector<int8_t>(variables_, -1); }
 private:
     int variables_ = 0;
 };
@@ -72,5 +79,8 @@ TEST_CASE("a backend that reports a false zero count is rejected by the checker,
     CHECK_THROWS(solve_with(f, configuration, liar));
     configuration.seed_kind = SeedKind::Uniform;
     configuration.polish_flips = 10;
+    CHECK_THROWS(solve_with(f, configuration, liar));
+    configuration.seed_kind = SeedKind::Tilted;
+    configuration.tilted.tilted_groups = 1;
     CHECK_THROWS(solve_with(f, configuration, liar));
 }
