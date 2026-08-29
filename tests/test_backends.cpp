@@ -1,5 +1,6 @@
-// CPU and CUDA backends compute the same thing from the same seed. Skipped when no
-// CUDA device is present, so the suite still passes on a CPU-only build.
+// CPU and CUDA backends compute the same thing from the same seed: the gradient to float
+// tolerance, the walk bit for bit. Skipped when no CUDA device is present, so the suite
+// still passes on a CPU-only build.
 #include <cmath>
 
 #include "backend.hpp"
@@ -43,4 +44,77 @@ TEST_CASE("cpu and cuda backends agree on initial points, counts and 200 steps w
     // differently once, which is why a handful of count disagreements is tolerated.
     CHECK(largest < 1e-3f);
     CHECK(count_disagreements <= 5);
+}
+
+TEST_CASE("cpu and cuda walks agree bit for bit under every rule, from every start, on clauses and parities") {
+    if (!cuda_available()) {
+        MESSAGE("no CUDA device: walk agreement test skipped");
+        return;
+    }
+    for (int with_parities = 0; with_parities < 2; ++with_parities) {
+        auto planted = with_parities ? testing::planted_xnf(150, 3.8, 40, 5, 13) : testing::planted_3sat(200, 4.2, 12);
+        const int batch = 64;
+        for (WalkRule rule : {WalkRule::Skc, WalkRule::ProbSat, WalkRule::Schoening, WalkRule::Metropolis}) {
+            for (SeedKind start : {SeedKind::Uniform, SeedKind::AllFalse, SeedKind::Ascent}) {
+                auto cpu = make_cpu_backend();
+                auto cuda = make_cuda_backend();
+                cpu->initialise(planted.formula, batch, 77);
+                cuda->initialise(planted.formula, batch, 77);
+                std::vector<WalkSlotPlan> plan(batch, WalkSlotPlan{static_cast<uint8_t>(start), static_cast<uint8_t>(rule), 500});
+                plan[3].budget = 120;   // one slot with a shorter budget, one thread that idles early
+                WalkParameters walk;
+                walk.walk_rule = rule;
+                walk.walk_flips_per_launch = 64;
+                cpu->begin_walk(plan, walk, 5);
+                cuda->begin_walk(plan, walk, 5);
+                std::vector<int> cpu_violated, cuda_violated;
+                std::vector<int32_t> cpu_flips, cuda_flips;
+                for (int launch = 0; launch < 8; ++launch) {
+                    cpu->walk(walk, cpu_violated);
+                    cuda->walk(walk, cuda_violated);
+                    CHECK(cpu_violated == cuda_violated);
+                }
+                for (int slot = 0; slot < batch; slot += 7) CHECK(cpu->walk_assignment(slot) == cuda->walk_assignment(slot));
+                cpu->walk_flips_done(cpu_flips);
+                cuda->walk_flips_done(cuda_flips);
+                CHECK(cpu_flips == cuda_flips);
+                CHECK(cpu_flips[3] <= 120);
+            }
+        }
+    }
+}
+
+TEST_CASE("cpu and cuda tilted draws agree exactly and their annealing ladders agree to float tolerance") {
+    if (!cuda_available()) {
+        MESSAGE("no CUDA device: tilted agreement test skipped");
+        return;
+    }
+    auto planted = testing::planted_3sat(120, 4.0, 14);
+    const int batch = 64, groups = 4;
+    std::vector<float> theta(static_cast<size_t>(groups) * planted.formula.variable_count);
+    uint64_t state = 8;
+    for (float& value : theta) value = static_cast<float>(testing::next_random(state) % 1000) / 500.0f - 1.0f;
+    const std::vector<float> beta = {0.1f, 0.5f, 1.0f, 2.0f};
+    auto cpu = make_cpu_backend();
+    auto cuda = make_cuda_backend();
+    cpu->initialise(planted.formula, batch, 91);
+    cuda->initialise(planted.formula, batch, 91);
+    cpu->draw_tilted(theta, batch / groups, 3);
+    cuda->draw_tilted(theta, batch / groups, 3);
+    std::vector<uint8_t> cpu_draws, cuda_draws;
+    cpu->walk_assignments(cpu_draws);
+    cuda->walk_assignments(cuda_draws);
+    CHECK(cpu_draws == cuda_draws);
+    std::vector<float> cpu_weights, cuda_weights;
+    std::vector<int> cpu_violated, cuda_violated;
+    std::vector<uint8_t> cpu_found, cuda_found;
+    cpu->anneal(theta, beta, batch / groups, 200, 3, cpu_weights, cpu_violated, cpu_found);
+    cuda->anneal(theta, beta, batch / groups, 200, 3, cuda_weights, cuda_violated, cuda_found);
+    // logf differs in the last bits between host and device, so one acceptance in a few
+    // thousand may go the other way and the chains diverge from there: the weights agree
+    // closely on most slots and the counts stay in the same range.
+    int weight_disagreements = 0;
+    for (int slot = 0; slot < batch; ++slot) weight_disagreements += std::fabs(cpu_weights[slot] - cuda_weights[slot]) > 1e-3f * std::fabs(cpu_weights[slot]) + 1e-2f;
+    CHECK(weight_disagreements <= 8);
+    CHECK(cpu_found == cuda_found);
 }

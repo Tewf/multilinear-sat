@@ -1,5 +1,5 @@
-// The two per-element operations of one iteration, shared by the CPU loops and the
-// CUDA kernels: mark a clause as violated by the rounded point, and update one
+// The two per-element operations of one gradient iteration, shared by the CPU loops and
+// the CUDA kernels: mark a row as violated by the rounded point, and update one
 // variable of one slot (gradient over its occurrences, focused kick, momentum, clip).
 #pragma once
 #include <cmath>
@@ -17,12 +17,12 @@ inline float kick_sigma_at(const StepParameters& step, int64_t iteration) {
 }
 
 MULTILINEAR_SAT_INLINE uint8_t mark_clause_violated(const int32_t* literals, const int32_t* clause_offsets,
-                                                    int clause, const float* point) {
+                                                    const uint8_t* clause_is_parity, int clause, const float* point) {
     const int begin = clause_offsets[clause];
-    return clause_violated_by_rounding(literals + begin, clause_offsets[clause + 1] - begin, point) ? 1 : 0;
+    return row_violated_by_rounding(clause_is_parity[clause] != 0, literals + begin, clause_offsets[clause + 1] - begin, point) ? 1 : 0;
 }
 
-MULTILINEAR_SAT_INLINE void update_variable(const int32_t* literals, const int32_t* clause_offsets,
+MULTILINEAR_SAT_INLINE void update_variable(const int32_t* literals, const int32_t* clause_offsets, const uint8_t* clause_is_parity,
                                             const int32_t* occurrence_offsets, const int32_t* occurrence_clauses,
                                             const int32_t* occurrence_positions, const uint8_t* clause_violated,
                                             const float* point, float* next_point, float* velocity, int variable,
@@ -33,7 +33,7 @@ MULTILINEAR_SAT_INLINE void update_variable(const int32_t* literals, const int32
     for (int o = occurrence_offsets[variable]; o < occurrence_offsets[variable + 1]; ++o) {
         const int clause = occurrence_clauses[o];
         const int begin = clause_offsets[clause];
-        gradient += clause_gradient_at(literals + begin, clause_offsets[clause + 1] - begin, point, occurrence_positions[o]);
+        gradient += row_gradient_at(clause_is_parity[clause] != 0, literals + begin, clause_offsets[clause + 1] - begin, point, occurrence_positions[o]);
         in_violated_clause |= (clause_violated[clause] != 0);
     }
     float kick = 0.0f;

@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+# The tensor-rank toolkit's decide-rank-by-sat chooses a solver's command line and file
+# format by the basename of the path given to --solver, and hands the parities as x lines
+# to a binary called xnfsat only, run as `xnfsat --witness=1 <file.xnf> <seed>`. This
+# adapter answers to that name and runs multilinear-sat on the XNF, so the toolkit's own
+# re-multiplication of the model covers the native parity path. The binary and its flags
+# come from the environment: MULTILINEAR_SAT_BINARY (required) and MULTILINEAR_SAT_FLAGS
+# (default: the walk from all-false starts, 50 n flips per run, on the CPU backend).
+set -euo pipefail
+file=""
+seed=0
+for argument in "$@"; do
+    case "$argument" in
+        --witness=*) ;;
+        --*) echo "c xnfsat adapter: ignoring $argument" >&2 ;;
+        *) if [ -z "$file" ]; then file="$argument"; else seed="$argument"; fi ;;
+    esac
+done
+[ -n "$file" ] || { echo "usage: xnfsat --witness=1 <file.xnf> [seed]" >&2; exit 2; }
+binary="${MULTILINEAR_SAT_BINARY:?set MULTILINEAR_SAT_BINARY to the multilinear-sat binary}"
+variables=$(awk '/^p /{print $3; exit}' "$file")
+flips=$((50 * variables))
+# The toolkit's timing protocol is one core; it pins multilinear-sat to one thread by name
+# and would not pin this adapter, so the adapter pins itself unless told otherwise.
+export OMP_NUM_THREADS="${OMP_NUM_THREADS:-1}"
+# shellcheck disable=SC2086
+exec "$binary" "$file" --seed "$seed" ${MULTILINEAR_SAT_FLAGS:---backend cpu --seed-kind all-false --polish-flips $flips --batch-size 256 --time-limit 3600}
