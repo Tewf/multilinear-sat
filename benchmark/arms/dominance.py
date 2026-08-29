@@ -5,6 +5,7 @@ satisfiable, finds the Pareto front on (expected time, p) per family and the arm
 arm dominates overall, and writes front.md (survivors with their numbers) and rejected.md
 (each dominated arm, by which arm, on which families, with the numbers; nothing deleted)."""
 import json
+import math
 import statistics
 import sys
 from pathlib import Path
@@ -46,7 +47,7 @@ def cells(records, verdict):
                         celsius=[c for r in group for c in (r.get("package_celsius") or []) if c is not None])
             if arm == "probsat":
                 solved = [r for r in group if r["status"] == "SATISFIABLE"]
-                cell.update(solved=len(solved), expected_ms=statistics.fmean(r["wall_seconds"] for r in solved) * 1000 if solved else INF,
+                cell.update(solved=len(solved), successes=len(solved), expected_ms=statistics.fmean(r["wall_seconds"] for r in solved) * 1000 if solved else INF,
                             median_ms=statistics.median(r["wall_seconds"] for r in solved) * 1000 if solved else INF,
                             flips_per_solution=statistics.fmean(r["flips"] for r in solved if r["flips"]) if solved else INF, p=None, cost_ms=None)
             else:
@@ -54,7 +55,7 @@ def cells(records, verdict):
                 slot_runs = sum(r["heuristic_slots"] * (r["runs_completed"] or 0) for r in group)
                 seconds = sum((r["seed_seconds"] or 0) + (r["polish_seconds"] or 0) for r in group)
                 flips = sum(r["flips"] or 0 for r in group)
-                cell.update(p=successes / slot_runs if slot_runs else 0.0, cost_ms=seconds * 1000 / slot_runs if slot_runs else INF,
+                cell.update(successes=successes, p=successes / slot_runs if slot_runs else 0.0, cost_ms=seconds * 1000 / slot_runs if slot_runs else INF,
                             expected_ms=seconds * 1000 / successes if successes else INF, flips_per_solution=flips / successes if successes else INF,
                             solved=sum(r["status"] == "SATISFIABLE" for r in group), capped=sum(bool(r.get("capped")) for r in group),
                             first_solution_ms=statistics.median(r["first_solution_seconds"] for r in group if r["first_solution_seconds"] is not None) * 1000
@@ -63,36 +64,63 @@ def cells(records, verdict):
     return out
 
 
-def better(a, b, band=arms.THERMAL_BAND):
-    """1 if a is better than b beyond the band, -1 if worse, 0 if within it (smaller is better; inf ties inf)."""
+def threshold(ka, kb, band=arms.THERMAL_BAND):
+    """The ratio two cells must exceed to be distinguished: the thermal band, or two standard errors of
+    the log ratio under Poisson success counts, whichever is larger; infinite when a count is zero."""
+    if not ka or not kb:
+        return INF
+    return max(1 + band, math.exp(2 * math.sqrt(1 / ka + 1 / kb)))
+
+
+def better(a, b, ka=None, kb=None, band=arms.THERMAL_BAND):
+    """1 if a is better than b beyond the threshold, -1 if worse, 0 if not distinguished (smaller is
+    better; inf ties inf; a finite value beats inf whatever the counts)."""
     if a == b:
         return 0
     if a == INF or b == INF:
         return -1 if a == INF else 1
-    if a < b * (1 - band):
+    limit = threshold(ka, kb, band)
+    if b / a > limit:
         return 1
-    if a > b * (1 + band):
+    if a / b > limit:
         return -1
     return 0
 
 
-def better_larger(a, b, band=arms.THERMAL_BAND):
-    """The same band test where larger is better (p)."""
-    return -better(a, b, band) if a == b or (a > 0 and b > 0) else (1 if a > b else -1 if a < b else 0)
+def better_larger(a, b, ka=None, kb=None, band=arms.THERMAL_BAND):
+    """The same rule where larger is better (p); zero against a positive value loses whatever the counts."""
+    if a == b:
+        return 0
+    if a == 0 or b == 0:
+        return -1 if a == 0 else 1
+    limit = threshold(ka, kb, band)
+    if a / b > limit:
+        return 1
+    if b / a > limit:
+        return -1
+    return 0
+
+
+def compare(table, a, b, f):
+    """(expected-time verdict, p verdict) of a against b on family f, counts included."""
+    x, y = table[(a, f)], table[(b, f)]
+    return (better(x["expected_ms"], y["expected_ms"], x["successes"], y["successes"]),
+            better_larger(x["p"], y["p"], x["successes"], y["successes"]))
 
 
 def dominates(table, a, b):
-    """a dominates b: at least as good on expected time on every family both were measured on, strictly
-    better on one; or equal on expected time everywhere and better on p on one. Returns the evidence."""
-    families = [f for f in arms.FAMILIES if (a, f) in table and (b, f) in table]
-    if not families:
+    """a dominates b: a was measured on every family b was, is at least as good on expected time on each,
+    and strictly better on one; or not distinguished on expected time anywhere and better on p on one.
+    Returns the families that carry the evidence, or None."""
+    families = [f for f in arms.FAMILIES if (b, f) in table]
+    if not families or any((a, f) not in table for f in families):
         return None
-    comparisons = [(f, better(table[(a, f)]["expected_ms"], table[(b, f)]["expected_ms"])) for f in families]
-    if any(c < 0 for _, c in comparisons):
+    verdicts = {f: compare(table, a, b, f) for f in families}
+    if any(e < 0 for e, _ in verdicts.values()):
         return None
-    if any(c > 0 for _, c in comparisons):
-        return [f for f, c in comparisons if c > 0]
-    on_p = [f for f in families if better_larger(table[(a, f)]["p"], table[(b, f)]["p"]) > 0]
+    if any(e > 0 for e, _ in verdicts.values()):
+        return [f for f, (e, _) in verdicts.items() if e > 0]
+    on_p = [f for f, (_, q) in verdicts.items() if q > 0]
     return on_p or None
 
 
@@ -107,9 +135,8 @@ def fronts(table):
     per_family = {}
     for f in arms.FAMILIES:
         here = [a for a in names if (a, f) in table]
-        per_family[f] = [a for a in here if not any(better(table[(o, f)]["expected_ms"], table[(a, f)]["expected_ms"]) > 0
-                                                    or (better(table[(o, f)]["expected_ms"], table[(a, f)]["expected_ms"]) == 0
-                                                        and better_larger(table[(o, f)]["p"], table[(a, f)]["p"]) > 0) for o in here if o != a)]
+        per_family[f] = [a for a in here if not any(compare(table, o, a, f)[0] > 0
+                                                    or (compare(table, o, a, f)[0] == 0 and compare(table, o, a, f)[1] > 0) for o in here if o != a)]
     return survivors, rejected, per_family
 
 
@@ -122,12 +149,12 @@ def cell_row(c):
         return (f"| {c['family']} | probSAT, one core | {c['solved']}/{c['runs']} solved | - | - | mean {fmt(c['expected_ms'], 2)}, median {fmt(c['median_ms'], 2)} "
                 f"| {fmt(c['flips_per_solution'], 0)} | - |")
     band = f"{min(c['celsius']):.0f} to {max(c['celsius']):.0f}" if c["celsius"] else "-"
-    return (f"| {c['family']} | {c['arm']} | {c['runs']} on {c['instances']} instances | {c['p']:.4f} | {fmt(c['cost_ms'], 4)} | {fmt(c['expected_ms'])} "
+    return (f"| {c['family']} | {c['arm']} | {c['runs']} on {c['instances']} instances | {c['successes']} | {c['p']:.4g} | {fmt(c['cost_ms'], 4)} | {fmt(c['expected_ms'])} "
             f"| {fmt(c['flips_per_solution'], 0)} | {fmt(c['first_solution_ms'], 1)} | {band} |")
 
 
-HEADER = ("| family | arm | runs | p | cost / restart (ms) | expected time (ms) | flips per solution | median first solution (ms) | package C |\n"
-          "|---|---|---|---|---|---|---|---|---|")
+HEADER = ("| family | arm | runs | satisfied slot-runs | p | cost / restart (ms) | expected time (ms) | flips per solution | median first solution (ms) | package C |\n"
+          "|---|---|---|---|---|---|---|---|---|---|")
 PROBSAT_HEADER = "| family | arm | runs | | | wall ms per solution | flips per solution | |\n|---|---|---|---|---|---|---|---|"
 
 
@@ -144,7 +171,9 @@ def provenance_lines(records):
 
 def write_front(records, table, survivors, per_family, verdict):
     lines = ["# The front: the arms no other arm dominates, with their numbers", "", *provenance_lines(records),
-             f"- Rule: [protocol.md](protocol.md); two expected times within {arms.THERMAL_BAND:.0%} of each other are not distinguished.", "",
+             f"- Rule: [protocol.md](protocol.md); two cells are distinguished only when their ratio exceeds the {arms.THERMAL_BAND:.0%} thermal band "
+             "and two standard errors of the log ratio under Poisson success counts, exp(2 sqrt(1/k_a + 1/k_b)); an arm dominates only arms it was "
+             "measured beside on every one of their families.", "",
              "## Overall", ""]
     for a in survivors:
         measured = [f for f in arms.FAMILIES if (a, f) in table]
@@ -185,9 +214,10 @@ def tilted_on_the_records():
 
 def write_rejected(records, table, rejected):
     lines = ["# The rejected arms, each with the arm that dominates it and the numbers", "", *provenance_lines(records),
-             "- An arm is dominated when another is at least as good on expected time on every family both were measured on and "
-             f"strictly better (beyond the {arms.THERMAL_BAND:.0%} band) on one, or equal everywhere and better on p on one. "
-             "Nothing is deleted: every rejected arm keeps its cells here.", ""]
+             "- An arm is dominated when another arm, measured on every family it was measured on, is at least as good on expected time on "
+             f"each and strictly better on one, or not distinguished on expected time anywhere and better on p on one; distinguished means beyond the "
+             f"{arms.THERMAL_BAND:.0%} thermal band and beyond two standard errors of the log ratio under Poisson success counts (the satisfied slot-runs column). "
+             "Nothing is deleted: every rejected arm keeps its cells here beside its dominator's.", ""]
     for b, by in rejected.items():
         lines.append(f"## {b} ({', '.join(f'{k}={v}' for k, v in arms.configuration(b).items())})")
         for a, evidence in by:

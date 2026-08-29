@@ -73,10 +73,17 @@ band cannot explain it.
 
 ## The dominance rule
 
-An arm is dominated when another arm is at least as good on expected time on every family both
-were measured on and strictly better (beyond the band) on one, or equal within the band on
-every family and better on p on one. The front is the set of arms no other dominates; per
-family, the Pareto front on (expected time, p). `rejected.md` keeps every dominated arm's
-cells beside its dominator's: a rejection with its evidence deleted is indistinguishable from
-a whim. The tilted seed enters only as a rejection on the sampling-walk records (94x a
-uniform start's expected time on the runs it completed, against the brief's 2x admission).
+Two cells are **distinguished** only when their ratio exceeds both the thermal band and two
+standard errors of the log ratio under Poisson success counts, exp(2 sqrt(1/k_a + 1/k_b))
+with k the satisfied slot-runs: at n = 1000 the counts are 2 to 30 per cell and a 30 %
+difference in expected time is inside that noise, where on uf250 the counts are in the
+thousands and the band governs. A zero count loses to any positive one. An arm is dominated
+when another arm, **measured on every family it was measured on**, is at least as good on
+expected time on each and strictly better on one, or not distinguished on expected time
+anywhere and better on p on one; an arm measured on fewer families cannot dominate one
+measured on more, since nothing says it is at least as good where it was not run. The front is
+the set of arms no other dominates; per family, the Pareto front on (expected time, p) under
+the same distinction. `rejected.md` keeps every dominated arm's cells beside its dominator's:
+a rejection with its evidence deleted is indistinguishable from a whim. The tilted seed enters
+only as a rejection on the sampling-walk records (94x a uniform start's expected time on the
+runs it completed, against the brief's 2x admission).
