@@ -69,7 +69,7 @@ def run_solver(binary, path, flags, cap_seconds, environment=None):
     returncode, stdout, stderr, elapsed, hung = run_command(command, cap_seconds, environment)
     json_line = next((line[len("c json "):] for line in stdout.splitlines() if line.startswith("c json ")), None)
     return dict(command=" ".join(command), returncode=returncode, wall_seconds=round(elapsed, 4), hung=hung,
-                json=json.loads(json_line) if json_line else None, stderr=stderr[-4000:],
+                json=json.loads(json_line) if json_line else None, stderr=stderr,
                 status="SATISFIABLE" if returncode == 10 else "UNKNOWN")
 
 

@@ -57,8 +57,9 @@ struct SolverConfiguration {
     int stall_patience = 0;           // resample a slot after this many non-improving iterations; 0 = off
     float rigorous_fraction = 0.0f;   // share of the batch walking Schoening's rule from uniform starts for 3n flips
     double prior_satisfiable = 0.5;   // pi, the prior P(SAT) of the instance's family
-    double beta_prior_a = 1.0;        // Beta(a, b) prior of a satisfiable instance's per-restart success; (1, 1)
-    double beta_prior_b = 1.0;        // until fitted on the family (posterior.hpp)
+    double beta_prior_a = 0.4698;     // Beta(a, b) prior of a satisfiable instance's per-restart success (posterior.hpp),
+    double beta_prior_b = 5.0207;     // fitted by moments on uf250-1065, uniform starts, 10n SKC flips at 4096 slots
+                                      // (benchmark/seed_comparison.jsonl, 2026-08-29): PROVISIONAL, refit on your family
     StepParameters step;
     WalkParameters walk;
     TiltedParameters tilted;
