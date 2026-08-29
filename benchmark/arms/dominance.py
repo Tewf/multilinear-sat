@@ -76,6 +76,11 @@ def better(a, b, band=arms.THERMAL_BAND):
     return 0
 
 
+def better_larger(a, b, band=arms.THERMAL_BAND):
+    """The same band test where larger is better (p)."""
+    return -better(a, b, band) if a == b or (a > 0 and b > 0) else (1 if a > b else -1 if a < b else 0)
+
+
 def dominates(table, a, b):
     """a dominates b: at least as good on expected time on every family both were measured on, strictly
     better on one; or equal on expected time everywhere and better on p on one. Returns the evidence."""
@@ -87,7 +92,7 @@ def dominates(table, a, b):
         return None
     if any(c > 0 for _, c in comparisons):
         return [f for f, c in comparisons if c > 0]
-    on_p = [f for f in families if better(-table[(a, f)]["p"], -table[(b, f)]["p"]) > 0]
+    on_p = [f for f in families if better_larger(table[(a, f)]["p"], table[(b, f)]["p"]) > 0]
     return on_p or None
 
 
@@ -104,7 +109,7 @@ def fronts(table):
         here = [a for a in names if (a, f) in table]
         per_family[f] = [a for a in here if not any(better(table[(o, f)]["expected_ms"], table[(a, f)]["expected_ms"]) > 0
                                                     or (better(table[(o, f)]["expected_ms"], table[(a, f)]["expected_ms"]) == 0
-                                                        and better(-table[(o, f)]["p"], -table[(a, f)]["p"]) > 0) for o in here if o != a)]
+                                                        and better_larger(table[(o, f)]["p"], table[(a, f)]["p"]) > 0) for o in here if o != a)]
     return survivors, rejected, per_family
 
 
