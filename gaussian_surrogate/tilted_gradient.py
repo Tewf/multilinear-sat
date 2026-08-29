@@ -22,9 +22,11 @@ def sampled_tilted_gradient(annealed, weights, p):
 
 def raw_draw_estimate(raw, satisfied_count, p, beta, centre):
     """h_hat = (1/S) sum_b (x0_b - p) beta (S(x0_b) - centre) per group, raw [G, S, n],
-    satisfied_count [G, S], centre [G]. Its expectation under q_theta is beta Cov(x, S) whatever
-    the centre, because E[x0 - p] = 0; the centre mu(p) removes the variance proportional to mu^2
-    that the uncentred count would carry."""
+    satisfied_count [G, S], centre [G]: the score-function estimator of the first-order Taylor
+    surrogate of exp(beta S) about p, whose expectation under the product measure is the closed
+    form (MuProp's mean-field control variate: Gu, Levine, Sutskever, Mnih, ICLR 2016). The
+    expectation is beta Cov(x, S) whatever the centre, because E[x0 - p] = 0; the centre mu(p)
+    removes the variance proportional to mu^2 that the uncentred count would carry."""
     beta = torch.as_tensor(beta, dtype=raw.dtype, device=raw.device).reshape(-1, 1, 1)
     scores = beta * (satisfied_count.to(raw.dtype) - centre.reshape(-1, 1)).unsqueeze(-1)
     return ((raw - p.unsqueeze(1)) * scores).mean(dim=1)
