@@ -1,6 +1,6 @@
 # Method note: the Gaussian-surrogate relaxation
 
-The branch asks one question: does the *variance* of the satisfied-clause count help gradient
+The Python record asks one question: does the *variance* of the satisfied-clause count help gradient
 ascent find a satisfying assignment, or is its *mean* enough? Everything here is written so
 that the question can be answered by a table, and nothing here claims what the table does not
 show.

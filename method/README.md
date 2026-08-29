@@ -65,6 +65,10 @@ per-restart success probability p; expected time to a solution is cost per resta
 The rigorous half, the two posteriors, the tilted seed and the cost of each part:
 [walk-and-posterior.md](walk-and-posterior.md). What all of it measures, whatever it shows:
 [../benchmark/findings-walk/](../benchmark/findings-walk/README.md).
+The design as proposed, before the build: [anytime-las-vegas.md](anytime-las-vegas.md) and
+[sampling-gradient-loop.md](sampling-gradient-loop.md). The algorithm as measured, the surviving
+arm of [../benchmark/arms/](../benchmark/arms/README.md) with the number behind each choice:
+[algorithm.md](algorithm.md).
 
 ## Contribution
 
