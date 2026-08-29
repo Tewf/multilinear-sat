@@ -22,9 +22,11 @@ class Configuration:
     # the tilted sampling-gradient loop (--obj tilted)
     tilted_num_groups: int = 16                    # G groups, one theta each
     tilted_slots_per_group: int = 32               # S samples per group; B = G * S slots
-    tilted_walk_flips_per_variable: float = 2.0    # L_walk = this * n kernel flips per sample and step
-    tilted_learning_rate: float = 0.1              # eta, the step on theta
-    tilted_optimizer: str = "adam"                 # adam | natural (theta += eta g)
+    tilted_walk_flips_per_variable: float = 2.0    # L_walk = this * n moves per sample and step (rungs or flips)
+    walk_mode: str = "metropolis"                  # metropolis (AIS weights, consistent) | walk (SKC, biased weights)
+    tilted_learning_rate: float = 0.1              # eta_0, the step on theta
+    tilted_learning_rate_half_life: float = 100.0  # eta_t = eta_0 / (1 + t / this), t = steps since the group's restart
+    tilted_optimizer: str = "adam"                 # adam | plain (theta += eta_t g)
     beta_initial: float = 0.05
     beta_growth_factor: float = 1.05               # applied while the group's ESS stays above the floor
     beta_max: float = 5.0

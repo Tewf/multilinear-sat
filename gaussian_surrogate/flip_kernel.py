@@ -59,13 +59,18 @@ class FlipKernel:
         clause = (violated.cumsum(dim=1) <= target.unsqueeze(1)).sum(dim=1)
         return clause.clamp(max=self.num_clauses - 1), count > 0
 
-    def break_counts(self, state, variables):
-        """For variables [B, k]: how many clauses each flip would violate (its literal alone true)."""
+    def flip_effects(self, state, variables):
+        """(make, break) for variables [B, k]: the clauses each flip would satisfy (its literal false
+        in a violated clause) and violate (its literal the only true one)."""
         clauses, signs = self.occurrence_clause[variables], self.occurrence_sign[variables]   # [B, k, D]
         num_slots, k, width = clauses.shape
         true_count = state.true_count.gather(1, clauses.view(num_slots, k * width)).view(num_slots, k, width)
         literal_true = state.assignment.gather(1, variables).unsqueeze(-1) * signs > 0
-        return ((true_count == 1) & literal_true).sum(dim=-1)
+        make = ((true_count == 0) & ~literal_true & (signs != 0)).sum(dim=-1)
+        return make, ((true_count == 1) & literal_true).sum(dim=-1)
+
+    def break_counts(self, state, variables):
+        return self.flip_effects(state, variables)[1]
 
     def choose_variable(self, state, clause, uniform_choice, noise, generator):
         """The variable to flip in each slot's chosen clause: uniform where uniform_choice [B] holds

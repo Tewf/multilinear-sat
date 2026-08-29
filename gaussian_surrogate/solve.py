@@ -60,7 +60,8 @@ def main():
         "rounding_events": result.num_rounding_events}
     if result.posterior_rigorous is not None:
         statistics.update(rigorous_failures=result.rigorous_failures, heuristic_failures=result.heuristic_failures,
-                          posterior_rigorous=result.posterior_rigorous, posterior_beta=result.posterior_beta)
+                          posterior_rigorous=result.posterior_rigorous, posterior_beta=result.posterior_beta,
+                          weights=result.weights)
     print("c json " + json.dumps(statistics))
     if result.solved:
         print("s SATISFIABLE")

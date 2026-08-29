@@ -26,6 +26,7 @@ class SolveResult:
     heuristic_failures: int = 0
     posterior_rigorous: float | None = None
     posterior_beta: float | None = None
+    weights: str | None = None       # how the loop's samples were weighted, "biased" spelled out when they are
 
 
 def certify_solution(formula, solution):

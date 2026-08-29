@@ -7,11 +7,12 @@ import subprocess
 import sys
 from pathlib import Path
 
+import pytest
 import torch
 
 from configuration import Configuration
 from dimacs import formula_from_clauses
-from group_optimizers import GroupAdam, NaturalStep
+from group_optimizers import GroupAdam, PlainStep
 from luby import LubyRestarts, luby
 from random_instances import planted_3sat
 from rounding import count_unsatisfied_python
@@ -34,7 +35,7 @@ def test_luby_restarts_follow_each_groups_budget():
 
 def test_group_adam_first_step_is_the_signed_learning_rate_and_reset_is_per_group():
     theta = torch.zeros(2, 3)
-    adam = GroupAdam(theta, learning_rate=0.1)
+    adam = GroupAdam(theta, learning_rate=0.1, half_life=1e9)
     gradient = torch.tensor([[1.0, -2.0, 0.5], [-3.0, 3.0, -0.1]])
     adam.step(gradient)
     assert torch.allclose(theta, 0.1 * gradient.sign(), atol=1e-6)
@@ -46,22 +47,31 @@ def test_group_adam_first_step_is_the_signed_learning_rate_and_reset_is_per_grou
     assert torch.allclose(theta[1] - before[1], 0.1 * gradient[1].sign(), atol=1e-6)
 
 
-def test_natural_step_adds_the_scaled_gradient():
-    theta = torch.ones(1, 2)
-    NaturalStep(theta, 0.5).step(torch.tensor([[2.0, -4.0]]))
-    assert theta.tolist() == [[2.0, -1.0]]
+def test_plain_step_adds_the_scaled_gradient_on_a_decreasing_schedule():
+    theta = torch.zeros(2, 1)
+    optimizer = PlainStep(theta, learning_rate=0.6, half_life=1.0)
+    gradient = torch.ones(2, 1)
+    for expected in (0.6, 0.6 + 0.3, 0.6 + 0.3 + 0.2):          # eta_t = 0.6 / (1 + t)
+        optimizer.step(gradient)
+        assert theta[0].item() == pytest.approx(expected)
+    optimizer.reset([1])
+    optimizer.step(gradient)
+    assert theta[1].item() == pytest.approx(0.6 + 0.3 + 0.2 + 0.6) and theta[0].item() == pytest.approx(1.1 + 0.15)
 
 
-def test_loop_finds_and_certifies_a_planted_solution():
+@pytest.mark.parametrize("walk_mode", ["metropolis", "walk"])
+def test_loop_finds_and_certifies_a_planted_solution(walk_mode):
     clauses, _ = planted_3sat(30, 120, 2)
-    configuration = Configuration(tilted_num_groups=4, tilted_slots_per_group=8, time_limit_seconds=10.0, device="cpu")
+    configuration = Configuration(tilted_num_groups=4, tilted_slots_per_group=8, walk_mode=walk_mode,
+                                  time_limit_seconds=10.0, device="cpu")
     result = solve_tilted(formula_from_clauses(30, clauses), configuration, seed=0)
     assert result.solved and count_unsatisfied_python(clauses, result.assignment) == 0
 
 
-def test_loop_runs_to_the_cap_on_an_unsatisfiable_formula_and_logs_the_schedule(tmp_path):
+@pytest.mark.parametrize("walk_mode", ["metropolis", "walk"])
+def test_loop_runs_to_the_cap_on_an_unsatisfiable_formula_and_logs_the_schedule(walk_mode, tmp_path):
     configuration = Configuration(tilted_num_groups=3, tilted_slots_per_group=4, luby_unit_steps=2, beta_max=0.2,
-                                  time_limit_seconds=1.0, device="cpu")
+                                  walk_mode=walk_mode, time_limit_seconds=1.0, device="cpu")
     path = tmp_path / "trajectory.csv"
     result = solve_tilted(formula_from_clauses(3, UNSATISFIABLE), configuration, seed=1, trajectory_path=str(path))
     assert not result.solved and result.min_unsat_at_rounding >= 1 and result.num_restarts > 0
@@ -73,6 +83,8 @@ def test_loop_runs_to_the_cap_on_an_unsatisfiable_formula_and_logs_the_schedule(
     assert all(1.0 - 1e-4 <= float(row["ess"]) <= configuration.tilted_slots_per_group + 1e-3 for row in rows)
     assert all(int(row["min_unsat"]) >= 1 and 0 <= float(row["saturated"]) <= 3 for row in rows)
     assert int(rows[-1]["restarts"]) == result.num_restarts
+    assert all(int(row["weights_biased"]) == (walk_mode == "walk") for row in rows)
+    assert ("biased" in result.weights) == (walk_mode == "walk")
 
 
 def test_rigorous_groups_count_failures_and_the_posteriors_rise(tmp_path):

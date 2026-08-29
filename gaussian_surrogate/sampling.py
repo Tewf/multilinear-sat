@@ -9,12 +9,18 @@ def draw_assignments(p, generator):
     return torch.where(uniform < (1.0 + p) / 2.0, 1.0, -1.0)
 
 
+def normalised_weights(log_weights, num_groups):
+    """exp(log w_b) normalised within each group of S consecutive slots, shape [G, S]."""
+    return torch.softmax(log_weights.view(num_groups, -1).to(torch.float32), dim=1)
+
+
 def tilted_weights(satisfied_count, beta, num_groups):
-    """w_b proportional to exp(beta S(x_b)), normalised within each group of S consecutive slots;
-    beta is one value per group (or one scalar). Shape [G, S]."""
+    """w_b proportional to exp(beta S(x_b)) per group, beta one value per group (or a scalar). These
+    are the weights of the tilted measure only for draws from q_theta itself; after a WalkSAT
+    walk they are biased (annealing.py has the weights that are not)."""
     scores = satisfied_count.view(num_groups, -1).to(torch.float32)
     beta = torch.as_tensor(beta, dtype=torch.float32, device=scores.device).reshape(-1, 1)
-    return torch.softmax(scores * beta, dim=1)
+    return normalised_weights(scores * beta, num_groups)
 
 
 def effective_sample_size(weights):

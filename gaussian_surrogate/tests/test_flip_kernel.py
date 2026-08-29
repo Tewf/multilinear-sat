@@ -49,15 +49,31 @@ def test_chosen_clause_is_violated_and_uniform():
     assert torch.all((frequencies - 1 / len(violated)).abs() < 0.35 / len(violated))
 
 
-def python_break_count(assignment, variable, clauses):
-    """Clauses in which the variable's literal is the only true one."""
-    count = 0
+def python_flip_effects(assignment, variable, clauses):
+    """(make, break): clauses the flip would satisfy (its literal false, none true) and violate (its
+    literal the only true one)."""
+    make = breaks = 0
     for clause in clauses:
         own = [literal for literal in clause if abs(literal) - 1 == variable]
         true_literals = [literal for literal in clause if assignment[abs(literal) - 1] == np.sign(literal)]
-        if own and true_literals == own:
-            count += 1
-    return count
+        make += bool(own) and not true_literals
+        breaks += bool(own) and true_literals == own
+    return make, breaks
+
+
+def python_break_count(assignment, variable, clauses):
+    return python_flip_effects(assignment, variable, clauses)[1]
+
+
+def test_flip_effects_match_plain_python():
+    clauses, formula, kernel, assignment, generator = random_problem(num_slots=6, seed=8)
+    state = kernel.initialise(assignment)
+    variables = torch.randint(0, formula.num_variables, (6, 4), generator=generator)
+    make, breaks = kernel.flip_effects(state, variables)
+    for slot in range(6):
+        for column in range(4):
+            expected = python_flip_effects(assignment[slot].tolist(), variables[slot, column].item(), clauses)
+            assert (make[slot, column].item(), breaks[slot, column].item()) == expected
 
 
 def test_skc_choice_takes_a_zero_break_or_the_minimum_break_without_noise():
