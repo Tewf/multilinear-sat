@@ -59,5 +59,7 @@ only if the clauses are treated as independent, which is `logsum` again.
   gradient step: the gap the author identified between message passing and continuous
   optimisation.
 - Constraints other than clauses (XOR, cardinality), where continuous methods have their
-  documented wins and where the product-tree FFT of FastFourierSAT is needed; the C++ library
-  in `../../solver` is where that would go.
+  documented wins. A parity is one Walsh monomial with an O(k) gradient and needs no
+  transform; FastFourierSAT's FFT earns its place only on wide cardinality-like constraints
+  (`../../literature/fft-walksat-las-vegas/`). The C++ library in `../../solver` is where
+  native XOR would go.

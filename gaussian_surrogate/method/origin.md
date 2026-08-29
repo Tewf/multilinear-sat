@@ -12,8 +12,11 @@ clauses. From there it reached FourierSAT (Kyrillidis, Shrivastava, Vardi and Zh
 encode x_i in {-1, 1}, write each clause indicator as a multilinear (Walsh-Fourier) polynomial,
 relax the cube's vertices to the cube, and maximise the sum of clause polynomials by
 box-constrained gradient ascent. Its strength is hybrid instances (clauses with XOR and
-cardinality constraints), where a product tree over prod_j (1 + y_j z) evaluates symmetric
-constraints by FFT.
+cardinality constraints), where the working notes credited it with a product-tree FFT for
+symmetric constraints. FourierSAT has none (it expands prod_i (a_i + t) directly, in O(k^2));
+the FFT is FastFourierSAT's (2025), a batched length-(k+1) DFT whose gain is parallel, and a
+parity needs no transform at all, being a single Walsh monomial
+(`../../literature/fft-walksat-las-vegas/4-positioning.md`).
 
 Three observations from that stage carried over. The relaxation is a probability, not a
 device: for a multilinear f and independent x_i with means y_i, E[f(x)] = f(y) exactly. The
