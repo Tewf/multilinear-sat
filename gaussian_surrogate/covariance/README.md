@@ -52,6 +52,29 @@ the literature review says what they should be measured against).
   Tseitin clauses, the r copies of one gate pattern: a symmetry signature the toolkit's
   orbit reduction already exploits, not a reduction.
 
+## What the literature review adds (`../../literature/covariance-structure/`, 2026-08-29)
+
+The field has no name for the kernel of a clause covariance and nobody has taken its
+spectrum; that is not an opening, because every reduction it could express is done by logic
+already. The exact merge is subsumption and bounded variable elimination (Eén and Biere 2005),
+whose count in random 3-SAT is Theta(alpha^2 / n), about 0.45 clauses on uf50; a non-negative
+null vector would be a Nullstellensatz certificate with constant multipliers, which random CNF
+provably lacks (polynomial calculus degree Omega(n)); the spectral refutation line works on
+n by n matrices indexed by variables; the exact correlation structure of k-SAT landscapes was
+computed by Walsh decomposition in 2009 (Sutton, Whitley and Howe), as a scalar autocorrelation
+along a hypercube walk; and on uniform random instances there is no community structure for a
+leading eigenvector to align with, so that question moves to application instances. Sigma is
+the zeroth-order Plefka susceptibility, whose systematic correction is loop-corrected linear
+response (Welling and Teh 2004; Mooij and Kappen 2007): that is where a multivariate use of the
+Gaussian would start, and it is a different branch.
+
+Baselines, should any reduction ever be claimed: CaDiCaL with default preprocessing against
+`cadical --plain`, measured by variables, clauses and literals removed and by the solver's
+PAR-2 afterwards; the 2009 Walsh computation re-implemented from the paper (no public code
+found) and checked against `../tests/brute_force_reference.py`; modularity from SATGraf on
+application instances. The review's own attribution and kernel statements were corrected
+where the measurement above contradicted them (commit 39160ca).
+
 ## What survives
 
 The off-diagonal covariance is a small fraction of the variance, which makes the diagonal
