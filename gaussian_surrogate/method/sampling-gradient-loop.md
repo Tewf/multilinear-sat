@@ -78,4 +78,5 @@ near the random threshold the tilted measure at large beta is the clustered solu
 sampling it is the hard part (the walk mixes slowly, which is the same obstacle every local
 method meets). The measurable claim is the same as before: does this loop raise the per-restart
 success probability of the polish, per unit of cost, above `mu` ascent and above a random or
-all-false start.
+all-false start. A continuous start for probSAT was tried once (Putikhin and Kascheev 2017,
+no code, no per-restart number), so the measurement is a replication with a new estimator.

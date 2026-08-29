@@ -41,7 +41,9 @@
    is a three-way seed comparison into an unmodified `xnfSAT`: all-zero, random, and the
    rounded point of our objective, with everything else fixed. That is NLocalSAT's protocol
    [zhang2020nlocalsat] with a relaxation in place of the network, which is the
-   combination nobody was found to have run.
+   combination nobody was found to have run (corrected 2026-08-29 by the Q6 review: Putikhin and
+  Kascheev, EWDTS 2017, DOI 10.1109/EWDTS.2017.8110119, seeded probSAT from a continuous
+  extension of the formula; no public code found, so the replication stands).
 4. **Random 3-SAT stays a separate track**, and its baseline is unchanged: `probSAT`
    [adrianopolus_probsat] and kissat with its own walk [biere_kissat]. The measure that
    matters for a Las Vegas reading is expected time to a solution, that is, cost of one
