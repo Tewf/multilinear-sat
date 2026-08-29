@@ -23,6 +23,7 @@
 | uf250-1065 | ascent50 | 40 | 0.1096 | 38/40 | 36/40 | 0.0311 | 0.284 | 0.034 | 0.092 |
 | uf250-1065 | ascent200 | 40 | 0.1125 | 39/40 | 36/40 | 0.0561 | 0.499 | 0.136 | 0.092 |
 | uf250-1065 | ascent500 | 40 | 0.1135 | 38/40 | 36/40 | 0.1057 | 0.932 | 0.340 | 0.092 |
+| uf250-1065 | tilted500 | 7 | 0.0707 | 7/7 | 4/7 | 2.5124 | 35.539 | 9.832 | 0.208 |
 | uf250-1065 | probSAT, one core | 40 | solved 40/40 | - | - | mean 75.6 k flips | mean 17.93, median 8.15 | - | - |
 
 Every run is in seed_comparison.jsonl with its command, seed, commit, binary hash and timestamp.
