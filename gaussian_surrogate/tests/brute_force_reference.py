@@ -1,4 +1,4 @@
-"""Exact quantities of the satisfied-clause count by enumerating {-1, 1}^n (n <= 10): its mean
+"""Exact quantities of the satisfied-clause count by enumerating {-1, 1}^n (n <= 16): its mean
 and variance under independent means p, and the tilted measure q_theta(x) exp(beta S(x)) / Z."""
 import itertools
 
@@ -13,11 +13,12 @@ def satisfied_count(assignment, clauses):
 def enumerate_cube(num_variables, clauses, p):
     """(X [2^n, n], q [2^n], S [2^n]): every assignment, its product-measure probability under
     means p, and its satisfied-clause count."""
-    assert num_variables <= 10, "enumeration is meant for tiny formulas"
+    assert num_variables <= 16, "enumeration is meant for tiny formulas"
     points = np.array(list(itertools.product((1, -1), repeat=num_variables)), dtype=np.float64)
     probability = np.prod((1 + points * np.asarray(p, dtype=np.float64)) / 2, axis=1)
-    counts = np.array([satisfied_count(point, clauses) for point in points], dtype=np.float64)
-    return points, probability, counts
+    literals = np.asarray(clauses)
+    literal_true = points[:, np.abs(literals) - 1] * np.sign(literals) > 0            # [2^n, m, 3]
+    return points, probability, literal_true.any(axis=-1).sum(axis=-1).astype(np.float64)
 
 
 def exact_moments(num_variables, clauses, p):
