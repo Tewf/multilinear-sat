@@ -64,7 +64,7 @@ exponentials and decays more slowly than any single satisfiable instance's
 - [2-review.md](2-review.md): the map in five lines of work, each entry with how it was verified.
 - [3-state-of-the-art.md](3-state-of-the-art.md): the records, with upper bounds kept apart from
   lower bounds, and the empty row that is our question.
-- [4-positioning.md](4-positioning.md): the design note section by section, theorem, measured
+- [4-positioning/README.md](4-positioning/README.md): the design note section by section, theorem, measured
   elsewhere, open or wrong, with the wrong ones quoted.
 - [5-plan.md](5-plan.md): seven rejections on paper, four steps to measure, each with a baseline.
 - [queries.md](queries.md): every query, service and hit count, including every zero.

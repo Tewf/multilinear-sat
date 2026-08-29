@@ -20,7 +20,7 @@ dE[S]/dp_i = dmu/dtheta_i`. "Linear response" is the field's name.
 
 **Theorem, and already named in this repository.** `E[x | SAT] - p` is the exact gradient of the
 log weighted model count, which is the gradient of the semantic loss
-[xu2018semanticloss, `gaussian-like-objectives/2-review.md`]; the update with the satisfying set
+[xu2018semanticloss, `gaussian-like-objectives/2-review/README.md`]; the update with the satisfying set
 as the elite is the cross-entropy method at its rare-event limit [rubinstein1999ce].
 
 ## "a natural-gradient step in the exponential family": **wrong as written**

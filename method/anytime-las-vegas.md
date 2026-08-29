@@ -1,7 +1,7 @@
 # The algorithm the reviews point to: a Las Vegas hybrid with an anytime UNSAT posterior
 
 Design note, 2026-08-29, written before its literature review (`../literature/anytime-unsat-confidence/`,
-which tests it claim by claim in its `4-positioning.md`). This is the design as proposed; the
+which tests it claim by claim in its `4-positioning/`). This is the design as proposed; the
 algorithm as built is [README.md](README.md) and [walk-and-posterior.md](walk-and-posterior.md),
 and the algorithm as measured is [algorithm.md](algorithm.md). Mohamed's requirement: good performance on satisfiable
 instances (polynomial or subexponential where that is possible), and on unsatisfiable ones an

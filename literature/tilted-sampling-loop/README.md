@@ -64,7 +64,7 @@ count at `n = 50`, as a function of the batch `B` and of the flips per sample.
 ## Files
 
 [1-naming.md](1-naming.md) the names the field uses ·
-[2-review.md](2-review.md) the map, by line ·
+[2-review/README.md](2-review/README.md) the map, by line ·
 [3-state-of-the-art.md](3-state-of-the-art.md) records, measures, hardware, and the two kinds of
 bound · [4-positioning.md](4-positioning.md) the design note section by section ·
 [5-plan.md](5-plan.md) what to build, what to reject on paper ·
