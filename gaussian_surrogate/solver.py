@@ -22,6 +22,10 @@ class SolveResult:
     min_unsat_at_rounding: int       # over every rounding event, before polishing
     mean_unsat_at_rounding: float    # batch minimum per event, averaged over events
     num_rounding_events: int
+    rigorous_failures: int = 0       # the four below are filled by the tilted loop only
+    heuristic_failures: int = 0
+    posterior_rigorous: float | None = None
+    posterior_beta: float | None = None
 
 
 def certify_solution(formula, solution):

@@ -75,6 +75,30 @@ def test_loop_runs_to_the_cap_on_an_unsatisfiable_formula_and_logs_the_schedule(
     assert int(rows[-1]["restarts"]) == result.num_restarts
 
 
+def test_rigorous_groups_count_failures_and_the_posteriors_rise(tmp_path):
+    configuration = Configuration(tilted_num_groups=4, tilted_slots_per_group=4, rigorous_fraction=0.5,
+                                  beta_prior_a=2.0, beta_prior_b=30.0, time_limit_seconds=1.0, device="cpu")
+    path = tmp_path / "trajectory.csv"
+    result = solve_tilted(formula_from_clauses(3, UNSATISFIABLE), configuration, seed=2, trajectory_path=str(path))
+    assert not result.solved
+    assert result.rigorous_failures == result.heuristic_failures == 8 * result.num_steps
+    assert result.posterior_rigorous > 0.5 and result.posterior_beta > 0.5
+    with open(path) as handle:
+        rows = list(csv.DictReader(handle))
+    posteriors = [float(row["posterior_beta"]) for row in rows]
+    assert all(later >= earlier for earlier, later in zip(posteriors, posteriors[1:]))
+    assert posteriors[-1] == result.posterior_beta and int(rows[-1]["rigorous_failures"]) == result.rigorous_failures
+
+
+def test_rigorous_groups_alone_find_a_planted_solution():
+    clauses, _ = planted_3sat(30, 120, 6)
+    configuration = Configuration(tilted_num_groups=4, tilted_slots_per_group=8, rigorous_fraction=1.0,
+                                  time_limit_seconds=10.0, device="cpu")
+    result = solve_tilted(formula_from_clauses(30, clauses), configuration, seed=0)
+    assert result.solved and count_unsatisfied_python(clauses, result.assignment) == 0
+    assert result.heuristic_failures == 0 and result.rigorous_failures < 32 * result.num_steps
+
+
 def test_command_line_solves_with_obj_tilted(tmp_path):
     clauses, _ = planted_3sat(30, 120, 4)
     cnf = tmp_path / "planted.cnf"
@@ -85,3 +109,4 @@ def test_command_line_solves_with_obj_tilted(tmp_path):
     assert completed.returncode == 10, completed.stderr
     statistics = json.loads(next(line for line in completed.stdout.splitlines() if line.startswith("c json "))[7:])
     assert statistics["status"] == "SATISFIABLE" and statistics["steps"] >= 1
+    assert {"posterior_rigorous", "posterior_beta", "rigorous_failures", "heuristic_failures"} <= set(statistics)

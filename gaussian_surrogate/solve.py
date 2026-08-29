@@ -52,12 +52,16 @@ def main():
     print(f"c gaussian-surrogate: {formula.num_variables} variables, {formula.num_clauses} clauses, "
           f"objective {arguments.obj}, device {configuration.device}, seed {arguments.seed}")
     result = run(arguments, configuration, formula)
-    print("c json " + json.dumps({
+    statistics = {
         "status": "SATISFIABLE" if result.solved else "UNKNOWN", "time_seconds": round(result.time_seconds, 4),
         "restarts": result.num_restarts, "steps": result.num_steps,
         "min_unsat_at_rounding": result.min_unsat_at_rounding,
         "mean_unsat_at_rounding": round(result.mean_unsat_at_rounding, 3),
-        "rounding_events": result.num_rounding_events}))
+        "rounding_events": result.num_rounding_events}
+    if result.posterior_rigorous is not None:
+        statistics.update(rigorous_failures=result.rigorous_failures, heuristic_failures=result.heuristic_failures,
+                          posterior_rigorous=result.posterior_rigorous, posterior_beta=result.posterior_beta)
+    print("c json " + json.dumps(statistics))
     if result.solved:
         print("s SATISFIABLE")
         print("v " + " ".join(str((index + 1) * value) for index, value in enumerate(result.assignment)) + " 0")

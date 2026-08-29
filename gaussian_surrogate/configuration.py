@@ -33,3 +33,7 @@ class Configuration:
                                                    # correction only added noise (see tilted_gradient.py)
     luby_unit_steps: int = 50                      # a group's restart budget = luby(i) * this, in steps
     saturation_threshold: float = 0.99             # |p_i| above it counts as a saturated mean in the log
+    rigorous_fraction: float = 0.0                 # share of the groups walking Schöning's rule from uniform starts
+    prior_satisfiable: float = 0.5                 # pi, the prior P(SAT) of the instance's family
+    beta_prior_a: float = 1.0                      # Beta(a, b) prior of a satisfiable instance's per-restart success
+    beta_prior_b: float = 1.0                      # fraction; (1, 1) until fitted on the family (posterior.py)

@@ -1,7 +1,13 @@
 """The tilted sampling-gradient loop (method/sampling-gradient-loop.md): B slots in G groups
 sharing one theta each. Per step: raw draws from q_theta, a short walk of the flip kernel, tilted
 weights, the merged gradient, a step on theta, the beta schedule, Luby restarts per group, a
-certificate check of every sample, and the trajectory log."""
+certificate check of every sample, and the trajectory log. A rigorous fraction of the groups
+draws uniform starts and walks Schöning's rule for 3n flips instead; their failures and the
+heuristic ones feed the two UNSAT posteriors.
+
+On the Luby schedule: on hard random 3-SAT a well-tuned SLS has a memoryless run-length
+distribution where no schedule helps (Hoos and Stützle 1999); the seeded walk's distribution is
+unknown until measured, which the trajectory log records."""
 import csv
 import math
 import time
@@ -9,6 +15,7 @@ import time
 import numpy as np
 import torch
 
+from failure_record import FailureRecord
 from flip_kernel import FlipKernel
 from group_optimizers import build_optimizer
 from luby import LubyRestarts
@@ -16,7 +23,9 @@ from sampling import draw_assignments, effective_sample_size, tilted_weights
 from solver import SolveResult, certify_solution
 from tilted_gradient import closed_form_gradient, merged_gradient, raw_draw_estimate, sampled_tilted_gradient
 
-TRAJECTORY_COLUMNS = ["step", "restarts", "seconds", "beta", "ess", "mu", "saturated", "min_unsat"]
+TRAJECTORY_COLUMNS = ["step", "restarts", "seconds", "beta", "ess", "mu", "saturated", "min_unsat",
+                      "rigorous_failures", "heuristic_failures", "posterior_rigorous", "posterior_beta"]
+SCHOENING_FLIPS_PER_VARIABLE = 3   # the walk length of Schöning's algorithm, part of its bound
 
 
 class TiltedLoop:
@@ -26,32 +35,39 @@ class TiltedLoop:
         self.generator = torch.Generator(device=self.device).manual_seed(seed)
         self.kernel = FlipKernel(formula)
         self.num_groups, self.slots_per_group = configuration.tilted_num_groups, configuration.tilted_slots_per_group
-        self.walk_flips = round(configuration.tilted_walk_flips_per_variable * formula.num_variables)
-        self.uniform_choice = torch.zeros(self.num_groups * self.slots_per_group, dtype=torch.bool, device=self.device)
+        num_rigorous = round(configuration.rigorous_fraction * self.num_groups)
+        self.rigorous_group = torch.arange(self.num_groups, device=self.device) >= self.num_groups - num_rigorous
+        self.rigorous_slot = self.rigorous_group.repeat_interleave(self.slots_per_group)
+        walk_flips = round(configuration.tilted_walk_flips_per_variable * formula.num_variables)
+        self.budget = torch.where(self.rigorous_slot, SCHOENING_FLIPS_PER_VARIABLE * formula.num_variables, walk_flips)
         self.theta = self.initial_theta(self.num_groups)
         self.beta = torch.full((self.num_groups,), configuration.beta_initial, device=self.device)
         self.optimizer = build_optimizer(configuration.tilted_optimizer, self.theta, configuration.tilted_learning_rate)
         self.restarts = LubyRestarts(self.num_groups, configuration.luby_unit_steps)
+        self.failures = FailureRecord(formula.num_variables, configuration)
 
     def initial_theta(self, count):
         shape = (count, self.formula.num_variables)
         return (torch.rand(shape, generator=self.generator, device=self.device) * 2 - 1) * self.configuration.init_scale
 
     def draw_and_walk(self, p):
-        """(raw draws, their satisfied counts, the walked state): one sample per slot."""
+        """(raw draws, their satisfied counts, the walked state): one sample per slot; rigorous
+        groups draw uniformly (p = 0) and walk Schöning's rule for 3n flips."""
         raw = draw_assignments(p.repeat_interleave(self.slots_per_group, dim=0), self.generator)
         state = self.kernel.initialise(raw)
         raw_count = self.formula.num_clauses - state.num_violated()
-        self.kernel.walk(state, self.walk_flips, self.uniform_choice, self.configuration.walksat_noise, self.generator)
+        self.kernel.walk(state, int(self.budget.max()), self.rigorous_slot, self.configuration.walksat_noise,
+                         self.generator, self.budget)
         return raw, raw_count, state
 
     def update_theta(self, p, raw, raw_count, state, weights):
-        """The merged gradient step on theta; returns mu(p) per group."""
+        """The merged gradient step on theta of the heuristic groups; returns mu(p) per group."""
         shape = (self.num_groups, self.slots_per_group, self.formula.num_variables)
         closed, mu = closed_form_gradient(self.theta, self.formula, self.beta)
         sampled = sampled_tilted_gradient(state.assignment.view(shape), weights, p)
         raw_estimate = raw_draw_estimate(raw.view(shape), raw_count.view(shape[:2]), p, self.beta, mu)
-        self.optimizer.step(merged_gradient(sampled, raw_estimate, closed, self.configuration.control_variate_coefficient))
+        gradient = merged_gradient(sampled, raw_estimate, closed, self.configuration.control_variate_coefficient)
+        self.optimizer.step(gradient * (~self.rigorous_group).unsqueeze(1))
         return mu
 
     def schedule_and_restart(self, ess):
@@ -68,14 +84,16 @@ class TiltedLoop:
 
     def step(self):
         """One round over every slot: (min unsat after the walk, a satisfying assignment or None,
-        the numbers of the log row: beta, ESS, mu, saturated means, all averaged over groups)."""
-        p = torch.tanh(self.theta)
+        the numbers of the log row: beta, ESS, mu, saturated means averaged over groups, then the
+        failure counts and the two posteriors)."""
+        p = torch.tanh(self.theta) * (~self.rigorous_group).unsqueeze(1)
         raw, raw_count, state = self.draw_and_walk(p)
         violated = state.num_violated()
         weights = tilted_weights(self.formula.num_clauses - violated, self.beta, self.num_groups)
         ess = effective_sample_size(weights)
         mu = self.update_theta(p, raw, raw_count, state, weights)
         self.schedule_and_restart(ess)
+        self.failures.count(violated, self.rigorous_slot)
         best = int(violated.argmin())
         min_unsat = int(violated[best])
         solution = [int(value) for value in state.assignment[best].tolist()] if min_unsat == 0 else None
@@ -93,14 +111,18 @@ def solve_tilted(formula, configuration, seed, trajectory_path=None):
         num_steps += 1
         unsat_events.append(min_unsat)
         if trajectory_path is not None:
-            trajectory.append((num_steps, loop.restarts.num_restarts, round(time.perf_counter() - start, 4),
-                               *numbers, min_unsat))
+            trajectory.append((num_steps, loop.restarts.num_restarts, round(time.perf_counter() - start, 4), *numbers,
+                               min_unsat, loop.failures.rigorous_failures, loop.failures.heuristic_failures,
+                               *loop.failures.posteriors()))
     certify_solution(formula, solution)
     if trajectory_path is not None:
         with open(trajectory_path, "w", newline="") as handle:
             writer = csv.writer(handle)
             writer.writerow(TRAJECTORY_COLUMNS)
             writer.writerows(trajectory)
+    posterior_rigorous, posterior_beta = loop.failures.posteriors()
     return SolveResult(solution is not None, solution, time.perf_counter() - start, loop.restarts.num_restarts,
                        num_steps, min(unsat_events) if unsat_events else -1,
-                       float(np.mean(unsat_events)) if unsat_events else math.nan, len(unsat_events))
+                       float(np.mean(unsat_events)) if unsat_events else math.nan, len(unsat_events),
+                       loop.failures.rigorous_failures, loop.failures.heuristic_failures,
+                       posterior_rigorous, posterior_beta)
