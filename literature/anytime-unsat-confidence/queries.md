@@ -62,6 +62,7 @@ was abandoned; OpenAlex replaced it, since it serves reconstructible abstracts.
 | Crossref | Runtime distributions and criteria for restarts Lorenz | SOFSEM 2017 |
 | DBLP | Istrate satisfiability local search | **0** |
 | DBLP | Istrate phase transition random satisfiability | 3, all on random Horn SAT, **not run-length distributions** |
+| (maestro, 2026-08-29) | the WalkSAT-on-XORSAT paper Q2 cites exists on arXiv as 1909.12353 (Istrate, "Interactive particle systems on hypergraphs, drift analysis and the WalkSAT algorithm", 2019), which DBLP lists as a CoRR record; the two rows above are the query's miss, not an absence | 1 |
 | Crossref | Sequential tests of statistical hypotheses Wald | Ann. Math. Statist. 1945 |
 | Crossref | Algorithm runtime prediction methods and evaluation | AIJ 2014 |
 | Crossref | Understanding the empirical hardness of NP-complete problems | JACM 2009, CACM 2014 |

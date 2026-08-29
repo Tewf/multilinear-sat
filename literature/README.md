@@ -13,6 +13,8 @@ compare against and what "better" is measured by.
 | `fft-walksat-las-vegas/` | the FFT of constraints plus WalkSAT as an efficient Las Vegas solver, and for the tensor-rank toolkit's GF(2) parity instances | gaussian-surrogate | done 2026-08-29 |
 | `fft-for-relaxations/` | Fourier and Walsh analysis as a tool to study SAT relaxations: spectra, influences, landscape correlation, low-degree approximation | gaussian-surrogate | done 2026-08-29 |
 | `tanh-parametrisation.md` | the smaller question: mirror descent, exponentiated gradient, Ising-machine nonlinearities as the geometry of the relaxation | gaussian-surrogate | done 2026-08-29 |
+| `anytime-unsat-confidence/` | an anytime Las Vegas solver with a calibrated UNSAT posterior: the bounding theorem (SAT in RP implies NP = RP), typical-case algorithms, run-length distributions, incomplete UNSAT methods, the relaxation-seeded walk (occupied in 2017) | gaussian-surrogate | done 2026-08-29 |
+| `tilted-sampling-loop/` | gradient and sampling as one tilted-objective loop: natural evolution strategies, cross-entropy, control variates, annealed and population sampling, sample-guided decimation, and whether GPU parallelism compensates slow mixing | gaussian-surrogate | in progress 2026-08-29 |
 | `covariance-structure/` | the covariance of the clause vector: null space, spectrum, collinearity, for literal and clause reduction | covariance-reduction | done 2026-08-29; the question closed, see that branch's `gaussian_surrogate/covariance/README.md` |
 
 `review.md` was produced by condensing six internal reviews and the prototype benchmark
