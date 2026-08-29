@@ -1,11 +1,12 @@
-"""Fetch the SATLIB uniform random 3-SAT families into the repository's ignored instances directory."""
+"""Fetch the SATLIB uniform random 3-SAT families (satisfiable uf, unsatisfiable uuf) into the
+repository's ignored instances directory."""
 import io
 import tarfile
 import urllib.request
 from pathlib import Path
 
 SATLIB_URL = "https://www.cs.ubc.ca/~hoos/SATLIB/Benchmarks/SAT/RND3SAT/{family}.tar.gz"
-FAMILIES = ("uf50-218", "uf100-430", "uf250-1065")
+FAMILIES = ("uf20-91", "uf50-218", "uf100-430", "uf250-1065", "uuf250-1065")   # uuf: unsatisfiable twins
 INSTANCES_DIRECTORY = Path(__file__).resolve().parents[2] / "benchmark" / "instances"
 
 
