@@ -1,0 +1,480 @@
+{"point": "n=100 ratio=3.0", "instance": "n100_r3.0_s0", "method": "F", "fraction": 0.865234375, "mean_final_unsat": 0.146484375, "min_final_unsat": 0, "seconds": 11.726}
+{"point": "n=100 ratio=3.0", "instance": "n100_r3.0_s0", "method": "mu", "fraction": 0.658203125, "mean_final_unsat": 0.44921875, "min_final_unsat": 0, "seconds": 0.267}
+{"point": "n=100 ratio=3.0", "instance": "n100_r3.0_s0", "method": "fourier", "fraction": 0.462890625, "mean_final_unsat": 0.775390625, "min_final_unsat": 0, "seconds": 0.358}
+{"point": "n=100 ratio=3.0", "instance": "n100_r3.0_s1", "method": "F", "fraction": 0.16796875, "mean_final_unsat": 1.4140625, "min_final_unsat": 0, "seconds": 10.814}
+{"point": "n=100 ratio=3.0", "instance": "n100_r3.0_s1", "method": "mu", "fraction": 0.03515625, "mean_final_unsat": 2.390625, "min_final_unsat": 0, "seconds": 0.259}
+{"point": "n=100 ratio=3.0", "instance": "n100_r3.0_s1", "method": "fourier", "fraction": 0.02734375, "mean_final_unsat": 2.58984375, "min_final_unsat": 0, "seconds": 0.287}
+{"point": "n=100 ratio=3.0", "instance": "n100_r3.0_s2", "method": "F", "fraction": 0.580078125, "mean_final_unsat": 0.515625, "min_final_unsat": 0, "seconds": 10.502}
+{"point": "n=100 ratio=3.0", "instance": "n100_r3.0_s2", "method": "mu", "fraction": 0.28515625, "mean_final_unsat": 1.158203125, "min_final_unsat": 0, "seconds": 0.373}
+{"point": "n=100 ratio=3.0", "instance": "n100_r3.0_s2", "method": "fourier", "fraction": 0.22265625, "mean_final_unsat": 1.4609375, "min_final_unsat": 0, "seconds": 0.366}
+{"point": "n=100 ratio=3.0", "instance": "n100_r3.0_s3", "method": "F", "fraction": 0.455078125, "mean_final_unsat": 0.716796875, "min_final_unsat": 0, "seconds": 10.616}
+{"point": "n=100 ratio=3.0", "instance": "n100_r3.0_s3", "method": "mu", "fraction": 0.205078125, "mean_final_unsat": 1.306640625, "min_final_unsat": 0, "seconds": 0.273}
+{"point": "n=100 ratio=3.0", "instance": "n100_r3.0_s3", "method": "fourier", "fraction": 0.16796875, "mean_final_unsat": 1.51953125, "min_final_unsat": 0, "seconds": 0.257}
+{"point": "n=100 ratio=3.0", "instance": "n100_r3.0_s4", "method": "F", "fraction": 0.099609375, "mean_final_unsat": 1.966796875, "min_final_unsat": 0, "seconds": 10.869}
+{"point": "n=100 ratio=3.0", "instance": "n100_r3.0_s4", "method": "mu", "fraction": 0.029296875, "mean_final_unsat": 2.9765625, "min_final_unsat": 0, "seconds": 0.26}
+{"point": "n=100 ratio=3.0", "instance": "n100_r3.0_s4", "method": "fourier", "fraction": 0.0234375, "mean_final_unsat": 3.267578125, "min_final_unsat": 0, "seconds": 0.321}
+{"point": "n=100 ratio=3.0", "instance": "n100_r3.0_s5", "method": "F", "fraction": 0.12890625, "mean_final_unsat": 1.6328125, "min_final_unsat": 0, "seconds": 11.003}
+{"point": "n=100 ratio=3.0", "instance": "n100_r3.0_s5", "method": "mu", "fraction": 0.01171875, "mean_final_unsat": 2.5234375, "min_final_unsat": 0, "seconds": 0.245}
+{"point": "n=100 ratio=3.0", "instance": "n100_r3.0_s5", "method": "fourier", "fraction": 0.01171875, "mean_final_unsat": 2.7109375, "min_final_unsat": 0, "seconds": 0.303}
+{"point": "n=100 ratio=3.0", "instance": "n100_r3.0_s6", "method": "F", "fraction": 0.63671875, "mean_final_unsat": 0.44921875, "min_final_unsat": 0, "seconds": 10.726}
+{"point": "n=100 ratio=3.0", "instance": "n100_r3.0_s6", "method": "mu", "fraction": 0.392578125, "mean_final_unsat": 0.826171875, "min_final_unsat": 0, "seconds": 0.252}
+{"point": "n=100 ratio=3.0", "instance": "n100_r3.0_s6", "method": "fourier", "fraction": 0.306640625, "mean_final_unsat": 1.107421875, "min_final_unsat": 0, "seconds": 0.277}
+{"point": "n=100 ratio=3.0", "instance": "n100_r3.0_s7", "method": "F", "fraction": 0.255859375, "mean_final_unsat": 1.2578125, "min_final_unsat": 0, "seconds": 10.706}
+{"point": "n=100 ratio=3.0", "instance": "n100_r3.0_s7", "method": "mu", "fraction": 0.12890625, "mean_final_unsat": 1.849609375, "min_final_unsat": 0, "seconds": 0.374}
+{"point": "n=100 ratio=3.0", "instance": "n100_r3.0_s7", "method": "fourier", "fraction": 0.076171875, "mean_final_unsat": 2.22265625, "min_final_unsat": 0, "seconds": 0.351}
+{"point": "n=100 ratio=3.0", "instance": "n100_r3.0_s8", "method": "F", "fraction": 0.43359375, "mean_final_unsat": 0.744140625, "min_final_unsat": 0, "seconds": 10.661}
+{"point": "n=100 ratio=3.0", "instance": "n100_r3.0_s8", "method": "mu", "fraction": 0.17578125, "mean_final_unsat": 1.3515625, "min_final_unsat": 0, "seconds": 0.379}
+{"point": "n=100 ratio=3.0", "instance": "n100_r3.0_s8", "method": "fourier", "fraction": 0.15234375, "mean_final_unsat": 1.6171875, "min_final_unsat": 0, "seconds": 0.382}
+{"point": "n=100 ratio=3.0", "instance": "n100_r3.0_s9", "method": "F", "fraction": 0.09375, "mean_final_unsat": 1.96875, "min_final_unsat": 0, "seconds": 10.924}
+{"point": "n=100 ratio=3.0", "instance": "n100_r3.0_s9", "method": "mu", "fraction": 0.017578125, "mean_final_unsat": 2.91015625, "min_final_unsat": 0, "seconds": 0.267}
+{"point": "n=100 ratio=3.0", "instance": "n100_r3.0_s9", "method": "fourier", "fraction": 0.013671875, "mean_final_unsat": 3.205078125, "min_final_unsat": 0, "seconds": 0.274}
+{"point": "n=100 ratio=3.0", "instance": "n100_r3.0_s10", "method": "F", "fraction": 0.189453125, "mean_final_unsat": 1.416015625, "min_final_unsat": 0, "seconds": 10.813}
+{"point": "n=100 ratio=3.0", "instance": "n100_r3.0_s10", "method": "mu", "fraction": 0.078125, "mean_final_unsat": 2.1640625, "min_final_unsat": 0, "seconds": 0.251}
+{"point": "n=100 ratio=3.0", "instance": "n100_r3.0_s10", "method": "fourier", "fraction": 0.041015625, "mean_final_unsat": 2.482421875, "min_final_unsat": 0, "seconds": 0.266}
+{"point": "n=100 ratio=3.0", "instance": "n100_r3.0_s11", "method": "F", "fraction": 0.60546875, "mean_final_unsat": 0.482421875, "min_final_unsat": 0, "seconds": 10.605}
+{"point": "n=100 ratio=3.0", "instance": "n100_r3.0_s11", "method": "mu", "fraction": 0.345703125, "mean_final_unsat": 0.85546875, "min_final_unsat": 0, "seconds": 0.329}
+{"point": "n=100 ratio=3.0", "instance": "n100_r3.0_s11", "method": "fourier", "fraction": 0.228515625, "mean_final_unsat": 1.19921875, "min_final_unsat": 0, "seconds": 0.253}
+{"point": "n=100 ratio=3.0", "instance": "n100_r3.0_s12", "method": "F", "fraction": 0.37109375, "mean_final_unsat": 0.84765625, "min_final_unsat": 0, "seconds": 10.722}
+{"point": "n=100 ratio=3.0", "instance": "n100_r3.0_s12", "method": "mu", "fraction": 0.146484375, "mean_final_unsat": 1.517578125, "min_final_unsat": 0, "seconds": 0.323}
+{"point": "n=100 ratio=3.0", "instance": "n100_r3.0_s12", "method": "fourier", "fraction": 0.107421875, "mean_final_unsat": 1.7890625, "min_final_unsat": 0, "seconds": 0.315}
+{"point": "n=100 ratio=3.0", "instance": "n100_r3.0_s13", "method": "F", "fraction": 0.234375, "mean_final_unsat": 1.07421875, "min_final_unsat": 0, "seconds": 10.976}
+{"point": "n=100 ratio=3.0", "instance": "n100_r3.0_s13", "method": "mu", "fraction": 0.111328125, "mean_final_unsat": 1.595703125, "min_final_unsat": 0, "seconds": 0.345}
+{"point": "n=100 ratio=3.0", "instance": "n100_r3.0_s13", "method": "fourier", "fraction": 0.087890625, "mean_final_unsat": 1.86328125, "min_final_unsat": 0, "seconds": 0.404}
+{"point": "n=100 ratio=3.0", "instance": "n100_r3.0_s14", "method": "F", "fraction": 0.515625, "mean_final_unsat": 0.62890625, "min_final_unsat": 0, "seconds": 10.781}
+{"point": "n=100 ratio=3.0", "instance": "n100_r3.0_s14", "method": "mu", "fraction": 0.2890625, "mean_final_unsat": 1.111328125, "min_final_unsat": 0, "seconds": 0.419}
+{"point": "n=100 ratio=3.0", "instance": "n100_r3.0_s14", "method": "fourier", "fraction": 0.21484375, "mean_final_unsat": 1.486328125, "min_final_unsat": 0, "seconds": 0.282}
+{"point": "n=100 ratio=3.0", "instance": "n100_r3.0_s15", "method": "F", "fraction": 0.509765625, "mean_final_unsat": 0.59375, "min_final_unsat": 0, "seconds": 10.802}
+{"point": "n=100 ratio=3.0", "instance": "n100_r3.0_s15", "method": "mu", "fraction": 0.27734375, "mean_final_unsat": 1.09765625, "min_final_unsat": 0, "seconds": 0.39}
+{"point": "n=100 ratio=3.0", "instance": "n100_r3.0_s15", "method": "fourier", "fraction": 0.224609375, "mean_final_unsat": 1.328125, "min_final_unsat": 0, "seconds": 0.283}
+{"point": "n=100 ratio=3.0", "instance": "n100_r3.0_s16", "method": "F", "fraction": 0.44140625, "mean_final_unsat": 0.673828125, "min_final_unsat": 0, "seconds": 10.858}
+{"point": "n=100 ratio=3.0", "instance": "n100_r3.0_s16", "method": "mu", "fraction": 0.177734375, "mean_final_unsat": 1.21875, "min_final_unsat": 0, "seconds": 0.393}
+{"point": "n=100 ratio=3.0", "instance": "n100_r3.0_s16", "method": "fourier", "fraction": 0.1328125, "mean_final_unsat": 1.513671875, "min_final_unsat": 0, "seconds": 0.308}
+{"point": "n=100 ratio=3.0", "instance": "n100_r3.0_s17", "method": "F", "fraction": 0.427734375, "mean_final_unsat": 0.767578125, "min_final_unsat": 0, "seconds": 10.789}
+{"point": "n=100 ratio=3.0", "instance": "n100_r3.0_s17", "method": "mu", "fraction": 0.2421875, "mean_final_unsat": 1.291015625, "min_final_unsat": 0, "seconds": 0.271}
+{"point": "n=100 ratio=3.0", "instance": "n100_r3.0_s17", "method": "fourier", "fraction": 0.1796875, "mean_final_unsat": 1.5703125, "min_final_unsat": 0, "seconds": 0.306}
+{"point": "n=100 ratio=3.0", "instance": "n100_r3.0_s18", "method": "F", "fraction": 0.255859375, "mean_final_unsat": 1.14453125, "min_final_unsat": 0, "seconds": 10.796}
+{"point": "n=100 ratio=3.0", "instance": "n100_r3.0_s18", "method": "mu", "fraction": 0.10546875, "mean_final_unsat": 1.736328125, "min_final_unsat": 0, "seconds": 0.28}
+{"point": "n=100 ratio=3.0", "instance": "n100_r3.0_s18", "method": "fourier", "fraction": 0.095703125, "mean_final_unsat": 1.9921875, "min_final_unsat": 0, "seconds": 0.277}
+{"point": "n=100 ratio=3.0", "instance": "n100_r3.0_s19", "method": "F", "fraction": 0.38671875, "mean_final_unsat": 0.796875, "min_final_unsat": 0, "seconds": 10.611}
+{"point": "n=100 ratio=3.0", "instance": "n100_r3.0_s19", "method": "mu", "fraction": 0.171875, "mean_final_unsat": 1.373046875, "min_final_unsat": 0, "seconds": 0.271}
+{"point": "n=100 ratio=3.0", "instance": "n100_r3.0_s19", "method": "fourier", "fraction": 0.138671875, "mean_final_unsat": 1.603515625, "min_final_unsat": 0, "seconds": 0.265}
+{"point": "n=100 ratio=3.5", "instance": "n100_r3.5_s0", "method": "F", "fraction": 0.6875, "mean_final_unsat": 0.380859375, "min_final_unsat": 0, "seconds": 14.526}
+{"point": "n=100 ratio=3.5", "instance": "n100_r3.5_s0", "method": "mu", "fraction": 0.552734375, "mean_final_unsat": 0.666015625, "min_final_unsat": 0, "seconds": 0.259}
+{"point": "n=100 ratio=3.5", "instance": "n100_r3.5_s0", "method": "fourier", "fraction": 0.33203125, "mean_final_unsat": 1.1796875, "min_final_unsat": 0, "seconds": 0.267}
+{"point": "n=100 ratio=3.5", "instance": "n100_r3.5_s1", "method": "F", "fraction": 0.001953125, "mean_final_unsat": 3.091796875, "min_final_unsat": 0, "seconds": 14.643}
+{"point": "n=100 ratio=3.5", "instance": "n100_r3.5_s1", "method": "mu", "fraction": 0.0, "mean_final_unsat": 4.03515625, "min_final_unsat": 1, "seconds": 0.269}
+{"point": "n=100 ratio=3.5", "instance": "n100_r3.5_s1", "method": "fourier", "fraction": 0.0, "mean_final_unsat": 4.341796875, "min_final_unsat": 1, "seconds": 0.261}
+{"point": "n=100 ratio=3.5", "instance": "n100_r3.5_s2", "method": "F", "fraction": 0.185546875, "mean_final_unsat": 1.328125, "min_final_unsat": 0, "seconds": 14.422}
+{"point": "n=100 ratio=3.5", "instance": "n100_r3.5_s2", "method": "mu", "fraction": 0.052734375, "mean_final_unsat": 2.158203125, "min_final_unsat": 0, "seconds": 0.361}
+{"point": "n=100 ratio=3.5", "instance": "n100_r3.5_s2", "method": "fourier", "fraction": 0.041015625, "mean_final_unsat": 2.517578125, "min_final_unsat": 0, "seconds": 0.29}
+{"point": "n=100 ratio=3.5", "instance": "n100_r3.5_s3", "method": "F", "fraction": 0.046875, "mean_final_unsat": 2.298828125, "min_final_unsat": 0, "seconds": 14.497}
+{"point": "n=100 ratio=3.5", "instance": "n100_r3.5_s3", "method": "mu", "fraction": 0.005859375, "mean_final_unsat": 3.365234375, "min_final_unsat": 0, "seconds": 0.277}
+{"point": "n=100 ratio=3.5", "instance": "n100_r3.5_s3", "method": "fourier", "fraction": 0.0, "mean_final_unsat": 3.60546875, "min_final_unsat": 1, "seconds": 0.264}
+{"point": "n=100 ratio=3.5", "instance": "n100_r3.5_s4", "method": "F", "fraction": 0.001953125, "mean_final_unsat": 3.96875, "min_final_unsat": 0, "seconds": 14.619}
+{"point": "n=100 ratio=3.5", "instance": "n100_r3.5_s4", "method": "mu", "fraction": 0.0, "mean_final_unsat": 5.09765625, "min_final_unsat": 1, "seconds": 0.324}
+{"point": "n=100 ratio=3.5", "instance": "n100_r3.5_s4", "method": "fourier", "fraction": 0.0, "mean_final_unsat": 5.380859375, "min_final_unsat": 1, "seconds": 0.386}
+{"point": "n=100 ratio=3.5", "instance": "n100_r3.5_s5", "method": "F", "fraction": 0.00390625, "mean_final_unsat": 3.0546875, "min_final_unsat": 0, "seconds": 14.871}
+{"point": "n=100 ratio=3.5", "instance": "n100_r3.5_s5", "method": "mu", "fraction": 0.0, "mean_final_unsat": 3.962890625, "min_final_unsat": 1, "seconds": 0.34}
+{"point": "n=100 ratio=3.5", "instance": "n100_r3.5_s5", "method": "fourier", "fraction": 0.0, "mean_final_unsat": 4.36328125, "min_final_unsat": 1, "seconds": 0.287}
+{"point": "n=100 ratio=3.5", "instance": "n100_r3.5_s6", "method": "F", "fraction": 0.17578125, "mean_final_unsat": 1.6015625, "min_final_unsat": 0, "seconds": 14.683}
+{"point": "n=100 ratio=3.5", "instance": "n100_r3.5_s6", "method": "mu", "fraction": 0.06640625, "mean_final_unsat": 2.240234375, "min_final_unsat": 0, "seconds": 0.282}
+{"point": "n=100 ratio=3.5", "instance": "n100_r3.5_s6", "method": "fourier", "fraction": 0.052734375, "mean_final_unsat": 2.765625, "min_final_unsat": 0, "seconds": 0.301}
+{"point": "n=100 ratio=3.5", "instance": "n100_r3.5_s7", "method": "F", "fraction": 0.041015625, "mean_final_unsat": 2.384765625, "min_final_unsat": 0, "seconds": 14.407}
+{"point": "n=100 ratio=3.5", "instance": "n100_r3.5_s7", "method": "mu", "fraction": 0.015625, "mean_final_unsat": 3.03515625, "min_final_unsat": 0, "seconds": 0.28}
+{"point": "n=100 ratio=3.5", "instance": "n100_r3.5_s7", "method": "fourier", "fraction": 0.009765625, "mean_final_unsat": 3.427734375, "min_final_unsat": 0, "seconds": 0.378}
+{"point": "n=100 ratio=3.5", "instance": "n100_r3.5_s8", "method": "F", "fraction": 0.09375, "mean_final_unsat": 1.888671875, "min_final_unsat": 0, "seconds": 14.568}
+{"point": "n=100 ratio=3.5", "instance": "n100_r3.5_s8", "method": "mu", "fraction": 0.03125, "mean_final_unsat": 2.8203125, "min_final_unsat": 0, "seconds": 0.282}
+{"point": "n=100 ratio=3.5", "instance": "n100_r3.5_s8", "method": "fourier", "fraction": 0.025390625, "mean_final_unsat": 3.298828125, "min_final_unsat": 0, "seconds": 0.381}
+{"point": "n=100 ratio=3.5", "instance": "n100_r3.5_s9", "method": "F", "fraction": 0.009765625, "mean_final_unsat": 3.296875, "min_final_unsat": 0, "seconds": 14.809}
+{"point": "n=100 ratio=3.5", "instance": "n100_r3.5_s9", "method": "mu", "fraction": 0.001953125, "mean_final_unsat": 4.146484375, "min_final_unsat": 0, "seconds": 0.265}
+{"point": "n=100 ratio=3.5", "instance": "n100_r3.5_s9", "method": "fourier", "fraction": 0.001953125, "mean_final_unsat": 4.6171875, "min_final_unsat": 0, "seconds": 0.274}
+{"point": "n=100 ratio=3.5", "instance": "n100_r3.5_s10", "method": "F", "fraction": 0.02734375, "mean_final_unsat": 2.771484375, "min_final_unsat": 0, "seconds": 14.727}
+{"point": "n=100 ratio=3.5", "instance": "n100_r3.5_s10", "method": "mu", "fraction": 0.00390625, "mean_final_unsat": 4.044921875, "min_final_unsat": 0, "seconds": 0.277}
+{"point": "n=100 ratio=3.5", "instance": "n100_r3.5_s10", "method": "fourier", "fraction": 0.0, "mean_final_unsat": 4.373046875, "min_final_unsat": 1, "seconds": 0.277}
+{"point": "n=100 ratio=3.5", "instance": "n100_r3.5_s11", "method": "F", "fraction": 0.1640625, "mean_final_unsat": 1.421875, "min_final_unsat": 0, "seconds": 14.627}
+{"point": "n=100 ratio=3.5", "instance": "n100_r3.5_s11", "method": "mu", "fraction": 0.103515625, "mean_final_unsat": 2.015625, "min_final_unsat": 0, "seconds": 0.263}
+{"point": "n=100 ratio=3.5", "instance": "n100_r3.5_s11", "method": "fourier", "fraction": 0.060546875, "mean_final_unsat": 2.455078125, "min_final_unsat": 0, "seconds": 0.248}
+{"point": "n=100 ratio=3.5", "instance": "n100_r3.5_s12", "method": "F", "fraction": 0.09375, "mean_final_unsat": 1.96875, "min_final_unsat": 0, "seconds": 14.567}
+{"point": "n=100 ratio=3.5", "instance": "n100_r3.5_s12", "method": "mu", "fraction": 0.02734375, "mean_final_unsat": 2.7734375, "min_final_unsat": 0, "seconds": 0.266}
+{"point": "n=100 ratio=3.5", "instance": "n100_r3.5_s12", "method": "fourier", "fraction": 0.0078125, "mean_final_unsat": 3.103515625, "min_final_unsat": 0, "seconds": 0.266}
+{"point": "n=100 ratio=3.5", "instance": "n100_r3.5_s13", "method": "F", "fraction": 0.037109375, "mean_final_unsat": 2.40234375, "min_final_unsat": 0, "seconds": 14.858}
+{"point": "n=100 ratio=3.5", "instance": "n100_r3.5_s13", "method": "mu", "fraction": 0.0078125, "mean_final_unsat": 2.939453125, "min_final_unsat": 0, "seconds": 0.344}
+{"point": "n=100 ratio=3.5", "instance": "n100_r3.5_s13", "method": "fourier", "fraction": 0.005859375, "mean_final_unsat": 3.267578125, "min_final_unsat": 0, "seconds": 0.357}
+{"point": "n=100 ratio=3.5", "instance": "n100_r3.5_s14", "method": "F", "fraction": 0.0625, "mean_final_unsat": 1.990234375, "min_final_unsat": 0, "seconds": 14.664}
+{"point": "n=100 ratio=3.5", "instance": "n100_r3.5_s14", "method": "mu", "fraction": 0.01171875, "mean_final_unsat": 2.9609375, "min_final_unsat": 0, "seconds": 0.355}
+{"point": "n=100 ratio=3.5", "instance": "n100_r3.5_s14", "method": "fourier", "fraction": 0.00390625, "mean_final_unsat": 3.326171875, "min_final_unsat": 0, "seconds": 0.292}
+{"point": "n=100 ratio=3.5", "instance": "n100_r3.5_s15", "method": "F", "fraction": 0.220703125, "mean_final_unsat": 1.16796875, "min_final_unsat": 0, "seconds": 14.689}
+{"point": "n=100 ratio=3.5", "instance": "n100_r3.5_s15", "method": "mu", "fraction": 0.06640625, "mean_final_unsat": 1.791015625, "min_final_unsat": 0, "seconds": 0.322}
+{"point": "n=100 ratio=3.5", "instance": "n100_r3.5_s15", "method": "fourier", "fraction": 0.048828125, "mean_final_unsat": 2.240234375, "min_final_unsat": 0, "seconds": 0.347}
+{"point": "n=100 ratio=3.5", "instance": "n100_r3.5_s16", "method": "F", "fraction": 0.068359375, "mean_final_unsat": 2.01171875, "min_final_unsat": 0, "seconds": 14.847}
+{"point": "n=100 ratio=3.5", "instance": "n100_r3.5_s16", "method": "mu", "fraction": 0.005859375, "mean_final_unsat": 3.162109375, "min_final_unsat": 0, "seconds": 0.379}
+{"point": "n=100 ratio=3.5", "instance": "n100_r3.5_s16", "method": "fourier", "fraction": 0.001953125, "mean_final_unsat": 3.533203125, "min_final_unsat": 0, "seconds": 0.356}
+{"point": "n=100 ratio=3.5", "instance": "n100_r3.5_s17", "method": "F", "fraction": 0.12890625, "mean_final_unsat": 1.9453125, "min_final_unsat": 0, "seconds": 14.683}
+{"point": "n=100 ratio=3.5", "instance": "n100_r3.5_s17", "method": "mu", "fraction": 0.029296875, "mean_final_unsat": 2.998046875, "min_final_unsat": 0, "seconds": 0.319}
+{"point": "n=100 ratio=3.5", "instance": "n100_r3.5_s17", "method": "fourier", "fraction": 0.02734375, "mean_final_unsat": 3.318359375, "min_final_unsat": 0, "seconds": 0.38}
+{"point": "n=100 ratio=3.5", "instance": "n100_r3.5_s18", "method": "F", "fraction": 0.013671875, "mean_final_unsat": 2.86328125, "min_final_unsat": 0, "seconds": 14.573}
+{"point": "n=100 ratio=3.5", "instance": "n100_r3.5_s18", "method": "mu", "fraction": 0.00390625, "mean_final_unsat": 3.943359375, "min_final_unsat": 0, "seconds": 0.308}
+{"point": "n=100 ratio=3.5", "instance": "n100_r3.5_s18", "method": "fourier", "fraction": 0.001953125, "mean_final_unsat": 4.07421875, "min_final_unsat": 0, "seconds": 0.277}
+{"point": "n=100 ratio=3.5", "instance": "n100_r3.5_s19", "method": "F", "fraction": 0.05859375, "mean_final_unsat": 1.962890625, "min_final_unsat": 0, "seconds": 14.603}
+{"point": "n=100 ratio=3.5", "instance": "n100_r3.5_s19", "method": "mu", "fraction": 0.009765625, "mean_final_unsat": 3.1875, "min_final_unsat": 0, "seconds": 0.323}
+{"point": "n=100 ratio=3.5", "instance": "n100_r3.5_s19", "method": "fourier", "fraction": 0.01171875, "mean_final_unsat": 3.521484375, "min_final_unsat": 0, "seconds": 0.267}
+{"point": "n=100 ratio=4.0", "instance": "n100_r4.0_s0", "method": "F", "fraction": 0.265625, "mean_final_unsat": 1.28515625, "min_final_unsat": 0, "seconds": 19.206}
+{"point": "n=100 ratio=4.0", "instance": "n100_r4.0_s0", "method": "mu", "fraction": 0.154296875, "mean_final_unsat": 1.81640625, "min_final_unsat": 0, "seconds": 0.327}
+{"point": "n=100 ratio=4.0", "instance": "n100_r4.0_s0", "method": "fourier", "fraction": 0.08984375, "mean_final_unsat": 2.515625, "min_final_unsat": 0, "seconds": 0.336}
+{"point": "n=100 ratio=4.0", "instance": "n100_r4.0_s1", "method": "F", "fraction": 0.0, "mean_final_unsat": 4.26953125, "min_final_unsat": 1, "seconds": 19.144}
+{"point": "n=100 ratio=4.0", "instance": "n100_r4.0_s1", "method": "mu", "fraction": 0.0, "mean_final_unsat": 5.197265625, "min_final_unsat": 1, "seconds": 0.306}
+{"point": "n=100 ratio=4.0", "instance": "n100_r4.0_s1", "method": "fourier", "fraction": 0.0, "mean_final_unsat": 5.689453125, "min_final_unsat": 2, "seconds": 0.304}
+{"point": "n=100 ratio=4.0", "instance": "n100_r4.0_s3", "method": "F", "fraction": 0.001953125, "mean_final_unsat": 3.591796875, "min_final_unsat": 0, "seconds": 18.919}
+{"point": "n=100 ratio=4.0", "instance": "n100_r4.0_s3", "method": "mu", "fraction": 0.0, "mean_final_unsat": 4.662109375, "min_final_unsat": 1, "seconds": 0.272}
+{"point": "n=100 ratio=4.0", "instance": "n100_r4.0_s3", "method": "fourier", "fraction": 0.0, "mean_final_unsat": 4.994140625, "min_final_unsat": 1, "seconds": 0.27}
+{"point": "n=100 ratio=4.0", "instance": "n100_r4.0_s5", "method": "F", "fraction": 0.0, "mean_final_unsat": 4.787109375, "min_final_unsat": 1, "seconds": 19.39}
+{"point": "n=100 ratio=4.0", "instance": "n100_r4.0_s5", "method": "mu", "fraction": 0.0, "mean_final_unsat": 6.322265625, "min_final_unsat": 2, "seconds": 0.278}
+{"point": "n=100 ratio=4.0", "instance": "n100_r4.0_s5", "method": "fourier", "fraction": 0.0, "mean_final_unsat": 6.6796875, "min_final_unsat": 2, "seconds": 0.29}
+{"point": "n=100 ratio=4.0", "instance": "n100_r4.0_s6", "method": "F", "fraction": 0.001953125, "mean_final_unsat": 3.4140625, "min_final_unsat": 0, "seconds": 19.225}
+{"point": "n=100 ratio=4.0", "instance": "n100_r4.0_s6", "method": "mu", "fraction": 0.0, "mean_final_unsat": 4.244140625, "min_final_unsat": 1, "seconds": 0.301}
+{"point": "n=100 ratio=4.0", "instance": "n100_r4.0_s6", "method": "fourier", "fraction": 0.0, "mean_final_unsat": 4.693359375, "min_final_unsat": 1, "seconds": 0.288}
+{"point": "n=100 ratio=4.0", "instance": "n100_r4.0_s7", "method": "F", "fraction": 0.00390625, "mean_final_unsat": 3.205078125, "min_final_unsat": 0, "seconds": 18.89}
+{"point": "n=100 ratio=4.0", "instance": "n100_r4.0_s7", "method": "mu", "fraction": 0.0, "mean_final_unsat": 4.236328125, "min_final_unsat": 1, "seconds": 0.309}
+{"point": "n=100 ratio=4.0", "instance": "n100_r4.0_s7", "method": "fourier", "fraction": 0.0, "mean_final_unsat": 4.85546875, "min_final_unsat": 1, "seconds": 0.281}
+{"point": "n=100 ratio=4.0", "instance": "n100_r4.0_s8", "method": "F", "fraction": 0.005859375, "mean_final_unsat": 3.63671875, "min_final_unsat": 0, "seconds": 18.907}
+{"point": "n=100 ratio=4.0", "instance": "n100_r4.0_s8", "method": "mu", "fraction": 0.00390625, "mean_final_unsat": 4.60546875, "min_final_unsat": 0, "seconds": 0.318}
+{"point": "n=100 ratio=4.0", "instance": "n100_r4.0_s8", "method": "fourier", "fraction": 0.0, "mean_final_unsat": 5.060546875, "min_final_unsat": 1, "seconds": 0.359}
+{"point": "n=100 ratio=4.0", "instance": "n100_r4.0_s10", "method": "F", "fraction": 0.0, "mean_final_unsat": 4.546875, "min_final_unsat": 1, "seconds": 19.172}
+{"point": "n=100 ratio=4.0", "instance": "n100_r4.0_s10", "method": "mu", "fraction": 0.0, "mean_final_unsat": 5.61328125, "min_final_unsat": 1, "seconds": 0.282}
+{"point": "n=100 ratio=4.0", "instance": "n100_r4.0_s10", "method": "fourier", "fraction": 0.0, "mean_final_unsat": 6.046875, "min_final_unsat": 1, "seconds": 0.315}
+{"point": "n=100 ratio=4.0", "instance": "n100_r4.0_s11", "method": "F", "fraction": 0.00390625, "mean_final_unsat": 2.77734375, "min_final_unsat": 0, "seconds": 19.18}
+{"point": "n=100 ratio=4.0", "instance": "n100_r4.0_s11", "method": "mu", "fraction": 0.005859375, "mean_final_unsat": 3.599609375, "min_final_unsat": 0, "seconds": 0.277}
+{"point": "n=100 ratio=4.0", "instance": "n100_r4.0_s11", "method": "fourier", "fraction": 0.001953125, "mean_final_unsat": 4.111328125, "min_final_unsat": 0, "seconds": 0.273}
+{"point": "n=100 ratio=4.0", "instance": "n100_r4.0_s12", "method": "F", "fraction": 0.005859375, "mean_final_unsat": 2.90234375, "min_final_unsat": 0, "seconds": 19.14}
+{"point": "n=100 ratio=4.0", "instance": "n100_r4.0_s12", "method": "mu", "fraction": 0.001953125, "mean_final_unsat": 3.7265625, "min_final_unsat": 0, "seconds": 0.278}
+{"point": "n=100 ratio=4.0", "instance": "n100_r4.0_s12", "method": "fourier", "fraction": 0.001953125, "mean_final_unsat": 4.05078125, "min_final_unsat": 0, "seconds": 0.284}
+{"point": "n=100 ratio=4.0", "instance": "n100_r4.0_s13", "method": "F", "fraction": 0.0, "mean_final_unsat": 3.72265625, "min_final_unsat": 1, "seconds": 19.303}
+{"point": "n=100 ratio=4.0", "instance": "n100_r4.0_s13", "method": "mu", "fraction": 0.0, "mean_final_unsat": 4.60546875, "min_final_unsat": 1, "seconds": 0.274}
+{"point": "n=100 ratio=4.0", "instance": "n100_r4.0_s13", "method": "fourier", "fraction": 0.0, "mean_final_unsat": 4.9453125, "min_final_unsat": 2, "seconds": 0.275}
+{"point": "n=100 ratio=4.0", "instance": "n100_r4.0_s14", "method": "F", "fraction": 0.001953125, "mean_final_unsat": 2.9140625, "min_final_unsat": 0, "seconds": 19.193}
+{"point": "n=100 ratio=4.0", "instance": "n100_r4.0_s14", "method": "mu", "fraction": 0.0, "mean_final_unsat": 4.185546875, "min_final_unsat": 1, "seconds": 0.28}
+{"point": "n=100 ratio=4.0", "instance": "n100_r4.0_s14", "method": "fourier", "fraction": 0.0, "mean_final_unsat": 4.65625, "min_final_unsat": 1, "seconds": 0.345}
+{"point": "n=100 ratio=4.0", "instance": "n100_r4.0_s15", "method": "F", "fraction": 0.169921875, "mean_final_unsat": 1.8125, "min_final_unsat": 0, "seconds": 19.252}
+{"point": "n=100 ratio=4.0", "instance": "n100_r4.0_s15", "method": "mu", "fraction": 0.0546875, "mean_final_unsat": 2.818359375, "min_final_unsat": 0, "seconds": 0.307}
+{"point": "n=100 ratio=4.0", "instance": "n100_r4.0_s15", "method": "fourier", "fraction": 0.03515625, "mean_final_unsat": 3.58203125, "min_final_unsat": 0, "seconds": 0.275}
+{"point": "n=100 ratio=4.0", "instance": "n100_r4.0_s16", "method": "F", "fraction": 0.001953125, "mean_final_unsat": 3.9296875, "min_final_unsat": 0, "seconds": 19.415}
+{"point": "n=100 ratio=4.0", "instance": "n100_r4.0_s16", "method": "mu", "fraction": 0.0, "mean_final_unsat": 5.30859375, "min_final_unsat": 2, "seconds": 0.367}
+{"point": "n=100 ratio=4.0", "instance": "n100_r4.0_s16", "method": "fourier", "fraction": 0.0, "mean_final_unsat": 5.732421875, "min_final_unsat": 2, "seconds": 0.273}
+{"point": "n=100 ratio=4.0", "instance": "n100_r4.0_s17", "method": "F", "fraction": 0.00390625, "mean_final_unsat": 3.931640625, "min_final_unsat": 0, "seconds": 19.022}
+{"point": "n=100 ratio=4.0", "instance": "n100_r4.0_s17", "method": "mu", "fraction": 0.0, "mean_final_unsat": 5.255859375, "min_final_unsat": 1, "seconds": 0.293}
+{"point": "n=100 ratio=4.0", "instance": "n100_r4.0_s17", "method": "fourier", "fraction": 0.0, "mean_final_unsat": 5.505859375, "min_final_unsat": 1, "seconds": 0.271}
+{"point": "n=100 ratio=4.0", "instance": "n100_r4.0_s18", "method": "F", "fraction": 0.005859375, "mean_final_unsat": 4.439453125, "min_final_unsat": 0, "seconds": 19.146}
+{"point": "n=100 ratio=4.0", "instance": "n100_r4.0_s18", "method": "mu", "fraction": 0.0, "mean_final_unsat": 5.541015625, "min_final_unsat": 1, "seconds": 0.313}
+{"point": "n=100 ratio=4.0", "instance": "n100_r4.0_s18", "method": "fourier", "fraction": 0.0, "mean_final_unsat": 5.744140625, "min_final_unsat": 1, "seconds": 0.34}
+{"point": "n=100 ratio=4.0", "instance": "n100_r4.0_s19", "method": "F", "fraction": 0.0, "mean_final_unsat": 3.81640625, "min_final_unsat": 1, "seconds": 19.047}
+{"point": "n=100 ratio=4.0", "instance": "n100_r4.0_s19", "method": "mu", "fraction": 0.0, "mean_final_unsat": 5.287109375, "min_final_unsat": 1, "seconds": 0.277}
+{"point": "n=100 ratio=4.0", "instance": "n100_r4.0_s19", "method": "fourier", "fraction": 0.0, "mean_final_unsat": 5.541015625, "min_final_unsat": 1, "seconds": 0.272}
+{"point": "n=100 ratio=4.0", "instance": "n100_r4.0_s20", "method": "F", "fraction": 0.0, "mean_final_unsat": 4.0078125, "min_final_unsat": 1, "seconds": 19.85}
+{"point": "n=100 ratio=4.0", "instance": "n100_r4.0_s20", "method": "mu", "fraction": 0.0, "mean_final_unsat": 4.84765625, "min_final_unsat": 1, "seconds": 0.276}
+{"point": "n=100 ratio=4.0", "instance": "n100_r4.0_s20", "method": "fourier", "fraction": 0.0, "mean_final_unsat": 5.140625, "min_final_unsat": 1, "seconds": 0.275}
+{"point": "n=100 ratio=4.0", "instance": "n100_r4.0_s21", "method": "F", "fraction": 0.0, "mean_final_unsat": 4.06640625, "min_final_unsat": 1, "seconds": 19.293}
+{"point": "n=100 ratio=4.0", "instance": "n100_r4.0_s21", "method": "mu", "fraction": 0.0, "mean_final_unsat": 5.263671875, "min_final_unsat": 1, "seconds": 0.334}
+{"point": "n=100 ratio=4.0", "instance": "n100_r4.0_s21", "method": "fourier", "fraction": 0.0, "mean_final_unsat": 5.591796875, "min_final_unsat": 1, "seconds": 0.317}
+{"point": "n=100 ratio=4.0", "instance": "n100_r4.0_s22", "method": "F", "fraction": 0.001953125, "mean_final_unsat": 3.46484375, "min_final_unsat": 0, "seconds": 19.18}
+{"point": "n=100 ratio=4.0", "instance": "n100_r4.0_s22", "method": "mu", "fraction": 0.0, "mean_final_unsat": 4.64453125, "min_final_unsat": 1, "seconds": 0.286}
+{"point": "n=100 ratio=4.0", "instance": "n100_r4.0_s22", "method": "fourier", "fraction": 0.0, "mean_final_unsat": 5.03125, "min_final_unsat": 1, "seconds": 0.313}
+{"point": "n=100 ratio=4.2", "instance": "n100_r4.2_s0", "method": "F", "fraction": 0.193359375, "mean_final_unsat": 1.841796875, "min_final_unsat": 0, "seconds": 21.16}
+{"point": "n=100 ratio=4.2", "instance": "n100_r4.2_s0", "method": "mu", "fraction": 0.072265625, "mean_final_unsat": 2.736328125, "min_final_unsat": 0, "seconds": 0.396}
+{"point": "n=100 ratio=4.2", "instance": "n100_r4.2_s0", "method": "fourier", "fraction": 0.03515625, "mean_final_unsat": 3.49609375, "min_final_unsat": 0, "seconds": 0.307}
+{"point": "n=100 ratio=4.2", "instance": "n100_r4.2_s1", "method": "F", "fraction": 0.0, "mean_final_unsat": 4.794921875, "min_final_unsat": 1, "seconds": 20.945}
+{"point": "n=100 ratio=4.2", "instance": "n100_r4.2_s1", "method": "mu", "fraction": 0.0, "mean_final_unsat": 5.888671875, "min_final_unsat": 1, "seconds": 0.32}
+{"point": "n=100 ratio=4.2", "instance": "n100_r4.2_s1", "method": "fourier", "fraction": 0.0, "mean_final_unsat": 6.5625, "min_final_unsat": 1, "seconds": 0.329}
+{"point": "n=100 ratio=4.2", "instance": "n100_r4.2_s3", "method": "F", "fraction": 0.0, "mean_final_unsat": 4.15234375, "min_final_unsat": 1, "seconds": 20.862}
+{"point": "n=100 ratio=4.2", "instance": "n100_r4.2_s3", "method": "mu", "fraction": 0.0, "mean_final_unsat": 5.072265625, "min_final_unsat": 1, "seconds": 0.286}
+{"point": "n=100 ratio=4.2", "instance": "n100_r4.2_s3", "method": "fourier", "fraction": 0.0, "mean_final_unsat": 5.384765625, "min_final_unsat": 1, "seconds": 0.283}
+{"point": "n=100 ratio=4.2", "instance": "n100_r4.2_s6", "method": "F", "fraction": 0.0, "mean_final_unsat": 4.638671875, "min_final_unsat": 1, "seconds": 21.057}
+{"point": "n=100 ratio=4.2", "instance": "n100_r4.2_s6", "method": "mu", "fraction": 0.0, "mean_final_unsat": 5.57421875, "min_final_unsat": 2, "seconds": 0.293}
+{"point": "n=100 ratio=4.2", "instance": "n100_r4.2_s6", "method": "fourier", "fraction": 0.0, "mean_final_unsat": 6.09375, "min_final_unsat": 1, "seconds": 0.318}
+{"point": "n=100 ratio=4.2", "instance": "n100_r4.2_s7", "method": "F", "fraction": 0.0, "mean_final_unsat": 4.01953125, "min_final_unsat": 1, "seconds": 20.813}
+{"point": "n=100 ratio=4.2", "instance": "n100_r4.2_s7", "method": "mu", "fraction": 0.0, "mean_final_unsat": 5.048828125, "min_final_unsat": 1, "seconds": 0.376}
+{"point": "n=100 ratio=4.2", "instance": "n100_r4.2_s7", "method": "fourier", "fraction": 0.0, "mean_final_unsat": 5.564453125, "min_final_unsat": 1, "seconds": 0.325}
+{"point": "n=100 ratio=4.2", "instance": "n100_r4.2_s11", "method": "F", "fraction": 0.0, "mean_final_unsat": 4.302734375, "min_final_unsat": 1, "seconds": 21.057}
+{"point": "n=100 ratio=4.2", "instance": "n100_r4.2_s11", "method": "mu", "fraction": 0.005859375, "mean_final_unsat": 5.20703125, "min_final_unsat": 0, "seconds": 0.327}
+{"point": "n=100 ratio=4.2", "instance": "n100_r4.2_s11", "method": "fourier", "fraction": 0.00390625, "mean_final_unsat": 5.779296875, "min_final_unsat": 0, "seconds": 0.35}
+{"point": "n=100 ratio=4.2", "instance": "n100_r4.2_s12", "method": "F", "fraction": 0.00390625, "mean_final_unsat": 3.578125, "min_final_unsat": 0, "seconds": 20.972}
+{"point": "n=100 ratio=4.2", "instance": "n100_r4.2_s12", "method": "mu", "fraction": 0.0, "mean_final_unsat": 4.462890625, "min_final_unsat": 1, "seconds": 0.304}
+{"point": "n=100 ratio=4.2", "instance": "n100_r4.2_s12", "method": "fourier", "fraction": 0.001953125, "mean_final_unsat": 4.779296875, "min_final_unsat": 0, "seconds": 0.288}
+{"point": "n=100 ratio=4.2", "instance": "n100_r4.2_s14", "method": "F", "fraction": 0.005859375, "mean_final_unsat": 3.349609375, "min_final_unsat": 0, "seconds": 21.124}
+{"point": "n=100 ratio=4.2", "instance": "n100_r4.2_s14", "method": "mu", "fraction": 0.001953125, "mean_final_unsat": 4.654296875, "min_final_unsat": 0, "seconds": 0.365}
+{"point": "n=100 ratio=4.2", "instance": "n100_r4.2_s14", "method": "fourier", "fraction": 0.0, "mean_final_unsat": 5.125, "min_final_unsat": 1, "seconds": 0.29}
+{"point": "n=100 ratio=4.2", "instance": "n100_r4.2_s15", "method": "F", "fraction": 0.009765625, "mean_final_unsat": 2.37109375, "min_final_unsat": 0, "seconds": 21.129}
+{"point": "n=100 ratio=4.2", "instance": "n100_r4.2_s15", "method": "mu", "fraction": 0.001953125, "mean_final_unsat": 3.49609375, "min_final_unsat": 0, "seconds": 0.297}
+{"point": "n=100 ratio=4.2", "instance": "n100_r4.2_s15", "method": "fourier", "fraction": 0.0, "mean_final_unsat": 4.203125, "min_final_unsat": 1, "seconds": 0.38}
+{"point": "n=100 ratio=4.2", "instance": "n100_r4.2_s16", "method": "F", "fraction": 0.0, "mean_final_unsat": 4.884765625, "min_final_unsat": 1, "seconds": 21.36}
+{"point": "n=100 ratio=4.2", "instance": "n100_r4.2_s16", "method": "mu", "fraction": 0.0, "mean_final_unsat": 6.255859375, "min_final_unsat": 1, "seconds": 0.314}
+{"point": "n=100 ratio=4.2", "instance": "n100_r4.2_s16", "method": "fourier", "fraction": 0.0, "mean_final_unsat": 6.796875, "min_final_unsat": 1, "seconds": 0.351}
+{"point": "n=100 ratio=4.2", "instance": "n100_r4.2_s17", "method": "F", "fraction": 0.0, "mean_final_unsat": 4.421875, "min_final_unsat": 1, "seconds": 20.961}
+{"point": "n=100 ratio=4.2", "instance": "n100_r4.2_s17", "method": "mu", "fraction": 0.0, "mean_final_unsat": 5.810546875, "min_final_unsat": 2, "seconds": 0.293}
+{"point": "n=100 ratio=4.2", "instance": "n100_r4.2_s17", "method": "fourier", "fraction": 0.0, "mean_final_unsat": 6.12109375, "min_final_unsat": 1, "seconds": 0.285}
+{"point": "n=100 ratio=4.2", "instance": "n100_r4.2_s23", "method": "F", "fraction": 0.009765625, "mean_final_unsat": 4.5078125, "min_final_unsat": 0, "seconds": 20.939}
+{"point": "n=100 ratio=4.2", "instance": "n100_r4.2_s23", "method": "mu", "fraction": 0.0, "mean_final_unsat": 6.01953125, "min_final_unsat": 2, "seconds": 0.282}
+{"point": "n=100 ratio=4.2", "instance": "n100_r4.2_s23", "method": "fourier", "fraction": 0.0, "mean_final_unsat": 6.453125, "min_final_unsat": 2, "seconds": 0.336}
+{"point": "n=100 ratio=4.2", "instance": "n100_r4.2_s24", "method": "F", "fraction": 0.001953125, "mean_final_unsat": 3.318359375, "min_final_unsat": 0, "seconds": 21.015}
+{"point": "n=100 ratio=4.2", "instance": "n100_r4.2_s24", "method": "mu", "fraction": 0.0, "mean_final_unsat": 4.65625, "min_final_unsat": 1, "seconds": 0.299}
+{"point": "n=100 ratio=4.2", "instance": "n100_r4.2_s24", "method": "fourier", "fraction": 0.0, "mean_final_unsat": 4.826171875, "min_final_unsat": 1, "seconds": 0.289}
+{"point": "n=100 ratio=4.2", "instance": "n100_r4.2_s25", "method": "F", "fraction": 0.001953125, "mean_final_unsat": 3.701171875, "min_final_unsat": 0, "seconds": 21.35}
+{"point": "n=100 ratio=4.2", "instance": "n100_r4.2_s25", "method": "mu", "fraction": 0.0, "mean_final_unsat": 5.091796875, "min_final_unsat": 1, "seconds": 0.284}
+{"point": "n=100 ratio=4.2", "instance": "n100_r4.2_s25", "method": "fourier", "fraction": 0.0, "mean_final_unsat": 5.83984375, "min_final_unsat": 1, "seconds": 0.282}
+{"point": "n=100 ratio=4.2", "instance": "n100_r4.2_s26", "method": "F", "fraction": 0.00390625, "mean_final_unsat": 3.9609375, "min_final_unsat": 0, "seconds": 21.146}
+{"point": "n=100 ratio=4.2", "instance": "n100_r4.2_s26", "method": "mu", "fraction": 0.0, "mean_final_unsat": 5.654296875, "min_final_unsat": 1, "seconds": 0.36}
+{"point": "n=100 ratio=4.2", "instance": "n100_r4.2_s26", "method": "fourier", "fraction": 0.0, "mean_final_unsat": 6.087890625, "min_final_unsat": 2, "seconds": 0.354}
+{"point": "n=100 ratio=4.2", "instance": "n100_r4.2_s27", "method": "F", "fraction": 0.0, "mean_final_unsat": 5.123046875, "min_final_unsat": 1, "seconds": 20.788}
+{"point": "n=100 ratio=4.2", "instance": "n100_r4.2_s27", "method": "mu", "fraction": 0.0, "mean_final_unsat": 5.919921875, "min_final_unsat": 1, "seconds": 0.282}
+{"point": "n=100 ratio=4.2", "instance": "n100_r4.2_s27", "method": "fourier", "fraction": 0.0, "mean_final_unsat": 6.5, "min_final_unsat": 1, "seconds": 0.281}
+{"point": "n=100 ratio=4.2", "instance": "n100_r4.2_s28", "method": "F", "fraction": 0.001953125, "mean_final_unsat": 3.513671875, "min_final_unsat": 0, "seconds": 21.073}
+{"point": "n=100 ratio=4.2", "instance": "n100_r4.2_s28", "method": "mu", "fraction": 0.0, "mean_final_unsat": 4.67578125, "min_final_unsat": 1, "seconds": 0.341}
+{"point": "n=100 ratio=4.2", "instance": "n100_r4.2_s28", "method": "fourier", "fraction": 0.0, "mean_final_unsat": 5.1953125, "min_final_unsat": 1, "seconds": 0.378}
+{"point": "n=100 ratio=4.2", "instance": "n100_r4.2_s29", "method": "F", "fraction": 0.009765625, "mean_final_unsat": 3.2265625, "min_final_unsat": 0, "seconds": 20.908}
+{"point": "n=100 ratio=4.2", "instance": "n100_r4.2_s29", "method": "mu", "fraction": 0.001953125, "mean_final_unsat": 4.212890625, "min_final_unsat": 0, "seconds": 0.376}
+{"point": "n=100 ratio=4.2", "instance": "n100_r4.2_s29", "method": "fourier", "fraction": 0.00390625, "mean_final_unsat": 4.673828125, "min_final_unsat": 0, "seconds": 0.444}
+{"point": "n=100 ratio=4.2", "instance": "n100_r4.2_s30", "method": "F", "fraction": 0.0, "mean_final_unsat": 4.513671875, "min_final_unsat": 1, "seconds": 21.466}
+{"point": "n=100 ratio=4.2", "instance": "n100_r4.2_s30", "method": "mu", "fraction": 0.0, "mean_final_unsat": 5.82421875, "min_final_unsat": 2, "seconds": 0.295}
+{"point": "n=100 ratio=4.2", "instance": "n100_r4.2_s30", "method": "fourier", "fraction": 0.0, "mean_final_unsat": 6.3359375, "min_final_unsat": 2, "seconds": 0.282}
+{"point": "n=100 ratio=4.2", "instance": "n100_r4.2_s32", "method": "F", "fraction": 0.0, "mean_final_unsat": 3.693359375, "min_final_unsat": 1, "seconds": 20.982}
+{"point": "n=100 ratio=4.2", "instance": "n100_r4.2_s32", "method": "mu", "fraction": 0.0, "mean_final_unsat": 4.41796875, "min_final_unsat": 1, "seconds": 0.377}
+{"point": "n=100 ratio=4.2", "instance": "n100_r4.2_s32", "method": "fourier", "fraction": 0.0, "mean_final_unsat": 4.994140625, "min_final_unsat": 1, "seconds": 0.376}
+{"point": "n=100 ratio=4.26", "instance": "n100_r4.26_s0", "method": "F", "fraction": 0.12890625, "mean_final_unsat": 1.994140625, "min_final_unsat": 0, "seconds": 21.809}
+{"point": "n=100 ratio=4.26", "instance": "n100_r4.26_s0", "method": "mu", "fraction": 0.068359375, "mean_final_unsat": 2.888671875, "min_final_unsat": 0, "seconds": 0.289}
+{"point": "n=100 ratio=4.26", "instance": "n100_r4.26_s0", "method": "fourier", "fraction": 0.037109375, "mean_final_unsat": 3.6796875, "min_final_unsat": 0, "seconds": 0.285}
+{"point": "n=100 ratio=4.26", "instance": "n100_r4.26_s1", "method": "F", "fraction": 0.0, "mean_final_unsat": 5.052734375, "min_final_unsat": 1, "seconds": 21.56}
+{"point": "n=100 ratio=4.26", "instance": "n100_r4.26_s1", "method": "mu", "fraction": 0.0, "mean_final_unsat": 6.087890625, "min_final_unsat": 1, "seconds": 0.285}
+{"point": "n=100 ratio=4.26", "instance": "n100_r4.26_s1", "method": "fourier", "fraction": 0.0, "mean_final_unsat": 6.705078125, "min_final_unsat": 1, "seconds": 0.284}
+{"point": "n=100 ratio=4.26", "instance": "n100_r4.26_s3", "method": "F", "fraction": 0.0, "mean_final_unsat": 4.4140625, "min_final_unsat": 1, "seconds": 21.432}
+{"point": "n=100 ratio=4.26", "instance": "n100_r4.26_s3", "method": "mu", "fraction": 0.0, "mean_final_unsat": 5.361328125, "min_final_unsat": 2, "seconds": 0.314}
+{"point": "n=100 ratio=4.26", "instance": "n100_r4.26_s3", "method": "fourier", "fraction": 0.0, "mean_final_unsat": 5.666015625, "min_final_unsat": 1, "seconds": 0.308}
+{"point": "n=100 ratio=4.26", "instance": "n100_r4.26_s6", "method": "F", "fraction": 0.0, "mean_final_unsat": 4.986328125, "min_final_unsat": 1, "seconds": 21.683}
+{"point": "n=100 ratio=4.26", "instance": "n100_r4.26_s6", "method": "mu", "fraction": 0.0, "mean_final_unsat": 6.0859375, "min_final_unsat": 2, "seconds": 0.309}
+{"point": "n=100 ratio=4.26", "instance": "n100_r4.26_s6", "method": "fourier", "fraction": 0.0, "mean_final_unsat": 6.498046875, "min_final_unsat": 1, "seconds": 0.315}
+{"point": "n=100 ratio=4.26", "instance": "n100_r4.26_s7", "method": "F", "fraction": 0.001953125, "mean_final_unsat": 4.056640625, "min_final_unsat": 0, "seconds": 21.466}
+{"point": "n=100 ratio=4.26", "instance": "n100_r4.26_s7", "method": "mu", "fraction": 0.0, "mean_final_unsat": 5.259765625, "min_final_unsat": 1, "seconds": 0.386}
+{"point": "n=100 ratio=4.26", "instance": "n100_r4.26_s7", "method": "fourier", "fraction": 0.0, "mean_final_unsat": 5.701171875, "min_final_unsat": 1, "seconds": 0.31}
+{"point": "n=100 ratio=4.26", "instance": "n100_r4.26_s11", "method": "F", "fraction": 0.001953125, "mean_final_unsat": 4.62109375, "min_final_unsat": 0, "seconds": 21.755}
+{"point": "n=100 ratio=4.26", "instance": "n100_r4.26_s11", "method": "mu", "fraction": 0.001953125, "mean_final_unsat": 5.546875, "min_final_unsat": 0, "seconds": 0.331}
+{"point": "n=100 ratio=4.26", "instance": "n100_r4.26_s11", "method": "fourier", "fraction": 0.001953125, "mean_final_unsat": 6.140625, "min_final_unsat": 0, "seconds": 0.363}
+{"point": "n=100 ratio=4.26", "instance": "n100_r4.26_s12", "method": "F", "fraction": 0.005859375, "mean_final_unsat": 3.8203125, "min_final_unsat": 0, "seconds": 21.576}
+{"point": "n=100 ratio=4.26", "instance": "n100_r4.26_s12", "method": "mu", "fraction": 0.001953125, "mean_final_unsat": 4.837890625, "min_final_unsat": 0, "seconds": 0.388}
+{"point": "n=100 ratio=4.26", "instance": "n100_r4.26_s12", "method": "fourier", "fraction": 0.001953125, "mean_final_unsat": 5.04296875, "min_final_unsat": 0, "seconds": 0.472}
+{"point": "n=100 ratio=4.26", "instance": "n100_r4.26_s14", "method": "F", "fraction": 0.001953125, "mean_final_unsat": 3.52734375, "min_final_unsat": 0, "seconds": 21.799}
+{"point": "n=100 ratio=4.26", "instance": "n100_r4.26_s14", "method": "mu", "fraction": 0.001953125, "mean_final_unsat": 4.943359375, "min_final_unsat": 0, "seconds": 0.35}
+{"point": "n=100 ratio=4.26", "instance": "n100_r4.26_s14", "method": "fourier", "fraction": 0.0, "mean_final_unsat": 5.509765625, "min_final_unsat": 1, "seconds": 0.321}
+{"point": "n=100 ratio=4.26", "instance": "n100_r4.26_s15", "method": "F", "fraction": 0.0, "mean_final_unsat": 3.33203125, "min_final_unsat": 1, "seconds": 21.726}
+{"point": "n=100 ratio=4.26", "instance": "n100_r4.26_s15", "method": "mu", "fraction": 0.0, "mean_final_unsat": 4.36328125, "min_final_unsat": 1, "seconds": 0.306}
+{"point": "n=100 ratio=4.26", "instance": "n100_r4.26_s15", "method": "fourier", "fraction": 0.0, "mean_final_unsat": 4.9921875, "min_final_unsat": 1, "seconds": 0.3}
+{"point": "n=100 ratio=4.26", "instance": "n100_r4.26_s16", "method": "F", "fraction": 0.0, "mean_final_unsat": 4.9765625, "min_final_unsat": 1, "seconds": 22.032}
+{"point": "n=100 ratio=4.26", "instance": "n100_r4.26_s16", "method": "mu", "fraction": 0.0, "mean_final_unsat": 6.4296875, "min_final_unsat": 2, "seconds": 0.318}
+{"point": "n=100 ratio=4.26", "instance": "n100_r4.26_s16", "method": "fourier", "fraction": 0.0, "mean_final_unsat": 7.080078125, "min_final_unsat": 2, "seconds": 0.375}
+{"point": "n=100 ratio=4.26", "instance": "n100_r4.26_s17", "method": "F", "fraction": 0.0, "mean_final_unsat": 4.83984375, "min_final_unsat": 1, "seconds": 21.59}
+{"point": "n=100 ratio=4.26", "instance": "n100_r4.26_s17", "method": "mu", "fraction": 0.0, "mean_final_unsat": 6.13671875, "min_final_unsat": 2, "seconds": 0.31}
+{"point": "n=100 ratio=4.26", "instance": "n100_r4.26_s17", "method": "fourier", "fraction": 0.0, "mean_final_unsat": 6.435546875, "min_final_unsat": 2, "seconds": 0.326}
+{"point": "n=100 ratio=4.26", "instance": "n100_r4.26_s23", "method": "F", "fraction": 0.00390625, "mean_final_unsat": 5.103515625, "min_final_unsat": 0, "seconds": 21.62}
+{"point": "n=100 ratio=4.26", "instance": "n100_r4.26_s23", "method": "mu", "fraction": 0.0, "mean_final_unsat": 6.521484375, "min_final_unsat": 1, "seconds": 0.304}
+{"point": "n=100 ratio=4.26", "instance": "n100_r4.26_s23", "method": "fourier", "fraction": 0.0, "mean_final_unsat": 7.048828125, "min_final_unsat": 2, "seconds": 0.308}
+{"point": "n=100 ratio=4.26", "instance": "n100_r4.26_s24", "method": "F", "fraction": 0.0, "mean_final_unsat": 3.38671875, "min_final_unsat": 1, "seconds": 21.699}
+{"point": "n=100 ratio=4.26", "instance": "n100_r4.26_s24", "method": "mu", "fraction": 0.0, "mean_final_unsat": 4.720703125, "min_final_unsat": 1, "seconds": 0.291}
+{"point": "n=100 ratio=4.26", "instance": "n100_r4.26_s24", "method": "fourier", "fraction": 0.0, "mean_final_unsat": 5.087890625, "min_final_unsat": 1, "seconds": 0.309}
+{"point": "n=100 ratio=4.26", "instance": "n100_r4.26_s25", "method": "F", "fraction": 0.0078125, "mean_final_unsat": 3.884765625, "min_final_unsat": 0, "seconds": 22.031}
+{"point": "n=100 ratio=4.26", "instance": "n100_r4.26_s25", "method": "mu", "fraction": 0.001953125, "mean_final_unsat": 5.201171875, "min_final_unsat": 0, "seconds": 0.388}
+{"point": "n=100 ratio=4.26", "instance": "n100_r4.26_s25", "method": "fourier", "fraction": 0.0, "mean_final_unsat": 6.01171875, "min_final_unsat": 1, "seconds": 0.298}
+{"point": "n=100 ratio=4.26", "instance": "n100_r4.26_s26", "method": "F", "fraction": 0.0, "mean_final_unsat": 3.9921875, "min_final_unsat": 1, "seconds": 21.728}
+{"point": "n=100 ratio=4.26", "instance": "n100_r4.26_s26", "method": "mu", "fraction": 0.0, "mean_final_unsat": 5.71875, "min_final_unsat": 1, "seconds": 0.491}
+{"point": "n=100 ratio=4.26", "instance": "n100_r4.26_s26", "method": "fourier", "fraction": 0.0, "mean_final_unsat": 6.17578125, "min_final_unsat": 1, "seconds": 0.332}
+{"point": "n=100 ratio=4.26", "instance": "n100_r4.26_s27", "method": "F", "fraction": 0.0, "mean_final_unsat": 5.400390625, "min_final_unsat": 2, "seconds": 21.354}
+{"point": "n=100 ratio=4.26", "instance": "n100_r4.26_s27", "method": "mu", "fraction": 0.0, "mean_final_unsat": 6.39453125, "min_final_unsat": 2, "seconds": 0.389}
+{"point": "n=100 ratio=4.26", "instance": "n100_r4.26_s27", "method": "fourier", "fraction": 0.0, "mean_final_unsat": 6.921875, "min_final_unsat": 1, "seconds": 0.293}
+{"point": "n=100 ratio=4.26", "instance": "n100_r4.26_s28", "method": "F", "fraction": 0.0, "mean_final_unsat": 3.533203125, "min_final_unsat": 1, "seconds": 21.753}
+{"point": "n=100 ratio=4.26", "instance": "n100_r4.26_s28", "method": "mu", "fraction": 0.0, "mean_final_unsat": 4.81640625, "min_final_unsat": 1, "seconds": 0.3}
+{"point": "n=100 ratio=4.26", "instance": "n100_r4.26_s28", "method": "fourier", "fraction": 0.0, "mean_final_unsat": 5.201171875, "min_final_unsat": 1, "seconds": 0.291}
+{"point": "n=100 ratio=4.26", "instance": "n100_r4.26_s29", "method": "F", "fraction": 0.00390625, "mean_final_unsat": 3.365234375, "min_final_unsat": 0, "seconds": 21.454}
+{"point": "n=100 ratio=4.26", "instance": "n100_r4.26_s29", "method": "mu", "fraction": 0.001953125, "mean_final_unsat": 4.2265625, "min_final_unsat": 0, "seconds": 0.31}
+{"point": "n=100 ratio=4.26", "instance": "n100_r4.26_s29", "method": "fourier", "fraction": 0.0, "mean_final_unsat": 4.740234375, "min_final_unsat": 1, "seconds": 0.325}
+{"point": "n=100 ratio=4.26", "instance": "n100_r4.26_s32", "method": "F", "fraction": 0.0, "mean_final_unsat": 3.681640625, "min_final_unsat": 1, "seconds": 21.598}
+{"point": "n=100 ratio=4.26", "instance": "n100_r4.26_s32", "method": "mu", "fraction": 0.0, "mean_final_unsat": 4.34765625, "min_final_unsat": 1, "seconds": 0.333}
+{"point": "n=100 ratio=4.26", "instance": "n100_r4.26_s32", "method": "fourier", "fraction": 0.001953125, "mean_final_unsat": 4.966796875, "min_final_unsat": 0, "seconds": 0.367}
+{"point": "n=100 ratio=4.26", "instance": "n100_r4.26_s34", "method": "F", "fraction": 0.0, "mean_final_unsat": 5.2890625, "min_final_unsat": 1, "seconds": 21.581}
+{"point": "n=100 ratio=4.26", "instance": "n100_r4.26_s34", "method": "mu", "fraction": 0.0, "mean_final_unsat": 6.486328125, "min_final_unsat": 2, "seconds": 0.295}
+{"point": "n=100 ratio=4.26", "instance": "n100_r4.26_s34", "method": "fourier", "fraction": 0.0, "mean_final_unsat": 6.81640625, "min_final_unsat": 2, "seconds": 0.37}
+{"point": "uf50-218 (ratio 4.26)", "instance": "uf50-01", "method": "F", "fraction": 0.01171875, "mean_final_unsat": 2.73046875, "min_final_unsat": 0, "seconds": 11.007}
+{"point": "uf50-218 (ratio 4.26)", "instance": "uf50-01", "method": "mu", "fraction": 0.001953125, "mean_final_unsat": 2.99609375, "min_final_unsat": 0, "seconds": 0.268}
+{"point": "uf50-218 (ratio 4.26)", "instance": "uf50-01", "method": "fourier", "fraction": 0.0078125, "mean_final_unsat": 3.26953125, "min_final_unsat": 0, "seconds": 0.29}
+{"point": "uf50-218 (ratio 4.26)", "instance": "uf50-010", "method": "F", "fraction": 0.072265625, "mean_final_unsat": 2.302734375, "min_final_unsat": 0, "seconds": 10.932}
+{"point": "uf50-218 (ratio 4.26)", "instance": "uf50-010", "method": "mu", "fraction": 0.01171875, "mean_final_unsat": 3.16015625, "min_final_unsat": 0, "seconds": 0.45}
+{"point": "uf50-218 (ratio 4.26)", "instance": "uf50-010", "method": "fourier", "fraction": 0.0078125, "mean_final_unsat": 3.373046875, "min_final_unsat": 0, "seconds": 0.394}
+{"point": "uf50-218 (ratio 4.26)", "instance": "uf50-0100", "method": "F", "fraction": 0.001953125, "mean_final_unsat": 2.75390625, "min_final_unsat": 0, "seconds": 11.029}
+{"point": "uf50-218 (ratio 4.26)", "instance": "uf50-0100", "method": "mu", "fraction": 0.0, "mean_final_unsat": 3.5078125, "min_final_unsat": 1, "seconds": 0.273}
+{"point": "uf50-218 (ratio 4.26)", "instance": "uf50-0100", "method": "fourier", "fraction": 0.0, "mean_final_unsat": 3.7109375, "min_final_unsat": 1, "seconds": 0.266}
+{"point": "uf50-218 (ratio 4.26)", "instance": "uf50-01000", "method": "F", "fraction": 0.021484375, "mean_final_unsat": 2.28125, "min_final_unsat": 0, "seconds": 10.961}
+{"point": "uf50-218 (ratio 4.26)", "instance": "uf50-01000", "method": "mu", "fraction": 0.001953125, "mean_final_unsat": 2.68359375, "min_final_unsat": 0, "seconds": 0.331}
+{"point": "uf50-218 (ratio 4.26)", "instance": "uf50-01000", "method": "fourier", "fraction": 0.001953125, "mean_final_unsat": 2.84765625, "min_final_unsat": 0, "seconds": 0.314}
+{"point": "uf50-218 (ratio 4.26)", "instance": "uf50-0101", "method": "F", "fraction": 0.029296875, "mean_final_unsat": 2.419921875, "min_final_unsat": 0, "seconds": 10.844}
+{"point": "uf50-218 (ratio 4.26)", "instance": "uf50-0101", "method": "mu", "fraction": 0.017578125, "mean_final_unsat": 2.830078125, "min_final_unsat": 0, "seconds": 0.267}
+{"point": "uf50-218 (ratio 4.26)", "instance": "uf50-0101", "method": "fourier", "fraction": 0.005859375, "mean_final_unsat": 3.162109375, "min_final_unsat": 0, "seconds": 0.29}
+{"point": "uf50-218 (ratio 4.26)", "instance": "uf50-0102", "method": "F", "fraction": 0.044921875, "mean_final_unsat": 2.294921875, "min_final_unsat": 0, "seconds": 10.75}
+{"point": "uf50-218 (ratio 4.26)", "instance": "uf50-0102", "method": "mu", "fraction": 0.0234375, "mean_final_unsat": 2.96484375, "min_final_unsat": 0, "seconds": 0.266}
+{"point": "uf50-218 (ratio 4.26)", "instance": "uf50-0102", "method": "fourier", "fraction": 0.01953125, "mean_final_unsat": 3.21875, "min_final_unsat": 0, "seconds": 0.247}
+{"point": "uf50-218 (ratio 4.26)", "instance": "uf50-0103", "method": "F", "fraction": 0.123046875, "mean_final_unsat": 1.494140625, "min_final_unsat": 0, "seconds": 11.128}
+{"point": "uf50-218 (ratio 4.26)", "instance": "uf50-0103", "method": "mu", "fraction": 0.162109375, "mean_final_unsat": 1.794921875, "min_final_unsat": 0, "seconds": 0.233}
+{"point": "uf50-218 (ratio 4.26)", "instance": "uf50-0103", "method": "fourier", "fraction": 0.111328125, "mean_final_unsat": 2.072265625, "min_final_unsat": 0, "seconds": 0.257}
+{"point": "uf50-218 (ratio 4.26)", "instance": "uf50-0104", "method": "F", "fraction": 0.0703125, "mean_final_unsat": 2.072265625, "min_final_unsat": 0, "seconds": 11.065}
+{"point": "uf50-218 (ratio 4.26)", "instance": "uf50-0104", "method": "mu", "fraction": 0.00390625, "mean_final_unsat": 2.5625, "min_final_unsat": 0, "seconds": 0.276}
+{"point": "uf50-218 (ratio 4.26)", "instance": "uf50-0104", "method": "fourier", "fraction": 0.00390625, "mean_final_unsat": 2.82421875, "min_final_unsat": 0, "seconds": 0.287}
+{"point": "uf50-218 (ratio 4.26)", "instance": "uf50-0105", "method": "F", "fraction": 0.0234375, "mean_final_unsat": 1.912109375, "min_final_unsat": 0, "seconds": 10.821}
+{"point": "uf50-218 (ratio 4.26)", "instance": "uf50-0105", "method": "mu", "fraction": 0.00390625, "mean_final_unsat": 2.60546875, "min_final_unsat": 0, "seconds": 0.276}
+{"point": "uf50-218 (ratio 4.26)", "instance": "uf50-0105", "method": "fourier", "fraction": 0.001953125, "mean_final_unsat": 2.779296875, "min_final_unsat": 0, "seconds": 0.217}
+{"point": "uf50-218 (ratio 4.26)", "instance": "uf50-0106", "method": "F", "fraction": 0.001953125, "mean_final_unsat": 1.7265625, "min_final_unsat": 0, "seconds": 10.979}
+{"point": "uf50-218 (ratio 4.26)", "instance": "uf50-0106", "method": "mu", "fraction": 0.0, "mean_final_unsat": 2.326171875, "min_final_unsat": 1, "seconds": 0.324}
+{"point": "uf50-218 (ratio 4.26)", "instance": "uf50-0106", "method": "fourier", "fraction": 0.00390625, "mean_final_unsat": 2.662109375, "min_final_unsat": 0, "seconds": 0.283}
+{"point": "uf50-218 (ratio 4.26)", "instance": "uf50-0107", "method": "F", "fraction": 0.021484375, "mean_final_unsat": 2.533203125, "min_final_unsat": 0, "seconds": 11.284}
+{"point": "uf50-218 (ratio 4.26)", "instance": "uf50-0107", "method": "mu", "fraction": 0.009765625, "mean_final_unsat": 2.853515625, "min_final_unsat": 0, "seconds": 0.274}
+{"point": "uf50-218 (ratio 4.26)", "instance": "uf50-0107", "method": "fourier", "fraction": 0.01171875, "mean_final_unsat": 3.177734375, "min_final_unsat": 0, "seconds": 0.265}
+{"point": "uf50-218 (ratio 4.26)", "instance": "uf50-0108", "method": "F", "fraction": 0.076171875, "mean_final_unsat": 2.125, "min_final_unsat": 0, "seconds": 10.946}
+{"point": "uf50-218 (ratio 4.26)", "instance": "uf50-0108", "method": "mu", "fraction": 0.005859375, "mean_final_unsat": 2.703125, "min_final_unsat": 0, "seconds": 0.269}
+{"point": "uf50-218 (ratio 4.26)", "instance": "uf50-0108", "method": "fourier", "fraction": 0.013671875, "mean_final_unsat": 3.0546875, "min_final_unsat": 0, "seconds": 0.265}
+{"point": "uf50-218 (ratio 4.26)", "instance": "uf50-0109", "method": "F", "fraction": 0.03515625, "mean_final_unsat": 1.48828125, "min_final_unsat": 0, "seconds": 10.919}
+{"point": "uf50-218 (ratio 4.26)", "instance": "uf50-0109", "method": "mu", "fraction": 0.01953125, "mean_final_unsat": 2.052734375, "min_final_unsat": 0, "seconds": 0.394}
+{"point": "uf50-218 (ratio 4.26)", "instance": "uf50-0109", "method": "fourier", "fraction": 0.015625, "mean_final_unsat": 2.591796875, "min_final_unsat": 0, "seconds": 0.278}
+{"point": "uf50-218 (ratio 4.26)", "instance": "uf50-011", "method": "F", "fraction": 0.021484375, "mean_final_unsat": 2.91015625, "min_final_unsat": 0, "seconds": 11.145}
+{"point": "uf50-218 (ratio 4.26)", "instance": "uf50-011", "method": "mu", "fraction": 0.00390625, "mean_final_unsat": 3.78515625, "min_final_unsat": 0, "seconds": 0.242}
+{"point": "uf50-218 (ratio 4.26)", "instance": "uf50-011", "method": "fourier", "fraction": 0.001953125, "mean_final_unsat": 3.96484375, "min_final_unsat": 0, "seconds": 0.292}
+{"point": "uf50-218 (ratio 4.26)", "instance": "uf50-0110", "method": "F", "fraction": 0.07421875, "mean_final_unsat": 1.85546875, "min_final_unsat": 0, "seconds": 10.966}
+{"point": "uf50-218 (ratio 4.26)", "instance": "uf50-0110", "method": "mu", "fraction": 0.029296875, "mean_final_unsat": 2.447265625, "min_final_unsat": 0, "seconds": 0.276}
+{"point": "uf50-218 (ratio 4.26)", "instance": "uf50-0110", "method": "fourier", "fraction": 0.017578125, "mean_final_unsat": 2.83984375, "min_final_unsat": 0, "seconds": 0.221}
+{"point": "uf50-218 (ratio 4.26)", "instance": "uf50-0111", "method": "F", "fraction": 0.009765625, "mean_final_unsat": 2.1875, "min_final_unsat": 0, "seconds": 10.894}
+{"point": "uf50-218 (ratio 4.26)", "instance": "uf50-0111", "method": "mu", "fraction": 0.0, "mean_final_unsat": 2.8984375, "min_final_unsat": 1, "seconds": 0.379}
+{"point": "uf50-218 (ratio 4.26)", "instance": "uf50-0111", "method": "fourier", "fraction": 0.0, "mean_final_unsat": 3.0390625, "min_final_unsat": 1, "seconds": 0.317}
+{"point": "uf50-218 (ratio 4.26)", "instance": "uf50-0112", "method": "F", "fraction": 0.005859375, "mean_final_unsat": 2.28515625, "min_final_unsat": 0, "seconds": 10.909}
+{"point": "uf50-218 (ratio 4.26)", "instance": "uf50-0112", "method": "mu", "fraction": 0.00390625, "mean_final_unsat": 2.95703125, "min_final_unsat": 0, "seconds": 0.265}
+{"point": "uf50-218 (ratio 4.26)", "instance": "uf50-0112", "method": "fourier", "fraction": 0.0, "mean_final_unsat": 3.09375, "min_final_unsat": 1, "seconds": 0.273}
+{"point": "uf50-218 (ratio 4.26)", "instance": "uf50-0113", "method": "F", "fraction": 0.041015625, "mean_final_unsat": 2.337890625, "min_final_unsat": 0, "seconds": 10.794}
+{"point": "uf50-218 (ratio 4.26)", "instance": "uf50-0113", "method": "mu", "fraction": 0.009765625, "mean_final_unsat": 2.599609375, "min_final_unsat": 0, "seconds": 0.385}
+{"point": "uf50-218 (ratio 4.26)", "instance": "uf50-0113", "method": "fourier", "fraction": 0.005859375, "mean_final_unsat": 2.7578125, "min_final_unsat": 0, "seconds": 0.384}
+{"point": "uf50-218 (ratio 4.26)", "instance": "uf50-0114", "method": "F", "fraction": 0.337890625, "mean_final_unsat": 1.345703125, "min_final_unsat": 0, "seconds": 10.784}
+{"point": "uf50-218 (ratio 4.26)", "instance": "uf50-0114", "method": "mu", "fraction": 0.173828125, "mean_final_unsat": 1.962890625, "min_final_unsat": 0, "seconds": 0.334}
+{"point": "uf50-218 (ratio 4.26)", "instance": "uf50-0114", "method": "fourier", "fraction": 0.138671875, "mean_final_unsat": 2.3671875, "min_final_unsat": 0, "seconds": 0.232}
+{"point": "uf50-218 (ratio 4.26)", "instance": "uf50-0115", "method": "F", "fraction": 0.08203125, "mean_final_unsat": 2.041015625, "min_final_unsat": 0, "seconds": 10.945}
+{"point": "uf50-218 (ratio 4.26)", "instance": "uf50-0115", "method": "mu", "fraction": 0.0390625, "mean_final_unsat": 2.693359375, "min_final_unsat": 0, "seconds": 0.377}
+{"point": "uf50-218 (ratio 4.26)", "instance": "uf50-0115", "method": "fourier", "fraction": 0.0390625, "mean_final_unsat": 2.919921875, "min_final_unsat": 0, "seconds": 0.299}
+{"point": "uf100-430 (ratio 4.26)", "instance": "uf100-01", "method": "F", "fraction": 0.0, "mean_final_unsat": 5.318359375, "min_final_unsat": 1, "seconds": 22.116}
+{"point": "uf100-430 (ratio 4.26)", "instance": "uf100-01", "method": "mu", "fraction": 0.0, "mean_final_unsat": 6.625, "min_final_unsat": 2, "seconds": 0.287}
+{"point": "uf100-430 (ratio 4.26)", "instance": "uf100-01", "method": "fourier", "fraction": 0.0, "mean_final_unsat": 6.96484375, "min_final_unsat": 1, "seconds": 0.285}
+{"point": "uf100-430 (ratio 4.26)", "instance": "uf100-010", "method": "F", "fraction": 0.0, "mean_final_unsat": 4.09375, "min_final_unsat": 1, "seconds": 22.484}
+{"point": "uf100-430 (ratio 4.26)", "instance": "uf100-010", "method": "mu", "fraction": 0.0, "mean_final_unsat": 4.943359375, "min_final_unsat": 1, "seconds": 0.349}
+{"point": "uf100-430 (ratio 4.26)", "instance": "uf100-010", "method": "fourier", "fraction": 0.0, "mean_final_unsat": 5.412109375, "min_final_unsat": 1, "seconds": 0.407}
+{"point": "uf100-430 (ratio 4.26)", "instance": "uf100-0100", "method": "F", "fraction": 0.0078125, "mean_final_unsat": 3.5390625, "min_final_unsat": 0, "seconds": 21.849}
+{"point": "uf100-430 (ratio 4.26)", "instance": "uf100-0100", "method": "mu", "fraction": 0.001953125, "mean_final_unsat": 4.431640625, "min_final_unsat": 0, "seconds": 0.352}
+{"point": "uf100-430 (ratio 4.26)", "instance": "uf100-0100", "method": "fourier", "fraction": 0.0, "mean_final_unsat": 5.0546875, "min_final_unsat": 1, "seconds": 0.378}
+{"point": "uf100-430 (ratio 4.26)", "instance": "uf100-01000", "method": "F", "fraction": 0.00390625, "mean_final_unsat": 3.59375, "min_final_unsat": 0, "seconds": 21.957}
+{"point": "uf100-430 (ratio 4.26)", "instance": "uf100-01000", "method": "mu", "fraction": 0.0, "mean_final_unsat": 4.6484375, "min_final_unsat": 1, "seconds": 0.288}
+{"point": "uf100-430 (ratio 4.26)", "instance": "uf100-01000", "method": "fourier", "fraction": 0.0, "mean_final_unsat": 5.140625, "min_final_unsat": 1, "seconds": 0.386}
+{"point": "uf100-430 (ratio 4.26)", "instance": "uf100-0101", "method": "F", "fraction": 0.00390625, "mean_final_unsat": 3.908203125, "min_final_unsat": 0, "seconds": 22.033}
+{"point": "uf100-430 (ratio 4.26)", "instance": "uf100-0101", "method": "mu", "fraction": 0.0, "mean_final_unsat": 5.02734375, "min_final_unsat": 1, "seconds": 0.291}
+{"point": "uf100-430 (ratio 4.26)", "instance": "uf100-0101", "method": "fourier", "fraction": 0.001953125, "mean_final_unsat": 5.4296875, "min_final_unsat": 0, "seconds": 0.293}
+{"point": "uf100-430 (ratio 4.26)", "instance": "uf100-0102", "method": "F", "fraction": 0.0, "mean_final_unsat": 4.8515625, "min_final_unsat": 1, "seconds": 22.137}
+{"point": "uf100-430 (ratio 4.26)", "instance": "uf100-0102", "method": "mu", "fraction": 0.0, "mean_final_unsat": 6.6015625, "min_final_unsat": 1, "seconds": 0.378}
+{"point": "uf100-430 (ratio 4.26)", "instance": "uf100-0102", "method": "fourier", "fraction": 0.0, "mean_final_unsat": 6.99609375, "min_final_unsat": 1, "seconds": 0.305}
+{"point": "uf100-430 (ratio 4.26)", "instance": "uf100-0103", "method": "F", "fraction": 0.0, "mean_final_unsat": 4.439453125, "min_final_unsat": 1, "seconds": 22.166}
+{"point": "uf100-430 (ratio 4.26)", "instance": "uf100-0103", "method": "mu", "fraction": 0.0, "mean_final_unsat": 5.69921875, "min_final_unsat": 2, "seconds": 0.316}
+{"point": "uf100-430 (ratio 4.26)", "instance": "uf100-0103", "method": "fourier", "fraction": 0.0, "mean_final_unsat": 6.11328125, "min_final_unsat": 1, "seconds": 0.316}
+{"point": "uf100-430 (ratio 4.26)", "instance": "uf100-0104", "method": "F", "fraction": 0.0, "mean_final_unsat": 4.90234375, "min_final_unsat": 1, "seconds": 22.129}
+{"point": "uf100-430 (ratio 4.26)", "instance": "uf100-0104", "method": "mu", "fraction": 0.0, "mean_final_unsat": 6.21484375, "min_final_unsat": 2, "seconds": 0.331}
+{"point": "uf100-430 (ratio 4.26)", "instance": "uf100-0104", "method": "fourier", "fraction": 0.0, "mean_final_unsat": 6.42578125, "min_final_unsat": 2, "seconds": 0.388}
+{"point": "uf100-430 (ratio 4.26)", "instance": "uf100-0105", "method": "F", "fraction": 0.001953125, "mean_final_unsat": 4.35546875, "min_final_unsat": 0, "seconds": 22.184}
+{"point": "uf100-430 (ratio 4.26)", "instance": "uf100-0105", "method": "mu", "fraction": 0.001953125, "mean_final_unsat": 5.2421875, "min_final_unsat": 0, "seconds": 0.299}
+{"point": "uf100-430 (ratio 4.26)", "instance": "uf100-0105", "method": "fourier", "fraction": 0.0, "mean_final_unsat": 5.89453125, "min_final_unsat": 1, "seconds": 0.375}
+{"point": "uf100-430 (ratio 4.26)", "instance": "uf100-0106", "method": "F", "fraction": 0.001953125, "mean_final_unsat": 4.10546875, "min_final_unsat": 0, "seconds": 22.28}
+{"point": "uf100-430 (ratio 4.26)", "instance": "uf100-0106", "method": "mu", "fraction": 0.001953125, "mean_final_unsat": 5.158203125, "min_final_unsat": 0, "seconds": 0.389}
+{"point": "uf100-430 (ratio 4.26)", "instance": "uf100-0106", "method": "fourier", "fraction": 0.001953125, "mean_final_unsat": 5.611328125, "min_final_unsat": 0, "seconds": 0.321}
+{"point": "uf100-430 (ratio 4.26)", "instance": "uf100-0107", "method": "F", "fraction": 0.0, "mean_final_unsat": 4.544921875, "min_final_unsat": 1, "seconds": 21.875}
+{"point": "uf100-430 (ratio 4.26)", "instance": "uf100-0107", "method": "mu", "fraction": 0.0, "mean_final_unsat": 5.732421875, "min_final_unsat": 1, "seconds": 0.287}
+{"point": "uf100-430 (ratio 4.26)", "instance": "uf100-0107", "method": "fourier", "fraction": 0.0, "mean_final_unsat": 6.185546875, "min_final_unsat": 2, "seconds": 0.289}
+{"point": "uf100-430 (ratio 4.26)", "instance": "uf100-0108", "method": "F", "fraction": 0.0, "mean_final_unsat": 4.619140625, "min_final_unsat": 1, "seconds": 22.14}
+{"point": "uf100-430 (ratio 4.26)", "instance": "uf100-0108", "method": "mu", "fraction": 0.0, "mean_final_unsat": 5.7109375, "min_final_unsat": 1, "seconds": 0.309}
+{"point": "uf100-430 (ratio 4.26)", "instance": "uf100-0108", "method": "fourier", "fraction": 0.0, "mean_final_unsat": 5.947265625, "min_final_unsat": 1, "seconds": 0.285}
+{"point": "uf100-430 (ratio 4.26)", "instance": "uf100-0109", "method": "F", "fraction": 0.0, "mean_final_unsat": 5.36328125, "min_final_unsat": 2, "seconds": 22.326}
+{"point": "uf100-430 (ratio 4.26)", "instance": "uf100-0109", "method": "mu", "fraction": 0.0, "mean_final_unsat": 6.98828125, "min_final_unsat": 2, "seconds": 0.294}
+{"point": "uf100-430 (ratio 4.26)", "instance": "uf100-0109", "method": "fourier", "fraction": 0.0, "mean_final_unsat": 7.353515625, "min_final_unsat": 2, "seconds": 0.293}
+{"point": "uf100-430 (ratio 4.26)", "instance": "uf100-011", "method": "F", "fraction": 0.001953125, "mean_final_unsat": 4.654296875, "min_final_unsat": 0, "seconds": 22.239}
+{"point": "uf100-430 (ratio 4.26)", "instance": "uf100-011", "method": "mu", "fraction": 0.0, "mean_final_unsat": 6.4375, "min_final_unsat": 1, "seconds": 0.338}
+{"point": "uf100-430 (ratio 4.26)", "instance": "uf100-011", "method": "fourier", "fraction": 0.0, "mean_final_unsat": 6.8125, "min_final_unsat": 2, "seconds": 0.328}
+{"point": "uf100-430 (ratio 4.26)", "instance": "uf100-0110", "method": "F", "fraction": 0.0, "mean_final_unsat": 4.490234375, "min_final_unsat": 1, "seconds": 22.103}
+{"point": "uf100-430 (ratio 4.26)", "instance": "uf100-0110", "method": "mu", "fraction": 0.0, "mean_final_unsat": 5.650390625, "min_final_unsat": 2, "seconds": 0.294}
+{"point": "uf100-430 (ratio 4.26)", "instance": "uf100-0110", "method": "fourier", "fraction": 0.0, "mean_final_unsat": 5.947265625, "min_final_unsat": 1, "seconds": 0.313}
+{"point": "uf100-430 (ratio 4.26)", "instance": "uf100-0111", "method": "F", "fraction": 0.0, "mean_final_unsat": 4.232421875, "min_final_unsat": 1, "seconds": 22.175}
+{"point": "uf100-430 (ratio 4.26)", "instance": "uf100-0111", "method": "mu", "fraction": 0.0, "mean_final_unsat": 5.400390625, "min_final_unsat": 1, "seconds": 0.294}
+{"point": "uf100-430 (ratio 4.26)", "instance": "uf100-0111", "method": "fourier", "fraction": 0.0, "mean_final_unsat": 5.7578125, "min_final_unsat": 1, "seconds": 0.288}
+{"point": "uf100-430 (ratio 4.26)", "instance": "uf100-0112", "method": "F", "fraction": 0.0, "mean_final_unsat": 3.85546875, "min_final_unsat": 1, "seconds": 22.192}
+{"point": "uf100-430 (ratio 4.26)", "instance": "uf100-0112", "method": "mu", "fraction": 0.0, "mean_final_unsat": 4.896484375, "min_final_unsat": 1, "seconds": 0.306}
+{"point": "uf100-430 (ratio 4.26)", "instance": "uf100-0112", "method": "fourier", "fraction": 0.0, "mean_final_unsat": 5.447265625, "min_final_unsat": 1, "seconds": 0.309}
+{"point": "uf100-430 (ratio 4.26)", "instance": "uf100-0113", "method": "F", "fraction": 0.0, "mean_final_unsat": 5.169921875, "min_final_unsat": 1, "seconds": 22.251}
+{"point": "uf100-430 (ratio 4.26)", "instance": "uf100-0113", "method": "mu", "fraction": 0.0, "mean_final_unsat": 6.033203125, "min_final_unsat": 2, "seconds": 0.301}
+{"point": "uf100-430 (ratio 4.26)", "instance": "uf100-0113", "method": "fourier", "fraction": 0.0, "mean_final_unsat": 6.408203125, "min_final_unsat": 2, "seconds": 0.286}
+{"point": "uf100-430 (ratio 4.26)", "instance": "uf100-0114", "method": "F", "fraction": 0.0, "mean_final_unsat": 5.12109375, "min_final_unsat": 1, "seconds": 21.938}
+{"point": "uf100-430 (ratio 4.26)", "instance": "uf100-0114", "method": "mu", "fraction": 0.0, "mean_final_unsat": 6.412109375, "min_final_unsat": 1, "seconds": 0.345}
+{"point": "uf100-430 (ratio 4.26)", "instance": "uf100-0114", "method": "fourier", "fraction": 0.0, "mean_final_unsat": 6.87109375, "min_final_unsat": 1, "seconds": 0.309}
+{"point": "uf100-430 (ratio 4.26)", "instance": "uf100-0115", "method": "F", "fraction": 0.009765625, "mean_final_unsat": 3.48828125, "min_final_unsat": 0, "seconds": 22.06}
+{"point": "uf100-430 (ratio 4.26)", "instance": "uf100-0115", "method": "mu", "fraction": 0.0, "mean_final_unsat": 4.21875, "min_final_unsat": 1, "seconds": 0.319}
+{"point": "uf100-430 (ratio 4.26)", "instance": "uf100-0115", "method": "fourier", "fraction": 0.001953125, "mean_final_unsat": 4.921875, "min_final_unsat": 0, "seconds": 0.295}
+{"point": "uf250-1065 (ratio 4.26)", "instance": "uf250-01", "method": "F", "fraction": 0.0, "mean_final_unsat": 8.5703125, "min_final_unsat": 2, "seconds": 55.382}
+{"point": "uf250-1065 (ratio 4.26)", "instance": "uf250-01", "method": "mu", "fraction": 0.0, "mean_final_unsat": 11.384765625, "min_final_unsat": 4, "seconds": 0.697}
+{"point": "uf250-1065 (ratio 4.26)", "instance": "uf250-01", "method": "fourier", "fraction": 0.0, "mean_final_unsat": 12.42578125, "min_final_unsat": 5, "seconds": 0.689}
+{"point": "uf250-1065 (ratio 4.26)", "instance": "uf250-010", "method": "F", "fraction": 0.0, "mean_final_unsat": 11.896484375, "min_final_unsat": 5, "seconds": 55.545}
+{"point": "uf250-1065 (ratio 4.26)", "instance": "uf250-010", "method": "mu", "fraction": 0.0, "mean_final_unsat": 14.611328125, "min_final_unsat": 7, "seconds": 0.688}
+{"point": "uf250-1065 (ratio 4.26)", "instance": "uf250-010", "method": "fourier", "fraction": 0.0, "mean_final_unsat": 15.35546875, "min_final_unsat": 7, "seconds": 0.669}
+{"point": "uf250-1065 (ratio 4.26)", "instance": "uf250-0100", "method": "F", "fraction": 0.0, "mean_final_unsat": 10.984375, "min_final_unsat": 4, "seconds": 55.649}
+{"point": "uf250-1065 (ratio 4.26)", "instance": "uf250-0100", "method": "mu", "fraction": 0.0, "mean_final_unsat": 14.025390625, "min_final_unsat": 6, "seconds": 0.679}
+{"point": "uf250-1065 (ratio 4.26)", "instance": "uf250-0100", "method": "fourier", "fraction": 0.0, "mean_final_unsat": 14.931640625, "min_final_unsat": 6, "seconds": 0.671}
+{"point": "uf250-1065 (ratio 4.26)", "instance": "uf250-011", "method": "F", "fraction": 0.0, "mean_final_unsat": 12.111328125, "min_final_unsat": 6, "seconds": 55.249}
+{"point": "uf250-1065 (ratio 4.26)", "instance": "uf250-011", "method": "mu", "fraction": 0.0, "mean_final_unsat": 15.453125, "min_final_unsat": 8, "seconds": 0.674}
+{"point": "uf250-1065 (ratio 4.26)", "instance": "uf250-011", "method": "fourier", "fraction": 0.0, "mean_final_unsat": 16.458984375, "min_final_unsat": 7, "seconds": 0.67}
+{"point": "uf250-1065 (ratio 4.26)", "instance": "uf250-012", "method": "F", "fraction": 0.0, "mean_final_unsat": 11.0546875, "min_final_unsat": 5, "seconds": 55.722}
+{"point": "uf250-1065 (ratio 4.26)", "instance": "uf250-012", "method": "mu", "fraction": 0.0, "mean_final_unsat": 14.10546875, "min_final_unsat": 6, "seconds": 0.664}
+{"point": "uf250-1065 (ratio 4.26)", "instance": "uf250-012", "method": "fourier", "fraction": 0.0, "mean_final_unsat": 15.263671875, "min_final_unsat": 7, "seconds": 0.668}
+{"point": "uf250-1065 (ratio 4.26)", "instance": "uf250-013", "method": "F", "fraction": 0.0, "mean_final_unsat": 11.6171875, "min_final_unsat": 5, "seconds": 55.532}
+{"point": "uf250-1065 (ratio 4.26)", "instance": "uf250-013", "method": "mu", "fraction": 0.0, "mean_final_unsat": 15.15625, "min_final_unsat": 7, "seconds": 0.661}
+{"point": "uf250-1065 (ratio 4.26)", "instance": "uf250-013", "method": "fourier", "fraction": 0.0, "mean_final_unsat": 15.91015625, "min_final_unsat": 7, "seconds": 0.662}
+{"point": "uf250-1065 (ratio 4.26)", "instance": "uf250-014", "method": "F", "fraction": 0.0, "mean_final_unsat": 11.376953125, "min_final_unsat": 4, "seconds": 55.251}
+{"point": "uf250-1065 (ratio 4.26)", "instance": "uf250-014", "method": "mu", "fraction": 0.0, "mean_final_unsat": 13.958984375, "min_final_unsat": 7, "seconds": 0.662}
+{"point": "uf250-1065 (ratio 4.26)", "instance": "uf250-014", "method": "fourier", "fraction": 0.0, "mean_final_unsat": 15.041015625, "min_final_unsat": 7, "seconds": 0.666}
+{"point": "uf250-1065 (ratio 4.26)", "instance": "uf250-015", "method": "F", "fraction": 0.0, "mean_final_unsat": 9.482421875, "min_final_unsat": 3, "seconds": 56.193}
+{"point": "uf250-1065 (ratio 4.26)", "instance": "uf250-015", "method": "mu", "fraction": 0.0, "mean_final_unsat": 12.525390625, "min_final_unsat": 5, "seconds": 0.664}
+{"point": "uf250-1065 (ratio 4.26)", "instance": "uf250-015", "method": "fourier", "fraction": 0.0, "mean_final_unsat": 13.798828125, "min_final_unsat": 6, "seconds": 0.657}
+{"point": "uf250-1065 (ratio 4.26)", "instance": "uf250-016", "method": "F", "fraction": 0.0, "mean_final_unsat": 10.37890625, "min_final_unsat": 4, "seconds": 55.801}
+{"point": "uf250-1065 (ratio 4.26)", "instance": "uf250-016", "method": "mu", "fraction": 0.0, "mean_final_unsat": 12.732421875, "min_final_unsat": 4, "seconds": 0.658}
+{"point": "uf250-1065 (ratio 4.26)", "instance": "uf250-016", "method": "fourier", "fraction": 0.0, "mean_final_unsat": 13.828125, "min_final_unsat": 5, "seconds": 0.656}
+{"point": "uf250-1065 (ratio 4.26)", "instance": "uf250-017", "method": "F", "fraction": 0.0, "mean_final_unsat": 11.73046875, "min_final_unsat": 4, "seconds": 56.03}
+{"point": "uf250-1065 (ratio 4.26)", "instance": "uf250-017", "method": "mu", "fraction": 0.0, "mean_final_unsat": 14.525390625, "min_final_unsat": 7, "seconds": 0.658}
+{"point": "uf250-1065 (ratio 4.26)", "instance": "uf250-017", "method": "fourier", "fraction": 0.0, "mean_final_unsat": 15.666015625, "min_final_unsat": 6, "seconds": 0.656}
+{"point": "uf250-1065 (ratio 4.26)", "instance": "uf250-018", "method": "F", "fraction": 0.0, "mean_final_unsat": 10.265625, "min_final_unsat": 5, "seconds": 55.896}
+{"point": "uf250-1065 (ratio 4.26)", "instance": "uf250-018", "method": "mu", "fraction": 0.0, "mean_final_unsat": 13.427734375, "min_final_unsat": 6, "seconds": 0.657}
+{"point": "uf250-1065 (ratio 4.26)", "instance": "uf250-018", "method": "fourier", "fraction": 0.0, "mean_final_unsat": 14.404296875, "min_final_unsat": 7, "seconds": 0.658}
+{"point": "uf250-1065 (ratio 4.26)", "instance": "uf250-019", "method": "F", "fraction": 0.0, "mean_final_unsat": 8.86328125, "min_final_unsat": 3, "seconds": 55.375}
+{"point": "uf250-1065 (ratio 4.26)", "instance": "uf250-019", "method": "mu", "fraction": 0.0, "mean_final_unsat": 12.21484375, "min_final_unsat": 5, "seconds": 0.658}
+{"point": "uf250-1065 (ratio 4.26)", "instance": "uf250-019", "method": "fourier", "fraction": 0.0, "mean_final_unsat": 13.400390625, "min_final_unsat": 4, "seconds": 0.656}
+{"point": "uf250-1065 (ratio 4.26)", "instance": "uf250-02", "method": "F", "fraction": 0.0, "mean_final_unsat": 11.1484375, "min_final_unsat": 4, "seconds": 55.648}
+{"point": "uf250-1065 (ratio 4.26)", "instance": "uf250-02", "method": "mu", "fraction": 0.0, "mean_final_unsat": 14.24609375, "min_final_unsat": 7, "seconds": 0.657}
+{"point": "uf250-1065 (ratio 4.26)", "instance": "uf250-02", "method": "fourier", "fraction": 0.0, "mean_final_unsat": 15.607421875, "min_final_unsat": 7, "seconds": 0.655}
+{"point": "uf250-1065 (ratio 4.26)", "instance": "uf250-020", "method": "F", "fraction": 0.0, "mean_final_unsat": 11.353515625, "min_final_unsat": 5, "seconds": 55.611}
+{"point": "uf250-1065 (ratio 4.26)", "instance": "uf250-020", "method": "mu", "fraction": 0.0, "mean_final_unsat": 14.0390625, "min_final_unsat": 6, "seconds": 0.658}
+{"point": "uf250-1065 (ratio 4.26)", "instance": "uf250-020", "method": "fourier", "fraction": 0.0, "mean_final_unsat": 15.326171875, "min_final_unsat": 7, "seconds": 0.656}
+{"point": "uf250-1065 (ratio 4.26)", "instance": "uf250-021", "method": "F", "fraction": 0.0, "mean_final_unsat": 8.576171875, "min_final_unsat": 3, "seconds": 55.383}
+{"point": "uf250-1065 (ratio 4.26)", "instance": "uf250-021", "method": "mu", "fraction": 0.0, "mean_final_unsat": 10.9609375, "min_final_unsat": 4, "seconds": 0.663}
+{"point": "uf250-1065 (ratio 4.26)", "instance": "uf250-021", "method": "fourier", "fraction": 0.0, "mean_final_unsat": 11.998046875, "min_final_unsat": 4, "seconds": 0.664}
+{"point": "uf250-1065 (ratio 4.26)", "instance": "uf250-022", "method": "F", "fraction": 0.0, "mean_final_unsat": 11.03515625, "min_final_unsat": 2, "seconds": 55.617}
+{"point": "uf250-1065 (ratio 4.26)", "instance": "uf250-022", "method": "mu", "fraction": 0.0, "mean_final_unsat": 13.63671875, "min_final_unsat": 4, "seconds": 0.663}
+{"point": "uf250-1065 (ratio 4.26)", "instance": "uf250-022", "method": "fourier", "fraction": 0.0, "mean_final_unsat": 14.537109375, "min_final_unsat": 5, "seconds": 0.659}
+{"point": "uf250-1065 (ratio 4.26)", "instance": "uf250-023", "method": "F", "fraction": 0.0, "mean_final_unsat": 11.5390625, "min_final_unsat": 4, "seconds": 55.166}
+{"point": "uf250-1065 (ratio 4.26)", "instance": "uf250-023", "method": "mu", "fraction": 0.0, "mean_final_unsat": 14.140625, "min_final_unsat": 6, "seconds": 0.657}
+{"point": "uf250-1065 (ratio 4.26)", "instance": "uf250-023", "method": "fourier", "fraction": 0.0, "mean_final_unsat": 14.818359375, "min_final_unsat": 6, "seconds": 0.656}
+{"point": "uf250-1065 (ratio 4.26)", "instance": "uf250-024", "method": "F", "fraction": 0.0, "mean_final_unsat": 12.4453125, "min_final_unsat": 5, "seconds": 55.255}
+{"point": "uf250-1065 (ratio 4.26)", "instance": "uf250-024", "method": "mu", "fraction": 0.0, "mean_final_unsat": 15.193359375, "min_final_unsat": 7, "seconds": 0.657}
+{"point": "uf250-1065 (ratio 4.26)", "instance": "uf250-024", "method": "fourier", "fraction": 0.0, "mean_final_unsat": 16.037109375, "min_final_unsat": 8, "seconds": 0.656}
+{"point": "uf250-1065 (ratio 4.26)", "instance": "uf250-025", "method": "F", "fraction": 0.0, "mean_final_unsat": 9.205078125, "min_final_unsat": 3, "seconds": 55.801}
+{"point": "uf250-1065 (ratio 4.26)", "instance": "uf250-025", "method": "mu", "fraction": 0.0, "mean_final_unsat": 12.046875, "min_final_unsat": 5, "seconds": 0.658}
+{"point": "uf250-1065 (ratio 4.26)", "instance": "uf250-025", "method": "fourier", "fraction": 0.0, "mean_final_unsat": 13.330078125, "min_final_unsat": 7, "seconds": 0.656}
+{"point": "uf250-1065 (ratio 4.26)", "instance": "uf250-026", "method": "F", "fraction": 0.0, "mean_final_unsat": 10.81640625, "min_final_unsat": 3, "seconds": 55.985}
+{"point": "uf250-1065 (ratio 4.26)", "instance": "uf250-026", "method": "mu", "fraction": 0.0, "mean_final_unsat": 13.935546875, "min_final_unsat": 5, "seconds": 0.657}
+{"point": "uf250-1065 (ratio 4.26)", "instance": "uf250-026", "method": "fourier", "fraction": 0.0, "mean_final_unsat": 14.75390625, "min_final_unsat": 7, "seconds": 0.655}
