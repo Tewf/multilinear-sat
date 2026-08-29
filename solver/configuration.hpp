@@ -8,6 +8,7 @@ namespace multilinear_sat {
 enum class BackendKind { Cpu, Cuda, Auto };
 enum class SeedKind { Uniform, AllFalse, Ascent, Tilted };    // where each run's walk starts
 enum class WalkRule { Skc, ProbSat, Schoening, Metropolis };  // how the walk picks a variable
+enum class RestartSchedule { Luby, Fixed };                   // run k's budget: times luby(k), or the same every run
 
 struct StepParameters {
     float step_size = 0.1f;      // gradient step on the cube
@@ -54,6 +55,7 @@ struct SolverConfiguration {
     SeedKind seed_kind = SeedKind::Ascent;
     int seed_steps = 200;             // gradient iterations of a run's seed, times luby(run); 0 = a uniform start
     int64_t polish_flips = 0;         // walk flips per slot of a run's polish, times luby(run); 0 = no walk
+    RestartSchedule restart_schedule = RestartSchedule::Luby;   // fixed = every run at the unit budget (a fixed cutoff)
     int stall_patience = 0;           // resample a slot after this many non-improving iterations; 0 = off
     float rigorous_fraction = 0.0f;   // share of the batch walking Schoening's rule from uniform starts for 3n flips
     double prior_satisfiable = 0.5;   // pi, the prior P(SAT) of the instance's family

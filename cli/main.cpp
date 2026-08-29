@@ -34,13 +34,15 @@ static void print_json(const SolveResult& r, const SolverConfiguration& c, bool 
                 "\"flips\": %lld, \"best_violated\": %d, \"elapsed_seconds\": %.3f, \"seed_seconds\": %.3f, \"polish_seconds\": %.3f, "
                 "\"polish_successes\": %lld, \"heuristic_failures\": %lld, \"rigorous_failures\": %lld, "
                 "\"posterior_beta\": %.6g, \"posterior_rigorous\": %.6g, \"batch_size\": %d, \"seed\": %llu, "
-                "\"seed_kind\": \"%s\", \"seed_steps\": %d, \"polish_flips\": %lld, \"walk_rule\": \"%s\", \"rigorous_fraction\": %g}\n",
+                "\"seed_kind\": \"%s\", \"seed_steps\": %d, \"polish_flips\": %lld, \"walk_rule\": \"%s\", \"rigorous_fraction\": %g, "
+                "\"restart_schedule\": \"%s\"}\n",
                 satisfiable ? "SATISFIABLE" : "UNKNOWN", r.backend_name.c_str(), static_cast<long long>(r.iterations),
                 static_cast<long long>(r.restarts), static_cast<long long>(r.runs), static_cast<long long>(r.flips), r.best_violated,
                 r.elapsed_seconds, r.seed_seconds, r.polish_seconds, static_cast<long long>(r.polish_successes),
                 static_cast<long long>(r.heuristic_failures), static_cast<long long>(r.rigorous_failures), r.posterior_beta,
                 r.posterior_rigorous, c.batch_size, static_cast<unsigned long long>(c.seed), seed_kind_name(c.seed_kind), c.seed_steps,
-                static_cast<long long>(c.polish_flips), walk_rule_name(c.walk.walk_rule), static_cast<double>(c.rigorous_fraction));
+                static_cast<long long>(c.polish_flips), walk_rule_name(c.walk.walk_rule), static_cast<double>(c.rigorous_fraction),
+                c.restart_schedule == RestartSchedule::Luby ? "luby" : "fixed");
 }
 
 int main(int argc, char** argv) {

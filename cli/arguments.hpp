@@ -20,7 +20,7 @@ inline const char* usage() {
     return "usage: multilinear-sat <file.cnf|file.xnf> [--time-limit S] [--iteration-limit N] [--run-limit N] [--seed N]\n"
            "         [--batch-size B] [--backend cpu|cuda|auto] [--step-size X] [--momentum X] [--kick-sigma X]\n"
            "         [--kick-decay X] [--focused-kick 0|1] [--seed-kind uniform|all-false|ascent|tilted] [--seed-steps N]\n"
-           "         [--polish-flips N] [--stall-patience N] [--walk-rule skc|probsat|schoening|metropolis]\n"
+           "         [--polish-flips N] [--restart-schedule luby|fixed] [--stall-patience N] [--walk-rule skc|probsat|schoening|metropolis]\n"
            "         [--walk-noise X] [--probsat-cb X] [--probsat-eps X] [--metropolis-beta X] [--walk-flips-per-launch N]\n"
            "         [--rigorous-fraction X] [--prior-satisfiable X] [--beta-prior-a X] [--beta-prior-b X]\n"
            "         [--tilted-groups N] [--tilted-rungs-per-variable X] [--tilted-learning-rate X]\n"
@@ -43,6 +43,12 @@ inline WalkRule parse_walk_rule(const std::string& rule) {
     if (rule == "schoening") return WalkRule::Schoening;
     if (rule == "metropolis") return WalkRule::Metropolis;
     throw std::invalid_argument("unknown walk rule " + rule + " (skc, probsat, schoening or metropolis)");
+}
+
+inline RestartSchedule parse_restart_schedule(const std::string& schedule) {
+    if (schedule == "luby") return RestartSchedule::Luby;
+    if (schedule == "fixed") return RestartSchedule::Fixed;
+    throw std::invalid_argument("unknown restart schedule " + schedule + " (luby or fixed)");
 }
 
 inline BackendKind parse_backend(const std::string& kind) {
@@ -74,6 +80,7 @@ inline Arguments parse_arguments(int argc, char** argv) {
         else if (flag == "--seed-kind") c.seed_kind = parse_seed_kind(value(i));
         else if (flag == "--seed-steps" || flag == "--luby-unit") c.seed_steps = std::stoi(value(i));
         else if (flag == "--polish-flips") c.polish_flips = std::stoll(value(i));
+        else if (flag == "--restart-schedule") c.restart_schedule = parse_restart_schedule(value(i));
         else if (flag == "--stall-patience") c.stall_patience = std::stoi(value(i));
         else if (flag == "--walk-rule") c.walk.walk_rule = parse_walk_rule(value(i));
         else if (flag == "--walk-noise") c.walk.walk_noise = std::stof(value(i));

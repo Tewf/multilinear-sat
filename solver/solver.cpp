@@ -47,11 +47,14 @@ static void validate(const SolverConfiguration& c, const Formula& formula) {
     if (formula.max_clause_length() > 255) throw std::invalid_argument("the walk counts true literals in a byte: no row may exceed 255 literals");
 }
 
-static void print_run(const RunState& state, int64_t run) {
+// Cumulative counts after each run, so a reader can difference consecutive lines into per-run outcomes.
+static void print_run(const RunState& state, int64_t run, int64_t scale) {
     const SolveResult& r = state.result;
-    std::fprintf(stderr, "c run %lld elapsed %.3f best %d restarts %lld heuristic_failures %lld rigorous_failures %lld posterior_beta %.6f posterior_rigorous %.6f\n",
+    std::fprintf(stderr, "c run %lld elapsed %.3f best %d restarts %lld heuristic_failures %lld rigorous_failures %lld posterior_beta %.6f posterior_rigorous %.6f"
+                         " scale %lld polish_successes %lld flips %lld seed_seconds %.4f polish_seconds %.4f\n",
                  static_cast<long long>(run), state.elapsed(), r.best_violated, static_cast<long long>(r.restarts),
-                 static_cast<long long>(r.heuristic_failures), static_cast<long long>(r.rigorous_failures), r.posterior_beta, r.posterior_rigorous);
+                 static_cast<long long>(r.heuristic_failures), static_cast<long long>(r.rigorous_failures), r.posterior_beta, r.posterior_rigorous,
+                 static_cast<long long>(scale), static_cast<long long>(r.polish_successes), static_cast<long long>(r.flips), r.seed_seconds, r.polish_seconds);
 }
 
 static void update_posteriors(RunState& state) {
@@ -66,14 +69,14 @@ SolveResult solve_with(const Formula& formula, const SolverConfiguration& config
     backend.initialise(formula, configuration.batch_size, configuration.seed);
     update_posteriors(state);
     for (int64_t run = 1; !state.stop; ++run) {
-        const int64_t scale = luby(run);
+        const int64_t scale = configuration.restart_schedule == RestartSchedule::Luby ? luby(run) : 1;
         if (configuration.seed_kind == SeedKind::Tilted) run_tilted_seed_phase(state, configuration.seed_steps * scale);
         else run_seed_phase(state, configuration.seed_steps * scale);
         run_polish_phase(state, configuration.polish_flips * scale);
         if (state.stop) break;
         ++state.result.runs;
         update_posteriors(state);
-        if (configuration.verbose) print_run(state, run);
+        if (configuration.verbose) print_run(state, run, scale);
         if (configuration.run_limit > 0 && run >= configuration.run_limit) break;
         backend.restart_slots(every_slot(configuration.batch_size), ++state.epoch);
         state.result.restarts += configuration.batch_size;

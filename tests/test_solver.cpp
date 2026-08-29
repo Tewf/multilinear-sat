@@ -112,3 +112,29 @@ TEST_CASE("with a run limit the batch completes its runs and reports every polis
     const int64_t walked = result.flips;
     CHECK(walked <= 2 * (24 * 300 + 8 * 150));
 }
+
+TEST_CASE("the fixed restart schedule walks the unit budget every run where Luby scales it") {
+    // Every clause over three variables: unsatisfiable, so no slot stops early and the flip
+    // count is exactly runs x budget x batch under either schedule.
+    std::vector<std::vector<int32_t>> clauses;
+    for (int mask = 0; mask < 8; ++mask) clauses.push_back({(mask & 1) ? 1 : -1, (mask & 2) ? 2 : -2, (mask & 4) ? 3 : -3});
+    const Formula formula = make_formula(3, clauses, {});
+    SolverConfiguration configuration = cpu_configuration();
+    configuration.batch_size = 8;
+    configuration.seed_kind = SeedKind::Uniform;
+    configuration.polish_flips = 96;
+    configuration.walk.walk_flips_per_launch = 32;
+    configuration.run_limit = 3;
+    SUBCASE("luby: 1, 1, 2 units") {
+        configuration.restart_schedule = RestartSchedule::Luby;
+        SolveResult result = solve(formula, configuration);
+        CHECK(result.runs == 3);
+        CHECK(result.flips == 4 * 96 * 8);
+    }
+    SUBCASE("fixed: one unit every run") {
+        configuration.restart_schedule = RestartSchedule::Fixed;
+        SolveResult result = solve(formula, configuration);
+        CHECK(result.runs == 3);
+        CHECK(result.flips == 3 * 96 * 8);
+    }
+}
