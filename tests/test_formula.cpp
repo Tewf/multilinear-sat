@@ -82,4 +82,12 @@ TEST_CASE("XNF x lines are odd parities, counted in the header with the clauses 
     CHECK_FALSE(satisfies(f, {1, 1, 1}));
     CHECK_THROWS_WITH_AS(parse("p xnf 2 1\nx 1 2\n"), doctest::Contains("terminating 0"), std::runtime_error);
     CHECK_THROWS_WITH_AS(parse("p xnf 2 2\nx 1 2 0\n"), doctest::Contains("declares 2"), std::runtime_error);
+    // The tensor-rank toolkit glues the first literal to the marker and keeps a cnf header.
+    Formula glued = parse("p cnf 3 3\n1 2 0\nx1 -2 3 0\nx-3 0\n");
+    CHECK(glued.parity_count() == 2);
+    CHECK(glued.clause_length(1) == 3);
+    CHECK(glued.literals[glued.clause_offsets[1]] == 1);
+    CHECK(glued.literals[glued.clause_offsets[2]] == -3);
+    CHECK(count_violated(glued, {-1, 1, -1}) == 1);   // clause by x2; no literal of x1 -2 3 is true: even, violated; -3 true
+    CHECK(count_violated(glued, {1, 1, -1}) == 0);    // literal 1 true alone in the first parity: odd; -3 true
 }

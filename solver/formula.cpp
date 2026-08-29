@@ -96,10 +96,9 @@ Formula parse_dimacs(std::istream& input) {
             continue;
         }
         if (declared_rows < 0) throw std::runtime_error("clause line before the p cnf header: " + line);
-        if (line[0] == 'x') {
-            std::string x;
-            tokens >> x;
-            parities.push_back(parse_parity_line(tokens, line));
+        if (line[0] == 'x') {   // "x 1 -2 0" (cnf2xnf) or "x1 -2 0" (the tensor-rank toolkit's writer): odd parity either way
+            std::istringstream rest(line.substr(1));
+            parities.push_back(parse_parity_line(rest, line));
             continue;
         }
         int32_t literal;
