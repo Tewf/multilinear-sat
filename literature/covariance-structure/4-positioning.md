@@ -22,8 +22,10 @@ Walsh decomposition of a k-SAT instance already exists in the literature
 
 The identity I(x or y or z) + I(x or y or not z) = I(x or y) is resolution on z whose resolvent
 subsumes both antecedents, which subsumption and bounded variable elimination already exploit
-[een2005satelite, biere2021preprocessing]. So this half of ker Sigma buys nothing a preprocessor
-does not already remove, and the corollary that all eight sign patterns on a triple sum to 1
+[een2005satelite, biere2021preprocessing]. The identity is not a null vector of Sigma, because I(x or y) is not a clause of the formula:
+measured on 2026-08-29, uf50-01 carries exactly one such pair and Sigma(p) has full rank m at
+every p tested (maestro's correction to this review). As a substitution it buys nothing a
+preprocessor does not already remove, and the corollary that all eight sign patterns on a triple sum to 1
 describes a formula any solver refutes as soon as it branches on those three variables.
 
 The brief's expectation is wrong on the facts. It says: "expect ker Sigma = the merge space, and

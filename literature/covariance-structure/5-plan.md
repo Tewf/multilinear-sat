@@ -39,10 +39,12 @@ non-constant Walsh coefficient matrix of the I_j (m rows, at most seven non-zero
   phrasings, so the baseline has to be a re-implementation from the paper, cross-checked
   against the brute-force enumeration already in `gaussian_surrogate/tests/`.
 - Measured by: agreement with brute force at n <= 10 to machine precision, and the rank
-  deficiency per family. The prediction from `4-positioning.md` is a deficiency of about 0.45
-  per uf50 instance falling to 0.083 on uf250. If the measured deficiency exceeds that, the
-  merge space is not the whole kernel and the claim-1 conjecture is wrong, which is the one
-  genuinely new thing this branch could find.
+  deficiency per family. Measured on 2026-08-29 before this review landed (maestro,
+  `2026-08-29_covariance-reduction/notes.md`): the deficiency is 0 on uf50-01,
+  uf50-02, uf100-01, uf250-01 and on two toolkit GF(2) encodings, at p = 0 and at random p,
+  with the Walsh rank cross-checked exactly mod 2^31 - 1; a merge pair present on uf50-01
+  contributes no null vector, since its resolvent is not in the formula. The diagnostic is
+  done and the exact-reduction question is closed.
 
 **Step 2, the alignment question, only if step 1 is clean.** Compare the k-way clustering from
 the leading eigenvectors of Sigma(0) with the community partition of the clause-clause sharing
@@ -74,8 +76,8 @@ removal or tying must be run as a preprocessor and compared to the real one.
 ## What to write regardless of the outcome
 
 `gaussian_surrogate/covariance/method.md` should carry, corrected: that the kernel is
-p-independent for elementary reasons and not a result; that the merge space is what
-preprocessing already removes and is Theta(alpha^2 / n) in size; that the non-negative
+p-independent for elementary reasons and not a result; that merge pairs are not null vectors of
+Sigma, are what preprocessing already removes, and number Theta(alpha^2 / n); that the non-negative
 certificate is empty for random CNF by a degree lower bound; that the Jacobian condition is
 duplication and not equivalence; and that Sigma is the zeroth-order Plefka susceptibility
 [plefka1982], whose systematic correction is loop-corrected linear response

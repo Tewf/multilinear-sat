@@ -10,8 +10,10 @@ warm-starting a search or detecting a backbone?
 1. Nobody has taken the spectrum of a clause-indicator covariance under a product measure, for
    any purpose. Not found on nine queries across three services and four `gh` phrasings.
 2. That is not an opening. Every reduction the covariance can express, the field already does
-   better by logic: the exact kernel is resolution plus subsumption, which every preprocessor
-   removes, and its size in random 3-SAT is Theta(alpha^2 / n), about 0.45 clauses on uf50.
+   better by logic: the one identity the kernel could hold, a resolution merge, is not even a null
+   vector of Sigma (its resolvent is not a clause of the formula; measured 2026-08-29, uf50-01
+   carries one merge pair and Sigma has full rank), and as a substitution it is what every
+   preprocessor removes, at Theta(alpha^2 / n) per instance, about 0.45 clauses on uf50.
 3. A non-negative null vector is a Nullstellensatz certificate with constant multipliers. Random
    CNFs need degree Omega(n), so it provably does not exist for them.
 4. The spectral refutation line does exist, and its matrices are n by n and indexed by
