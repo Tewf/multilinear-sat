@@ -136,9 +136,9 @@ def provenance_lines(records):
     if not stamps:
         return ["- no provenance block yet"]
     commits = sorted({s["commit"] for s in stamps})
-    binaries = sorted({s["binary_sha256"] for s in stamps})
-    return [f"- {len(stamps)} stages from {stamps[0]['timestamp']} to {stamps[-1]['timestamp']}; commit(s) {', '.join(commits)}; "
-            f"binary sha256 {', '.join(binaries)}; GPU at the first stage: {stamps[0]['gpu']}.",
+    binaries = sorted({f"{Path(s['binary']).name} (sha256 {s['binary_sha256']})" for s in stamps})
+    return [f"- {len(stamps)} stages from {stamps[0]['timestamp']} to {stamps[-1]['timestamp']}; frozen binary {', '.join(binaries)}, "
+            f"named by the commit it was built from; HEAD at the stages: {', '.join(commits)}; GPU at the first stage: {stamps[0]['gpu']}.",
             f"- Every run is in arms_results.jsonl with its command, seed, timeline, package temperature before and after, and the gate readings of its stage."]
 
 
@@ -200,8 +200,9 @@ def write_rejected(records, table, rejected):
     if t:
         n, tilted_ms, uniform_ms = t
         lines += ["## tilted seed (rejected on the sampling-walk records, not run here)",
-                  f"- On the {n} uf250-1065 runs the tilted arm completed in benchmark/seed_comparison.jsonl its expected time is "
-                  f"{tilted_ms:.1f} ms against {uniform_ms:.2f} ms for a uniform start on the same (instance, seed) runs, {tilted_ms / uniform_ms:.0f}x; "
+                  f"- On the {n} uf250-1065 runs the tilted arm completed in benchmark/seed_comparison.jsonl, the mean over runs of each run's "
+                  f"expected time is {tilted_ms:.1f} ms against {uniform_ms:.2f} ms for a uniform start on the same (instance, seed) runs, "
+                  f"{tilted_ms / uniform_ms:.0f}x (the record's table, pooling the runs, says 94x); "
                   "the brief admits it only within 2x of uniform somewhere, so it is not an arm.", ""]
     (HERE / "rejected.md").write_text("\n".join(lines) + "\n")
 
