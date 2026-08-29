@@ -19,9 +19,12 @@ with S_j = 1 - U_j and S_jk = 1 - U_j - U_k + U_jk = P(both satisfied).
 were independent, which is also the top coefficient of the generating function in
 [origin.md](origin.md) and the author's "log-sum" salvage direction. It needs no product tree.
 
-`pair` is the pair (Kirkwood, or Bethe) approximation of P(all satisfied): the joint law of the
-indicators is approximated by the product of the one-clause laws times a correction factor
-S_jk / (S_j S_k) for each dependent pair. It is exact for a single pair and not on a chain of
+`pair` is the Kirkwood pair closure of P(all satisfied), the cluster expansion of
+[pair-expansion.md](pair-expansion.md) truncated at pairs (its published form is the cluster
+expansion of the polymer gas, Bissacot, Fernández, Procacci and Scoppola 2011; the Bethe
+functional is a different object): the joint law of the indicators is approximated by the
+product of the one-clause laws times a correction factor S_jk / (S_j S_k) for each dependent
+pair. It is exact for a single pair and not on a chain of
 three clauses (0.3 % off at p = 0, [pair-expansion.md](pair-expansion.md)); its error is third
 order in the U's, its first-order expansion is `logsum`, and its second-order term is the same covariance
 U_jk - U_j U_k that sigma^2 uses, but as an additive log-probability with a bounded, Poisson-
@@ -33,8 +36,11 @@ variance (point 2 of [objective.md](objective.md)).
 
 The Poisson-binomial law of the satisfied count under clause independence is computable in
 O(m log^2 m) by inverting G(z). Comparing its P[N = m] (which is `logsum`, so the inversion
-is only needed for the rest of the law) with the Gaussian F and with the truth by
-enumeration on small instances would put a number on what the normal approximation costs.
+is only needed for the rest of the law) with the Gaussian F and with the truth would put a
+number on what the normal approximation costs. The truth is not limited to enumeration: under
+the product measure P(all satisfied) is the weighted model count of the formula with literal
+weights (1 ± p_i)/2 (Chavira and Darwiche 2008), which a public counter (Ganak) computes on
+uf50-218 and probably uf100-430; see `../../literature/gaussian-like-objectives/5-plan.md`.
 
 ## A correction to one proposed direction
 

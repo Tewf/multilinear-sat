@@ -57,7 +57,10 @@ What did not survive, as four caveats:
    polynomial evaluated at p.
 
 Two salvage directions were named: the log-sum objective sum_j log f_j(p), and correlated
-parameterisations where sampling earns its place. The follow-up dropped the transform step
+parameterisations where sampling earns its place. The second is not a direction but a field:
+Bernoulli parameters sampled and updated by gradient is the cross-entropy method (Rubinstein
+1999), used for counting satisfying assignments since 2007, and in neural form variational
+annealing; see `../../literature/gaussian-like-objectives/`. The follow-up dropped the transform step
 altogether (the clause polynomial *is* its Fourier expansion), took the sum of clause
 indicators as the object, and used the sparsity of its dependency graph to write its mean and
 variance in closed form and justify a Gaussian surrogate by the central limit theorem for

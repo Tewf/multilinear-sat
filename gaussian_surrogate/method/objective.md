@@ -12,7 +12,11 @@ P(x_i = -s) = (1 - s p_i)/2, and the literals of a clause are distinct variables
     U_j(p) = P(clause j unsatisfied) = (1/8) prod_{(i,s) in C_j} (1 - s p_i).
 
 This is the expectation of the indicator (1/8) prod (1 - s x_i), which is multilinear, so the
-expectation is the polynomial at p. FourierSAT's clause polynomial is 1 - U_j.
+expectation is the polynomial at p. FourierSAT's clause polynomial is 1 - U_j. The target of
+the whole construction, P(all clauses satisfied) under this measure, is the weighted model
+count of the formula with literal weights (1 ± p_i)/2 (Chavira and Darwiche 2008); its exact
+gradient ascent is known as the semantic loss (Xu, Zhang, Friedman, Liang and Van den Broeck
+2018). Everything below approximates that count from its first two moments.
 
 ## Two clauses
 
@@ -70,8 +74,10 @@ Each point below is a property of the formula, not a measurement.
 
 1. F is not multilinear (Phi of a ratio of two multilinear polynomials, one under a square
    root), so the theorem that a multilinear polynomial attains its maximum at a vertex does
-   not apply. Interior local maxima are possible in principle; whether they occur on random
-   3-SAT is not known here.
+   not apply, and neither does the entry-wise concavity condition under which a low relaxed
+   loss certifies the rounded point (Wang, Yan, Li, Li 2022, arXiv:2207.05984), which mu, being
+   entry-wise affine, satisfies. Interior local maxima are possible in principle; whether they
+   occur on random 3-SAT is not known here. Every claim for F is empirical by construction.
 2. With z = (1/2 - sum U_j)/sigma, dF/dsigma = -phi(z) z / sigma, positive while z < 0. Until
    sum_j U_j falls below 1/2 the ascent rewards a larger variance: for a fixed mean, more
    mass at N = 0 needs more spread, which means making clause failures co-occur. The

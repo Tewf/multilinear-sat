@@ -36,3 +36,20 @@ public.
 - R. O'Donnell. Analysis of Boolean Functions. Cambridge University Press, 2014.
 - D. P. Williamson, D. B. Shmoys. The Design of Approximation Algorithms. Cambridge University
   Press, 2011, chapter 5. (a multilinear polynomial attains its maximum at a vertex)
+- M. Chavira, A. Darwiche. On probabilistic inference by weighted model counting. Artificial
+  Intelligence 172, 2008. (P(all satisfied) under the product measure is a weighted model count)
+- J. Xu, Z. Zhang, T. Friedman, Y. Liang, G. Van den Broeck. A semantic loss function for deep
+  learning with symbolic knowledge. ICML 2018. arXiv:1711.11157. (the exact objective, descended)
+- R. Y. Rubinstein. The cross-entropy method for combinatorial and continuous optimization.
+  Methodology and Computing in Applied Probability 1, 1999. (the sampled skeleton)
+- H. Wang, N. Yan, C. Li, P. Li. Unsupervised learning for combinatorial optimization with
+  principled objective relaxation. NeurIPS 2022. arXiv:2207.05984. (entry-wise concavity)
+- R. Bissacot, R. Fernández, A. Procacci, B. Scoppola. An improvement of the Lovász local lemma
+  via cluster expansion. Combinatorics, Probability and Computing 20, 2011. arXiv:0910.1824.
+  (the pair closure's published form)
+- H. Jonsson, B. Söderberg. An information-based neural approach to constraint satisfaction.
+  Neural Computation 13, 2001. arXiv:cond-mat/0105319. (a k-SAT annealer whose free energy is
+  deliberately not the mean-field one; the nearest ancestor)
+
+The full, verified bibliography of the 2026-08-29 review is
+`../../literature/gaussian-like-objectives/references.bib`.
