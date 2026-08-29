@@ -1,6 +1,6 @@
 # The front: the arms no other arm dominates, with their numbers
 
-- 17 stages from 2026-08-29T20:58:20 to 2026-08-29T23:15:59; frozen binary multilinear-sat-4b98f0a2ea-20260829-205205 (sha256 fd00a7139329af3a), multilinear-sat-67c51ca66a-20260829-205205 (sha256 fd00a7139329af3a), multilinear-sat-f15c737875-20260829-205205 (sha256 fd00a7139329af3a), named by the commit it was built from; HEAD at the stages: 10ec02cb75, 339ee7f1d0, 4b98f0a2ea, 672b5acee5, 674ca584d7, 9092e76858, dc063e6e07, f15c737875; GPU at the first stage: NVIDIA GeForce RTX 4060 Laptop GPU, 12 MiB, 0 %.
+- 18 stages from 2026-08-29T20:58:20 to 2026-08-29T23:30:08; frozen binary multilinear-sat-4b98f0a2ea-20260829-205205 (sha256 fd00a7139329af3a), multilinear-sat-67c51ca66a-20260829-205205 (sha256 fd00a7139329af3a), multilinear-sat-8124137c0d-20260829-205205 (sha256 fd00a7139329af3a), multilinear-sat-f15c737875-20260829-205205 (sha256 fd00a7139329af3a), named by the commit it was built from; HEAD at the stages: 10ec02cb75, 339ee7f1d0, 4b98f0a2ea, 672b5acee5, 674ca584d7, 7c32b6f259, 9092e76858, dc063e6e07, f15c737875; GPU at the first stage: NVIDIA GeForce RTX 4060 Laptop GPU, 12 MiB, 0 %.
 - Every run is in arms_results.jsonl with its command, seed, timeline, package temperature before and after, and the gate readings of its stage.
 - Rule: [protocol.md](protocol.md); two cells are distinguished only when their ratio exceeds the 13% thermal band and two standard errors of the log ratio under Poisson success counts, exp(2 sqrt(1/k_a + 1/k_b)); an arm dominates only arms it was measured beside on every one of their families.
 
@@ -11,6 +11,7 @@
 - **ascent_30** (seed=ascent_30, rule=probsat, batch=4096, schedule=luby, polish_per_variable=10, rigorous=0.0), measured on uf250-1065, n1000-r4.20, n1000-r4.26
 - **batch_16384** (seed=uniform, rule=probsat, batch=16384, schedule=luby, polish_per_variable=10, rigorous=0.0), measured on uf250-1065, n1000-r4.20, n1000-r4.26
 - **polish_100n** (seed=uniform, rule=probsat, batch=4096, schedule=luby, polish_per_variable=100, rigorous=0.0), measured on n1000-r4.20
+- **batch_16384+polish_20n** (seed=uniform, rule=probsat, batch=16384, schedule=luby, polish_per_variable=20, rigorous=0.0), measured on uf250-1065
 
 ## Per family: every arm on the family's front, then probSAT beside it
 
@@ -38,7 +39,7 @@
 
 | family | arm | runs | satisfied slot-runs | p | cost / restart (ms) | expected time (ms) | flips per solution | median first solution (ms) | package C |
 |---|---|---|---|---|---|---|---|---|---|
-| uf250-1065 | batch_16384 | 40 on 20 instances | 1051342 | 0.2292 | 0.0268 | 0.117 | 15912 | 372.5 | 59 to 79 |
+| uf250-1065 | batch_16384+polish_20n | 40 on 20 instances | 1755650 | 0.3827 | 0.0460 | 0.120 | 16452 | 609.0 | 54 to 96 |
 
 | family | arm | runs | | | wall ms per solution | flips per solution | |
 |---|---|---|---|---|---|---|---|

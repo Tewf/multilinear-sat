@@ -1,6 +1,6 @@
 # The rejected arms, each with the arm that dominates it and the numbers
 
-- 17 stages from 2026-08-29T20:58:20 to 2026-08-29T23:15:59; frozen binary multilinear-sat-4b98f0a2ea-20260829-205205 (sha256 fd00a7139329af3a), multilinear-sat-67c51ca66a-20260829-205205 (sha256 fd00a7139329af3a), multilinear-sat-f15c737875-20260829-205205 (sha256 fd00a7139329af3a), named by the commit it was built from; HEAD at the stages: 10ec02cb75, 339ee7f1d0, 4b98f0a2ea, 672b5acee5, 674ca584d7, 9092e76858, dc063e6e07, f15c737875; GPU at the first stage: NVIDIA GeForce RTX 4060 Laptop GPU, 12 MiB, 0 %.
+- 18 stages from 2026-08-29T20:58:20 to 2026-08-29T23:30:08; frozen binary multilinear-sat-4b98f0a2ea-20260829-205205 (sha256 fd00a7139329af3a), multilinear-sat-67c51ca66a-20260829-205205 (sha256 fd00a7139329af3a), multilinear-sat-8124137c0d-20260829-205205 (sha256 fd00a7139329af3a), multilinear-sat-f15c737875-20260829-205205 (sha256 fd00a7139329af3a), named by the commit it was built from; HEAD at the stages: 10ec02cb75, 339ee7f1d0, 4b98f0a2ea, 672b5acee5, 674ca584d7, 7c32b6f259, 9092e76858, dc063e6e07, f15c737875; GPU at the first stage: NVIDIA GeForce RTX 4060 Laptop GPU, 12 MiB, 0 %.
 - Every run is in arms_results.jsonl with its command, seed, timeline, package temperature before and after, and the gate readings of its stage.
 - An arm is dominated when another arm, measured on every family it was measured on, is at least as good on expected time on each and strictly better on one, or not distinguished on expected time anywhere and better on p on one; distinguished means beyond the 13% thermal band and beyond two standard errors of the log ratio under Poisson success counts (the satisfied slot-runs column). Nothing is deleted: every rejected arm keeps its cells here beside its dominator's.
 
@@ -119,6 +119,7 @@
 - dominated by **ascent_30** on uf250-1065
 - dominated by **batch_16384** on uf250-1065
 - dominated by **polish_20n** on uf250-1065
+- dominated by **batch_16384+polish_20n** on uf250-1065
 
 | family | arm | runs | satisfied slot-runs | p | cost / restart (ms) | expected time (ms) | flips per solution | median first solution (ms) | package C |
 |---|---|---|---|---|---|---|---|---|---|
@@ -129,6 +130,7 @@
 | uf250-1065 | ascent_30 | 40 on 20 instances | 291583 | 0.2542 | 0.0596 | 0.235 | 13951 | 221.0 | 57 to 88 |
 | uf250-1065 | batch_16384 | 40 on 20 instances | 1051342 | 0.2292 | 0.0268 | 0.117 | 15912 | 372.5 | 59 to 79 |
 | uf250-1065 | polish_20n | 40 on 20 instances | 439146 | 0.3829 | 0.0946 | 0.247 | 16437 | 324.5 | 58 to 61 |
+| uf250-1065 | batch_16384+polish_20n | 40 on 20 instances | 1755650 | 0.3827 | 0.0460 | 0.120 | 16452 | 609.0 | 54 to 96 |
 
 ## no_restart (seed=uniform, rule=probsat, batch=4096, schedule=none, polish_per_variable=10, rigorous=0.0)
 - dominated by **base** on uf250-1065
@@ -141,6 +143,7 @@
 - dominated by **fixed_cutoff** on uf250-1065
 - dominated by **polish_5n** on uf250-1065
 - dominated by **polish_20n** on uf250-1065
+- dominated by **batch_16384+polish_20n** on uf250-1065
 
 | family | arm | runs | satisfied slot-runs | p | cost / restart (ms) | expected time (ms) | flips per solution | median first solution (ms) | package C |
 |---|---|---|---|---|---|---|---|---|---|
@@ -155,6 +158,7 @@
 | uf250-1065 | fixed_cutoff | 40 on 20 instances | 279320 | 0.1421 | 0.0319 | 0.224 | 16701 | 197.0 | 55 to 62 |
 | uf250-1065 | polish_5n | 40 on 20 instances | 121048 | 0.1055 | 0.0271 | 0.257 | 18959 | 132.0 | 57 to 60 |
 | uf250-1065 | polish_20n | 40 on 20 instances | 439146 | 0.3829 | 0.0946 | 0.247 | 16437 | 324.5 | 58 to 61 |
+| uf250-1065 | batch_16384+polish_20n | 40 on 20 instances | 1755650 | 0.3827 | 0.0460 | 0.120 | 16452 | 609.0 | 54 to 96 |
 
 ## polish_5n (seed=uniform, rule=probsat, batch=4096, schedule=luby, polish_per_variable=5, rigorous=0.0)
 - dominated by **base** on uf250-1065
@@ -166,6 +170,7 @@
 - dominated by **batch_16384** on uf250-1065
 - dominated by **fixed_cutoff** on uf250-1065
 - dominated by **polish_20n** on uf250-1065
+- dominated by **batch_16384+polish_20n** on uf250-1065
 
 | family | arm | runs | satisfied slot-runs | p | cost / restart (ms) | expected time (ms) | flips per solution | median first solution (ms) | package C |
 |---|---|---|---|---|---|---|---|---|---|
@@ -179,16 +184,19 @@
 | uf250-1065 | batch_16384 | 40 on 20 instances | 1051342 | 0.2292 | 0.0268 | 0.117 | 15912 | 372.5 | 59 to 79 |
 | uf250-1065 | fixed_cutoff | 40 on 20 instances | 279320 | 0.1421 | 0.0319 | 0.224 | 16701 | 197.0 | 55 to 62 |
 | uf250-1065 | polish_20n | 40 on 20 instances | 439146 | 0.3829 | 0.0946 | 0.247 | 16437 | 324.5 | 58 to 61 |
+| uf250-1065 | batch_16384+polish_20n | 40 on 20 instances | 1755650 | 0.3827 | 0.0460 | 0.120 | 16452 | 609.0 | 54 to 96 |
 
 ## polish_20n (seed=uniform, rule=probsat, batch=4096, schedule=luby, polish_per_variable=20, rigorous=0.0)
 - dominated by **ascent_10** on uf250-1065
 - dominated by **batch_16384** on uf250-1065
+- dominated by **batch_16384+polish_20n** on uf250-1065
 
 | family | arm | runs | satisfied slot-runs | p | cost / restart (ms) | expected time (ms) | flips per solution | median first solution (ms) | package C |
 |---|---|---|---|---|---|---|---|---|---|
 | uf250-1065 | polish_20n | 40 on 20 instances | 439146 | 0.3829 | 0.0946 | 0.247 | 16437 | 324.5 | 58 to 61 |
 | uf250-1065 | ascent_10 | 40 on 20 instances | 288410 | 0.2515 | 0.0537 | 0.214 | 14136 | 209.5 | 49 to 69 |
 | uf250-1065 | batch_16384 | 40 on 20 instances | 1051342 | 0.2292 | 0.0268 | 0.117 | 15912 | 372.5 | 59 to 79 |
+| uf250-1065 | batch_16384+polish_20n | 40 on 20 instances | 1755650 | 0.3827 | 0.0460 | 0.120 | 16452 | 609.0 | 54 to 96 |
 
 ## rigorous_half (seed=uniform, rule=probsat, batch=4096, schedule=luby, polish_per_variable=10, rigorous=0.5)
 - dominated by **base** on uf250-1065
@@ -202,6 +210,7 @@
 - dominated by **no_restart** on uf250-1065
 - dominated by **polish_5n** on uf250-1065
 - dominated by **polish_20n** on uf250-1065
+- dominated by **batch_16384+polish_20n** on uf250-1065
 
 | family | arm | runs | satisfied slot-runs | p | cost / restart (ms) | expected time (ms) | flips per solution | median first solution (ms) | package C |
 |---|---|---|---|---|---|---|---|---|---|
@@ -217,6 +226,7 @@
 | uf250-1065 | no_restart | 40 on 20 instances | 112637 | 0.6875 | 0.2672 | 0.389 | 22519 | 1344.0 | 58 to 61 |
 | uf250-1065 | polish_5n | 40 on 20 instances | 121048 | 0.1055 | 0.0271 | 0.257 | 18959 | 132.0 | 57 to 60 |
 | uf250-1065 | polish_20n | 40 on 20 instances | 439146 | 0.3829 | 0.0946 | 0.247 | 16437 | 324.5 | 58 to 61 |
+| uf250-1065 | batch_16384+polish_20n | 40 on 20 instances | 1755650 | 0.3827 | 0.0460 | 0.120 | 16452 | 609.0 | 54 to 96 |
 
 ## n = 5000: the one-factor arms, not run, the base arm's zero standing for all of them
 - ascent_10, ascent_30, all_false, ascent_50, ascent_200, skc, batch_16384, fixed_cutoff, no_restart, polish_5n, polish_20n, rigorous_half: cut on the base stage's own numbers (protocol.md). The base arm found nothing at n = 5000 in the family's budget of 200n flips per slot, so a one-factor change of it would carry the same zero and price nothing; the long-walk arm is the n = 5000 test.
