@@ -152,6 +152,10 @@ def write_front(records, table, survivors, per_family, verdict):
     lines += ["", "## Per family: every arm on the family's front, then probSAT beside it", ""]
     for f in arms.FAMILIES:
         if not any((a, f) in table for a in arms.ARMS):
+            names = {p.name for p in arms.instances(f)}
+            if any(r["family"] == f for r in records if r.get("kind") == "run"):
+                lines += [f"### {f}: no instance decided satisfiable of {len(names)} "
+                          f"({sum(verdict.get(n) == 'UNSAT' for n in names)} unsatisfiable, the rest undecided: probSAT capped, CaDiCaL without a verdict, no walk certificate); no cell", ""]
             continue
         counts = next(c for (a, ff), c in table.items() if ff == f)
         lines += [f"### {f}: {counts['satisfiable']} satisfiable, {counts['unsatisfiable']} unsatisfiable, {counts['undecided']} undecided of "
