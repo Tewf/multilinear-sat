@@ -70,15 +70,21 @@ LARGE = ["n1000-r4.20", "n1000-r4.26", "n5000-r4.20", "n5000-r4.26"]
 N1000 = ["n1000-r4.20", "n1000-r4.26"]
 
 # The brief's order: (stage, arms, families). probSAT runs beside every family of the base stage.
+# n = 5000 was cut from the one-factor arms on the base stage's own numbers: the base arm finds
+# nothing there in 200n flips per slot (p = 0 on every run, 22.7 s each), so every one-factor
+# arm would carry the same zero and price nothing; its zero stands for all of them
+# (rejected.md), and the long-walk arm is the one n = 5000 test.
 STAGES = [
     ("base", ["base"], SMALL + LARGE),
-    ("seeds", ["ascent_10", "ascent_30", "all_false", "ascent_50", "ascent_200"], ["uf250-1065"] + LARGE),
+    ("seeds", ["ascent_10", "ascent_30", "all_false", "ascent_50", "ascent_200"], ["uf250-1065"] + N1000),
     ("rule_and_batch", ["skc", "batch_16384"], ["uf250-1065"] + N1000),
     ("schedule_and_polish", ["fixed_cutoff", "no_restart", "polish_5n", "polish_20n"], ["uf250-1065"]),
     ("rigorous", ["rigorous_half"], ["uf250-1065"]),
     ("two_factor", ["batch_16384+polish_20n", "skc+polish_20n"], ["uf250-1065"] + N1000),
-    ("long_walk", ["polish_100n"], ["n1000-r4.20"]),
+    ("long_walk", ["polish_100n"], ["n1000-r4.20", "n5000-r4.20"]),
 ]
+N5000 = ["n5000-r4.20", "n5000-r4.26"]
+ONE_FACTOR_ARMS_NOT_RUN_AT_N5000 = [arm for stage, stage_arms, _ in STAGES if stage not in ("base", "long_walk") for arm in stage_arms]
 
 
 def configuration(arm):

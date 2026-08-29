@@ -28,6 +28,13 @@ factor they price. The base arm is uniform starts, the probsat rule, 4096 slots,
 schedule, 10n flips per unit, no rigorous share; every other arm changes one factor of it,
 and the two-factor arms the one-factor results suggested are listed as such in `arms.py`.
 
+**n = 5000 was cut from the one-factor arms on the base stage's own numbers** (2026-08-29,
+21:40): the base arm found nothing there in 200n flips per slot, p = 0 on every one of its 20
+runs at 22.7 s a run, so every one-factor arm at n = 5000 would carry the same zero and price
+nothing. The base's zero stands for all of them (`rejected.md` says so with the base's cells
+and probSAT's beside them), and the long-walk arm is the one n = 5000 test, run after the
+one-factor stages. The one-factor arms run on uf250 and n = 1000 at both ratios.
+
 ## The instances
 
 uf50-218, uf100-430, uf250-1065: the first 20 of each family in name order (SATLIB, all

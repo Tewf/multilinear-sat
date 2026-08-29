@@ -196,6 +196,15 @@ def write_rejected(records, table, rejected):
                     if (a, f) in table:
                         lines.append(cell_row(table[(a, f)]))
         lines.append("")
+    n5000 = [f for f in arms.N5000 if ("base", f) in table]
+    if n5000:
+        lines += ["## n = 5000: the one-factor arms, not run, the base arm's zero standing for all of them",
+                  f"- {', '.join(arms.ONE_FACTOR_ARMS_NOT_RUN_AT_N5000)}: cut on the base stage's own numbers (protocol.md). The base arm "
+                  "found nothing at n = 5000 in the family's budget of 200n flips per slot, so a one-factor change of it would carry "
+                  "the same zero and price nothing; the long-walk arm is the n = 5000 test.", "", HEADER]
+        for f in n5000:
+            lines.append(cell_row(table[("base", f)]))
+        lines += ["", PROBSAT_HEADER] + [cell_row(table[("probsat", f)]) for f in n5000 if ("probsat", f) in table] + [""]
     t = tilted_on_the_records()
     if t:
         n, tilted_ms, uniform_ms = t
