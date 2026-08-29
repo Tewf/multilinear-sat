@@ -64,7 +64,7 @@ per-restart success probability p; expected time to a solution is cost per resta
 
 The rigorous half, the two posteriors, the tilted seed and the cost of each part:
 [walk-and-posterior.md](walk-and-posterior.md). What all of it measures, whatever it shows:
-`../findings-walk.md`.
+[../benchmark/findings-walk/](../benchmark/findings-walk/README.md).
 
 ## Contribution
 

@@ -12,7 +12,7 @@ La version 0.2 ajoute la recherche locale par lots comme polissage de chaque red
 (WalkSAT/SKC, probSAT, Schöning, Metropolis, depuis un point uniforme, tout-faux, la montée
 de gradient ou la boucle tiltée), les contraintes de parité du format XNF prises telles
 quelles (un monôme de Walsh dans l'énergie, une bascule dans la marche), et deux
-postérieurs sur UNSAT qui ne deviennent jamais un verdict ; `findings-walk.md` donne ce que
+postérieurs sur UNSAT qui ne deviennent jamais un verdict ; `benchmark/findings-walk/` donne ce que
 tout cela mesure. C'est d'abord une bibliothèque (statique, sans Python), faite pour être
 liée à d'autres codes C++, avec une ligne de commande pour mesurer.
 

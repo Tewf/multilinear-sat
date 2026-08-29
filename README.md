@@ -19,7 +19,7 @@ code), with a command line for measuring.
 or CaDiCaL (`benchmark/results.md`), and the walk is the same algorithm as probSAT's, so
 per chain it is slower than probSAT's hand-tuned loop; what the batch buys, what each seed
 buys per restart, what the posterior is worth against kissat, and what the native parity
-does on the MM-Challenge-1 instances are all measured in `findings-walk.md`, whatever they
+does on the MM-Challenge-1 instances are all measured in `benchmark/findings-walk/`, whatever they
 show. See `literature/review.md` for who did what before this, and `method/README.md` for
 the algorithm and its cost.
 
@@ -44,7 +44,7 @@ compiler, optionally OpenMP and CUDA 12.
 
 `--run-limit N` completes N runs of the whole batch instead of stopping at the first
 certificate and counts every polish outcome, which is how the per-restart success
-probability in `findings-walk.md` is measured. `--rigorous-fraction X` makes a share of the
+probability in `benchmark/findings-walk/` is measured. `--rigorous-fraction X` makes a share of the
 batch walk Schöning's rule from uniform starts for 3n flips; their failures feed the rigorous
 posterior in the json line, the others' the Beta-mixture one.
 
@@ -84,7 +84,7 @@ line are built only when this is the top-level project.
 | `benchmark/` | instance generator, baseline build script, the 0.1 harness and `results.md`, and the walk's four measurements with their records (`walk_throughput`, `seed_comparison`, `posterior_calibration`, `parity_challenge`) |
 | `method/` | the algorithm, its pseudocode, cost and Las Vegas framing |
 | `literature/` | the review and `references.bib` |
-| `findings-walk.md` | what the walk, the seeds, the posterior and the parities measured |
+| `benchmark/findings-walk/` | what the walk, the seeds, the posterior and the parities measured |
 
 ## Citation and licence
 

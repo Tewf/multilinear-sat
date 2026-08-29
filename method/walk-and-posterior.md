@@ -31,7 +31,7 @@ heuristic slots' k failed polishes and a Beta(a, b) prior on a satisfiable insta
 per-restart success probability, fitted by moments on the family (the seed comparison's
 uniform arm), so that S = B(a, b + k) / B(a, b), exact for the mixture and instance-adaptive.
 Both are reported in the `c json` line and in the verbose run lines, and neither ever turns
-the status into UNSAT; `../findings-walk.md` gives the reliability curve on uf250-1065
+the status into UNSAT; [../benchmark/findings-walk/posterior.md](../benchmark/findings-walk/posterior.md) gives the reliability curve on uf250-1065
 against uuf250-1065 and the time to 0.99 against kissat's refutation.
 
 ## The tilted seed
