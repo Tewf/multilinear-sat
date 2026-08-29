@@ -19,6 +19,13 @@ PROBSAT_BINARY = BENCHMARK / "third_party" / "probSAT" / "probSAT"
 EXTERNAL_MARGIN = 20   # seconds added to a solver's own cap before the process is killed
 
 
+def repository_relative(path):
+    """A path as the records store it: relative to the repository root when it lies inside it,
+    so that no record names this machine's home directory."""
+    path = Path(path).resolve()
+    return str(path.relative_to(ROOT)) if path.is_relative_to(ROOT) else str(path)
+
+
 def git_head():
     return subprocess.run(["git", "rev-parse", "--short=10", "HEAD"], cwd=ROOT, capture_output=True, text=True).stdout.strip()
 
@@ -49,9 +56,9 @@ def gpu_state():
 
 def provenance(binary, arguments):
     return dict(kind="provenance", timestamp=datetime.now().isoformat(timespec="seconds"), commit=git_head(),
-                binary=str(binary), binary_sha256=sha256_of(binary), gpu=gpu_state(),
+                binary=repository_relative(binary), binary_sha256=sha256_of(binary), gpu=gpu_state(),
                 probsat_sha256=sha256_of(PROBSAT_BINARY) if PROBSAT_BINARY.exists() else None,
-                arguments={key: str(value) for key, value in vars(arguments).items()})
+                arguments={key: repository_relative(value) if isinstance(value, Path) else str(value) for key, value in vars(arguments).items()})
 
 
 def run_command(command, cap_seconds, environment=None):
@@ -68,7 +75,7 @@ def run_solver(binary, path, flags, cap_seconds, environment=None):
     command = [str(binary), str(path), "--no-model", "--time-limit", str(cap_seconds)] + [str(flag) for flag in flags]
     returncode, stdout, stderr, elapsed, hung = run_command(command, cap_seconds, environment)
     json_line = next((line[len("c json "):] for line in stdout.splitlines() if line.startswith("c json ")), None)
-    return dict(command=" ".join(command), returncode=returncode, wall_seconds=round(elapsed, 4), hung=hung,
+    return dict(command=" ".join([repository_relative(binary), repository_relative(path)] + command[2:]), returncode=returncode, wall_seconds=round(elapsed, 4), hung=hung,
                 json=json.loads(json_line) if json_line else None, stderr=stderr,
                 status="SATISFIABLE" if returncode == 10 else "UNKNOWN")
 
@@ -80,6 +87,7 @@ def run_probsat(path, seed, cap_seconds, max_flips=None):
         command += ["--maxflips", str(max_flips), "--runs", "1"]
     command += [str(path), str(seed)]
     returncode, stdout, stderr, elapsed, hung = run_command(["timeout", str(cap_seconds)] + command, cap_seconds)
+    command = [repository_relative(PROBSAT_BINARY)] + command[1:-2] + [repository_relative(path), str(seed)]
     statistics = {}
     for line in stdout.splitlines():
         for key in ("numFlips", "flips/sec", "CPU Time"):

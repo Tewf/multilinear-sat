@@ -4,7 +4,7 @@
 
 - Date: 2026-08-29 01:02; branch commit c6f383cf9b
 - Device: cuda (NVIDIA GeForce RTX 4060 Laptop GPU), torch 2.13.0+cu130
-- Other GPU processes at start (nvidia-smi): 50779, ~/miniforge3/envs/comfyui/bin/python, 4824 MiB
+- Other GPU processes at start (nvidia-smi): 50779, python (conda env comfyui), 4824 MiB
 - Runs started 2026-08-28T23:37:48; one warm-up solve per process, untimed, before any record
 - Instances: SATLIB uniform random 3-SAT, satisfiable by construction (uf50-218, uf100-430, uf250-1065), the first N files by sorted name; fixed seeds; identical scaffolding for every method
 
