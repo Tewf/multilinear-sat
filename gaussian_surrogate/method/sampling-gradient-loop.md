@@ -30,17 +30,22 @@ the current means. Its two limits are the two methods of this branch:
         move each a few flips toward S = m at inverse temperature beta   (Metropolis on S, or a
                                                                           short WalkSAT walk: the
                                                                           annealed sample)
-        weight w_b ∝ e^{beta S(x^(b))} / (proposal correction)          (self-normalised importance
-                                                                          weights; the walk makes
-                                                                          the proposal informative)
+        weight w_b: annealed-importance-sampling weights if the walk is a Metropolis kernel on S
+                    (detailed balance, so the weights exist); after a WalkSAT walk no proposal
+                    density exists and the self-normalised e^{beta S} weights are BIASED,
+                    which must be measured, not assumed (review Q7)
         g_sample  ←  sum_b w_b x^(b) / sum_b w_b  -  p
         g_closed  ←  beta * d mu / d theta  [+ second-order term from the pairs, if wanted]
-        g  ←  g_closed + ( g_sample - g_closed )                        (the closed form is a control
-                                                                          variate: exact in expectation
-                                                                          at small beta, so the sampled
-                                                                          part estimates only what mean
-                                                                          field misses, the correlations)
-        theta ← theta + eta g ;  raise beta on a schedule
+        h_sample  ←  (1/S) sum_b (x0_b - p) beta S(x0_b)   on the RAW draws x0_b, whose expectation
+                                                          is exactly g_closed (a random quantity
+                                                          with known mean: MuProp's mean-field
+                                                          Taylor control variate)
+        g  ←  g_sample - lambda (h_sample - g_closed)     (the sampled part estimates only what
+                                                          mean field misses; the note's first
+                                                          version added a constant, a no-op)
+        theta ← theta + eta_t g ;  raise beta on a schedule; eta_t decreasing (with constant
+                                   smoothing the cross-entropy iteration collapses to a unit
+                                   mass with probability 1: Costa, Jones, Kroese 2007)
         if some E_tilted[x_i] is within delta of +-1: fix x_i, simplify F, drop i    (decimation)
     until a sample satisfies F (certified) or the restart budget ends
 
@@ -50,15 +55,17 @@ samples, once the walk has moved them near S = m, carry the correlations the pro
 cannot express, and their mean corrects the direction toward the solution cluster. The same
 samples give the empirical covariance of the clause indicators under the tilted measure, which
 replaces the closed-form pair sum (the 3 to 86x cost of F) by a Monte Carlo estimate at the cost
-of a few flips per sample on the GPU. The variables whose tilted mean saturates are the frozen
-ones of the cluster, and fixing them is the simplification: decimation guided by samples rather
-than by messages.
+of a few flips per sample on the GPU. The variables whose tilted mean saturates are candidates for
+fixing, which would be decimation guided by samples rather than by messages; at k = 3 near the
+threshold there are clusters with no frozen variable (frozen variables are guaranteed only for
+k >= 9), so the trigger has no theory there and the step stays unbuilt until measured.
 
 ## What it is, in the field's terms (to be confirmed by the review)
 
-The update theta <- theta + eta (E_tilted[x] - p) is a natural-gradient step in the exponential
-family (the Fisher metric is what removes the (1 - p^2) factors), which is the form of natural
-evolution strategies and of the cross-entropy method with soft elites; the subtraction of the
+The update theta <- theta + eta (E_tilted[x] - p) is the plain gradient step in the natural
+parameters, which to first order is the natural-gradient step in the means (information-geometric
+optimisation makes it exact in the means, and for Bernoulli models that recovers PBIL: Ollivier,
+Arnold, Auger, Hansen 2017); the cross-entropy method with soft elites is its large-beta form; the subtraction of the
 closed-form gradient is a control variate (Rao-Blackwellisation of the score-function estimator
 by its mean-field expectation); the walk between draw and weight is annealed or population
 importance sampling; fixing saturated variables is backbone or belief-propagation-guided
