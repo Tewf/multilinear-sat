@@ -46,8 +46,13 @@ ARMS = {
     # n = 1000 the base arm's 10n cutoff finds nothing in 120n flips per slot where probSAT's
     # one chain needs about 14 000n, so the walk's length is the factor to price there
     "polish_100n": dict(polish_per_variable=100),
+    # the two-factor arms the one-factor results suggested (2026-08-29, 23:10): the short ascent
+    # was the best seed on n1000-r4.26 and the walk's length is the lever at n = 1000, so the
+    # two are crossed there; 16384 slots halved the time per solution on uf250, so the batch is
+    # crossed with the longer polish there. skc was no better than probsat anywhere, so the
+    # skc cross first pencilled in is dropped unrun.
+    "ascent_10+polish_100n": dict(seed="ascent_10", polish_per_variable=100),
     "batch_16384+polish_20n": dict(batch=16384, polish_per_variable=20),
-    "skc+polish_20n": dict(rule="skc", polish_per_variable=20),
 }
 # The tilted seed is not an arm: on the sampling-walk records its expected time is 94x a
 # uniform start's on the same uf250 runs, far outside the brief's 2x; dominance.py reads that
@@ -80,11 +85,12 @@ STAGES = [
     ("rule_and_batch", ["skc", "batch_16384"], ["uf250-1065"] + N1000),
     ("schedule_and_polish", ["fixed_cutoff", "no_restart", "polish_5n", "polish_20n"], ["uf250-1065"]),
     ("rigorous", ["rigorous_half"], ["uf250-1065"]),
-    ("two_factor", ["batch_16384+polish_20n", "skc+polish_20n"], ["uf250-1065"] + N1000),
     ("long_walk", ["polish_100n"], ["n1000-r4.20", "n5000-r4.20"]),
+    ("two_factor_uf250", ["batch_16384+polish_20n"], ["uf250-1065"]),
+    ("two_factor_n1000", ["ascent_10+polish_100n"], ["n1000-r4.20"]),
 ]
 N5000 = ["n5000-r4.20", "n5000-r4.26"]
-ONE_FACTOR_ARMS_NOT_RUN_AT_N5000 = [arm for stage, stage_arms, _ in STAGES if stage not in ("base", "long_walk") for arm in stage_arms]
+ONE_FACTOR_ARMS_NOT_RUN_AT_N5000 = [arm for stage, stage_arms, _ in STAGES if stage in ("seeds", "rule_and_batch", "schedule_and_polish", "rigorous") for arm in stage_arms]
 
 
 def configuration(arm):
