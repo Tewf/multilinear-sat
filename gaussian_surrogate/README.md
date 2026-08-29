@@ -23,6 +23,7 @@ any SATISFIABLE before it is printed):
 | `F` | log F | p = tanh(theta), theta free |
 | `mu` | mu | p = tanh(theta), theta free |
 | `fourier` | mu, which is FourierSAT's multilinear energy up to an affine map | x on the box [-1, 1]^n, clipped after each step |
+| `tilted` | log E[exp(beta S)] by sampling (`method/sampling-gradient-loop.md`), its own loop | p = tanh(theta), one theta per group of slots |
 
 `mu` and `fourier` optimise the same function: FourierSAT's clause polynomial on +-1 with
 independent means is exactly 1 - U_j. What separates them is the relaxation.
@@ -31,7 +32,7 @@ independent means is exactly 1 - U_j. What separates them is the relaxation.
 
     conda activate flappy_bird                    # torch 2.13 + CUDA, numpy, pysat, pytest
     cd gaussian_surrogate
-    python solve.py ../benchmark/instances/uf50-218/uf50-01.cnf --obj F --seed 0 \
+    python solve.py ../benchmark/instances/uf50-218/uf50-01.cnf --obj F --seed 0 \   # --obj tilted for the loop; every Configuration field is a flag
         --log-trajectory trajectory.csv          # --device cpu|cuda, --time-limit SECONDS
     python -m pytest tests -q                     # brute-force moments, reader, search, every method
 
@@ -46,18 +47,28 @@ rounding steps and NaN otherwise.
 
 | File | Role |
 |---|---|
-| `configuration.py` | every tunable, one dataclass |
+| `configuration.py` | every tunable, one dataclass; each field is a flag of the same name in `solve.py` |
 | `dimacs.py` | DIMACS reader (SATLIB `%` trailer included) and the `Formula` tensors |
 | `adjacency.py` | clause pairs sharing a variable, laid out for a vectorised U_jk |
 | `moments.py` | U_j, U_jk, mu, var, batched over restarts |
 | `objective.py` | log F from the moments, and the value record every objective returns |
 | `baseline_objectives.py` | mu as the ascent target |
 | `relaxation.py` | tanh(theta) and the clipped box: parameters to point, and projection |
-| `methods.py` | the `--obj` names: objective x relaxation |
+| `methods.py` | the `--obj` names: objective x relaxation for the gradient methods, and the sampling loop |
 | `rounding.py` | sign(p) and the vectorised / plain-Python violated-clause counts |
 | `walksat.py` | the WalkSAT/SKC polish and its application to the best slot |
 | `solver.py` | the restart loop, rounding checks, polish, trajectory log |
 | `solve.py` | the command line |
+| `sampling.py` | Bernoulli draws from means p, weights from log weights, effective sample size |
+| `flip_kernel.py` | a local-search walk vectorised over slots (SKC or Schöning rule), true-literal counts by scatter |
+| `annealing.py` | annealed importance sampling toward q_theta exp(beta S) over a Metropolis kernel |
+| `tilted_gradient.py` | the tilted objective's ascent direction: sampled mean, MuProp control variate, closed form |
+| `group_optimizers.py` | plain and Adam steps on theta per group with a decreasing step size, resettable per group |
+| `luby.py` | the Luby sequence and one restart budget per group |
+| `failure_record.py` | counts failed rigorous and heuristic restarts and evaluates the two posteriors |
+| `posterior.py` | P(UNSAT | failures): Schöning's bound and the Beta-mixture posterior, with the moment fit |
+| `tilted_loop.py` | the tilted sampling-gradient loop, `--obj tilted`: draws, move, weights, step, schedule, log |
+| `experiments/` | the seed comparison, the posterior calibration and the tilted-mean bias table, each with its table writer |
 | `tests/` | pytest: moments against enumeration of {-1,1}^n, the reader, the search |
 | `benchmark/` | SATLIB download, the run over families x methods, and the results table |
 
