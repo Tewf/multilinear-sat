@@ -7,26 +7,48 @@
 |---|---|---|---|---|
 | MM-23-2-2-2-2-3 | all_false | 0/5 | - | 27-30 |
 | MM-23-2-2-2-2-3 | ascent200 | 0/5 | - | 543-562 |
+| MM-23-2-2-2-2-3 | xnf_all_false | 0/5 | - | 10-15 |
+| MM-23-2-2-2-2-3 | xnf_ascent200 | 0/5 | - | 230-255 |
 | MM-23-2-2-2-2-A | all_false | 0/5 | - | 18-21 |
 | MM-23-2-2-2-2-A | ascent200 | 0/5 | - | 545-569 |
+| MM-23-2-2-2-2-A | xnf_all_false | 0/5 | - | 7-11 |
+| MM-23-2-2-2-2-A | xnf_ascent200 | 0/5 | - | 246-253 |
 | MM-23-2-2-2-2-B | all_false | 0/5 | - | 20-22 |
 | MM-23-2-2-2-2-B | ascent200 | 0/5 | - | 547-568 |
+| MM-23-2-2-2-2-B | xnf_all_false | 0/5 | - | 9-12 |
+| MM-23-2-2-2-2-B | xnf_ascent200 | 0/5 | - | 237-263 |
 | MM-23-2-2-2-2-C | all_false | 0/5 | - | 19-22 |
 | MM-23-2-2-2-2-C | ascent200 | 0/5 | - | 544-799 |
+| MM-23-2-2-2-2-C | xnf_all_false | 0/5 | - | 8-12 |
+| MM-23-2-2-2-2-C | xnf_ascent200 | 0/5 | - | 216-262 |
 | MM-23-2-2-2-2-D | all_false | 0/5 | - | 19-23 |
 | MM-23-2-2-2-2-D | ascent200 | 0/5 | - | 772-805 |
+| MM-23-2-2-2-2-D | xnf_all_false | 0/5 | - | 5-10 |
+| MM-23-2-2-2-2-D | xnf_ascent200 | 0/5 | - | 235-261 |
 | MM-23-2-2-2-2-M | all_false | 0/5 | - | 16-21 |
 | MM-23-2-2-2-2-M | ascent200 | 0/5 | - | 774-798 |
+| MM-23-2-2-2-2-M | xnf_all_false | 0/5 | - | 11-12 |
+| MM-23-2-2-2-2-M | xnf_ascent200 | 0/5 | - | 222-253 |
 | MM-23-2-2-2-3-4 | all_false | 0/5 | - | 29-35 |
 | MM-23-2-2-2-3-4 | ascent200 | 0/5 | - | 781-807 |
+| MM-23-2-2-2-3-4 | xnf_all_false | 0/5 | - | 19-23 |
+| MM-23-2-2-2-3-4 | xnf_ascent200 | 0/5 | - | 245-252 |
 | MM-23-2-2-2-4-A | all_false | 0/5 | - | 23-27 |
 | MM-23-2-2-2-4-A | ascent200 | 0/5 | - | 780-801 |
+| MM-23-2-2-2-4-A | xnf_all_false | 0/5 | - | 15-19 |
+| MM-23-2-2-2-4-A | xnf_ascent200 | 0/5 | - | 234-256 |
 | MM-23-2-2-2-4-B | all_false | 0/5 | - | 25-27 |
 | MM-23-2-2-2-4-B | ascent200 | 0/5 | - | 777-812 |
+| MM-23-2-2-2-4-B | xnf_all_false | 0/5 | - | 14-19 |
+| MM-23-2-2-2-4-B | xnf_ascent200 | 0/5 | - | 243-266 |
 | MM-23-4-4-4-4-1 | all_false | 0/5 | - | 37-44 |
 | MM-23-4-4-4-4-1 | ascent200 | 0/5 | - | 785-804 |
+| MM-23-4-4-4-4-1 | xnf_all_false | 0/5 | - | 27-31 |
+| MM-23-4-4-4-4-1 | xnf_ascent200 | 0/5 | - | 234-254 |
 | matmul_3x3x3 at 23 (toolkit --emit-xnf) | all_false | 0/5 | - | 6-7 |
 | matmul_3x3x3 at 23 (toolkit --emit-xnf) | ascent200 | 0/5 | - | 767-790 |
+| matmul_3x3x3 at 23 (toolkit --emit-xnf) | xnf_all_false | 0/5 | - | 4-5 |
+| matmul_3x3x3 at 23 (toolkit --emit-xnf) | xnf_ascent200 | 0/5 | - | 224-253 |
 
 Verification, matmul_2x2x2 at 7 through decide-rank-by-sat --solver: 3-cut CNF, the ascent alone (the toolkit's multilinear-sat line) (the toolkit's own line, 0.1 defaults, one thread): exit code 1.
 

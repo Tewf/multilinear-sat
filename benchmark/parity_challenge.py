@@ -13,7 +13,12 @@ from pathlib import Path
 
 from walk_runs import BENCHMARK, append_record, frozen_binary, load_records, provenance, run_solver
 
-ARMS = {"all_false": ["--seed-kind", "all-false"], "ascent200": ["--seed-kind", "ascent", "--seed-steps", 200]}
+ARMS = {"all_false": ["--seed-kind", "all-false", "--walk-rule", "skc"],
+        "ascent200": ["--seed-kind", "ascent", "--seed-steps", 200, "--walk-rule", "skc"],
+        # xnfSAT's weighted-break rule ported as --walk-rule xnf (2026-09-01): the caveat of
+        # findings-walk/parities.md was that only the SKC rule had been tried here
+        "xnf_all_false": ["--seed-kind", "all-false", "--walk-rule", "xnf"],
+        "xnf_ascent200": ["--seed-kind", "ascent", "--seed-steps", 200, "--walk-rule", "xnf"]}
 
 
 def parse_arguments():
@@ -51,7 +56,7 @@ def header(path):
 
 def walk_record(binary, arguments, name, path, arm, seed):
     variables, rows = header(path)
-    flags = ["--backend", arguments.backend, "--batch-size", arguments.slots, "--walk-rule", "skc",
+    flags = ["--backend", arguments.backend, "--batch-size", arguments.slots,
              "--polish-flips", arguments.polish_flips_per_variable * variables, "--seed", seed] + ARMS[arm]
     result = run_solver(binary, path, flags, arguments.cap)
     stats = result["json"] or {}

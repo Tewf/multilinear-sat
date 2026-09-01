@@ -29,11 +29,25 @@ las-vegas-sat, one seed, 5 s cap): xnfsat 3 of 10 (4-4-4-4-1 in 0.03 s, 2-2-2-2-
 None solved, where xnfsat solves three of ten within five seconds. The native parity does
 what it should (a parity is one row, its flip a toggle; the walk on the XNF reaches 16 to 44
 violated rows of 56 700 from all false, and 6 to 7 on the toolkit's formula) and the SKC
-rule at noise 0.5 with 20 s does not close the last rows; xnfSAT is yalsat's probSAT-style
-rule with its own constants, and the probsat rule of this walk was not tried on these
-instances (caveat). The ascent's rounded point is a far worse start than all false here,
-540 to 810 rows against 16 to 44: on Brent equations the relaxation's landscape does not
-point at the decompositions, which is the replication's answer to the toolkit's step 3.
+rule at noise 0.5 with 20 s does not close the last rows. The ascent's rounded point is a
+far worse start than all false here, 540 to 810 rows against 16 to 44: on Brent equations
+the relaxation's landscape does not point at the decompositions, which is the replication's
+answer to the toolkit's step 3.
+
+**The xnf rule closes half the gap and no instance (2026-09-01).** With xnfSAT's weighted
+break ported as `--walk-rule xnf` (the caveat above was that only SKC had been tried), the
+same protocol reaches 5 to 15 violated rows on the 2-2-2-2 instances against SKC's 16 to 30,
+14 to 23 on the 2-2-2-3/4, 27 to 31 on 4-4-4-4-1, and 4 to 5 on the toolkit's formula
+against 6 to 7 - every instance roughly halved, none solved. Under the same rule the
+ascent's start improves from 540-810 to 216-266 and stays an order of magnitude behind all
+false, so the relaxation verdict does not move. Two readings. First, the instance the rule
+helps least, 4-4-4-4-1, is the one xnfsat solves fastest (0.03 s), so what separates the
+solvers there is not the variable score. Second, the shape matches the n = 5000 boundary of
+[../arms/front.md](../arms/front.md): xnfsat spends its five seconds as one uninterrupted
+chain of about 5e7 flips where each of our 1024 slots gets about 1e6 across its Luby runs,
+and Brent equations, like n = 5000, look like formulas that pay for one long walk rather
+than many short ones. The unmeasured next lever is the budget shape (fewer slots, far longer
+runs), not the rule.
 
 Verification on matmul_2x2x2 at rank 7 through the toolkit's `decide-rank-by-sat --solver`
 route, which reads the model back and re-multiplies it: given the binary itself the toolkit

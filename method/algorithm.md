@@ -79,7 +79,9 @@ and the number is what a caller gets instead of a verdict.
   beyond the noise; the 50- and 200-step seeds are rejected (0.256 and 0.429 on uf250).
 - **Parity mode**: a parity is one row of the same formula, its flip a toggle. Measured on
   MM-Challenge-1 ([../benchmark/findings-walk/parities.md](../benchmark/findings-walk/parities.md)):
-  none of ten solved where xnfsat solves three, so it is a capability, not a claim.
+  none of ten solved where xnfsat solves three, so it is a capability, not a claim. The xnf
+  rule (xnfSAT's weighted break, 2026-09-01) halves the violated floor on every instance and
+  still solves none at this budget shape; the residue tracks chain length, not the score.
 - **The tilted seed**: rejected on the sampling-walk records, 94x a uniform start's expected
   time on the runs it completed.
 - **The cross-entropy loop** (the tilted loop with SKC rungs as elite generator,
