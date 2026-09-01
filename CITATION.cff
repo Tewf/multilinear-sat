@@ -5,7 +5,7 @@ type: software
 authors:
   - family-names: Hamlil
     given-names: Mohamed Ali Tewfik
-repository-code: ""
+repository-code: "https://github.com/Tewf/multilinear-sat"
 license: MIT
 version: 0.2.0
 date-released: 2026-08-29

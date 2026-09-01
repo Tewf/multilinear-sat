@@ -15,8 +15,7 @@ parity is one Walsh monomial in the energy and a toggle in the walk.
 or CaDiCaL (`benchmark/results.md`), and the walk is probSAT's algorithm, slower per chain
 than probSAT's hand-tuned loop; what the batch buys, what each seed buys per restart, what
 the posterior is worth against kissat, and what the native parity does on MM-Challenge-1 are
-measured in `benchmark/findings-walk/`, whatever they show. The code is not yet published
-anywhere; `CITATION.cff` leaves its repository field blank until it is.
+measured in `benchmark/findings-walk/`, whatever they show.
 
 ## What is here
 
