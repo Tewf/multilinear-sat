@@ -1,6 +1,6 @@
 # The rejected arms, each with the arm that dominates it and the numbers
 
-- 19 stages from 2026-08-29T20:58:20 to 2026-08-29T23:35:39; frozen binary multilinear-sat-4b98f0a2ea-20260829-205205 (sha256 fd00a7139329af3a), multilinear-sat-67c51ca66a-20260829-205205 (sha256 fd00a7139329af3a), multilinear-sat-7c32b6f259-20260829-205205 (sha256 fd00a7139329af3a), multilinear-sat-8124137c0d-20260829-205205 (sha256 fd00a7139329af3a), multilinear-sat-f15c737875-20260829-205205 (sha256 fd00a7139329af3a), named by the commit it was built from; HEAD at the stages: 10ec02cb75, 339ee7f1d0, 4b98f0a2ea, 672b5acee5, 674ca584d7, 6c97ae1769, 7c32b6f259, 9092e76858, dc063e6e07, f15c737875; GPU at the first stage: NVIDIA GeForce RTX 4060 Laptop GPU, 12 MiB, 0 %.
+- 22 stages from 2026-08-29T20:58:20 to 2026-09-01T11:19:18; frozen binary multilinear-sat-4b98f0a2ea-20260829-205205 (sha256 fd00a7139329af3a), multilinear-sat-67c51ca66a-20260829-205205 (sha256 fd00a7139329af3a), multilinear-sat-7c32b6f259-20260829-205205 (sha256 fd00a7139329af3a), multilinear-sat-8124137c0d-20260829-205205 (sha256 fd00a7139329af3a), multilinear-sat-da515db6cf-20260829-205205 (sha256 fd00a7139329af3a), multilinear-sat-f15c737875-20260829-205205 (sha256 fd00a7139329af3a), multilinear-sat-f99216a20c-20260901-102352 (sha256 50cd8cfaddbb8345), named by the commit it was built from; HEAD at the stages: 10ec02cb75, 339ee7f1d0, 4b98f0a2ea, 632da06af6, 672b5acee5, 674ca584d7, 6c97ae1769, 7c32b6f259, 9092e76858, da515db6cf, dc063e6e07, f15c737875, f99216a20c; GPU at the first stage: NVIDIA GeForce RTX 4060 Laptop GPU, 12 MiB, 0 %.
 - Every run is in arms_results.jsonl with its command, seed, timeline, package temperature before and after, and the gate readings of its stage.
 - An arm is dominated when another arm, measured on every family it was measured on, is at least as good on expected time on each and strictly better on one, or not distinguished on expected time anywhere and better on p on one; distinguished means beyond the 13% thermal band and beyond two standard errors of the log ratio under Poisson success counts (the satisfied slot-runs column). Nothing is deleted: every rejected arm keeps its cells here beside its dominator's.
 
@@ -227,6 +227,28 @@
 | uf250-1065 | polish_5n | 40 on 20 instances | 121048 | 0.1055 | 0.0271 | 0.257 | 18959 | 132.0 | 57 to 60 |
 | uf250-1065 | polish_20n | 40 on 20 instances | 439146 | 0.3829 | 0.0946 | 0.247 | 16437 | 324.5 | 58 to 61 |
 | uf250-1065 | batch_16384+polish_20n | 40 on 20 instances | 1755650 | 0.3827 | 0.0460 | 0.120 | 16452 | 609.0 | 54 to 96 |
+
+## tilted_walk_loop (seed=tilted_walk_loop, rule=probsat, batch=4096, schedule=luby, polish_per_variable=10, rigorous=0.0)
+- dominated by **base** on n1000-r4.20
+- dominated by **ascent_10** on n1000-r4.20
+- dominated by **ascent_30** on n1000-r4.20
+- dominated by **ascent_50** on n1000-r4.20
+- dominated by **ascent_200** on n1000-r4.20
+- dominated by **batch_16384** on n1000-r4.20
+- dominated by **polish_100n** on n1000-r4.20
+- dominated by **ascent_10+polish_100n** on n1000-r4.20
+
+| family | arm | runs | satisfied slot-runs | p | cost / restart (ms) | expected time (ms) | flips per solution | median first solution (ms) | package C |
+|---|---|---|---|---|---|---|---|---|---|
+| n1000-r4.20 | tilted_walk_loop | 8 on 4 instances | 7 | 3.052e-05 | 2.5074 | 82161.429 | 561728160 | 71319.0 | 74 to 96 |
+| n1000-r4.20 | base | 8 on 4 instances | 7 | 3.052e-05 | 0.2749 | 9006.857 | 561729861 | 7957.0 | 48 to 67 |
+| n1000-r4.20 | ascent_10 | 8 on 4 instances | 10 | 4.36e-05 | 0.2984 | 6845.400 | 393208969 | 8604.5 | 55 to 64 |
+| n1000-r4.20 | ascent_30 | 8 on 4 instances | 6 | 2.616e-05 | 0.3454 | 13205.167 | 655349646 | 9990.0 | 64 to 77 |
+| n1000-r4.20 | ascent_50 | 8 on 4 instances | 14 | 6.104e-05 | 0.3930 | 6438.571 | 280858840 | 11317.0 | 67 to 91 |
+| n1000-r4.20 | ascent_200 | 8 on 4 instances | 12 | 5.232e-05 | 0.7675 | 14670.500 | 327673475 | 22042.0 | 68 to 73 |
+| n1000-r4.20 | batch_16384 | 8 on 4 instances | 29 | 3.161e-05 | 0.4860 | 15376.276 | 542357752 | 55721.0 | 63 to 96 |
+| n1000-r4.20 | polish_100n | 8 on 4 instances | 2451 | 0.01069 | 2.7385 | 256.283 | 15937564 | 6639.0 | 47 to 65 |
+| n1000-r4.20 | ascent_10+polish_100n | 8 on 4 instances | 2422 | 0.01056 | 2.7695 | 262.290 | 16131776 | 6695.0 | 55 to 96 |
 
 ## n = 5000: the one-factor arms, not run, the base arm's zero standing for all of them
 - ascent_10, ascent_30, all_false, ascent_50, ascent_200, skc, batch_16384, fixed_cutoff, no_restart, polish_5n, polish_20n, rigorous_half: cut on the base stage's own numbers (protocol.md). The base arm found nothing at n = 5000 in the family's budget of 200n flips per slot, so a one-factor change of it would carry the same zero and price nothing; the long-walk arm is the n = 5000 test.
