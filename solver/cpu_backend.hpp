@@ -21,7 +21,7 @@ public:
     std::vector<int8_t> walk_assignment(int slot) const override;
     void walk_flips_done(std::vector<int32_t>& flips) const override;
     void draw_tilted(const std::vector<float>& theta, int slots_per_group, uint64_t epoch) override;
-    void anneal(const std::vector<float>& theta, const std::vector<float>& beta, int slots_per_group, int rungs, uint64_t epoch,
+    void anneal(const std::vector<float>& theta, const std::vector<float>& beta, int slots_per_group, int rungs, bool skc_rungs, float noise, uint64_t epoch,
                 std::vector<float>& log_weights, std::vector<int>& violated, std::vector<uint8_t>& found) override;
     void walk_assignments(std::vector<uint8_t>& assignments) const override;
     std::vector<int8_t> saved_assignment(int slot) const override;

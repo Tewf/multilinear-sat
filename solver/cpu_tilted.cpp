@@ -15,7 +15,7 @@ void CpuBackend::draw_tilted(const std::vector<float>& theta, int slots_per_grou
     }
 }
 
-void CpuBackend::anneal(const std::vector<float>& theta, const std::vector<float>& beta, int slots_per_group, int rungs, uint64_t epoch,
+void CpuBackend::anneal(const std::vector<float>& theta, const std::vector<float>& beta, int slots_per_group, int rungs, bool skc_rungs, float noise, uint64_t epoch,
                         std::vector<float>& log_weights, std::vector<int>& violated, std::vector<uint8_t>& found) {
     log_weights.resize(batch_size_);
     violated.resize(batch_size_);
@@ -27,7 +27,7 @@ void CpuBackend::anneal(const std::vector<float>& theta, const std::vector<float
     for (int slot = 0; slot < batch_size_; ++slot) {
         WalkSlot state = slot_view(arrays, slot, variable_count_, clause_count_);
         const int group = slot / slots_per_group;
-        log_weights[slot] = anneal_slot(formula, state, theta.data() + static_cast<size_t>(group) * variable_count_, beta[group], rungs,
+        log_weights[slot] = anneal_slot(formula, state, theta.data() + static_cast<size_t>(group) * variable_count_, beta[group], rungs, skc_rungs, noise,
                                         seed_, epoch, slot, &found[slot], &saved_[static_cast<size_t>(slot) * variable_count_]);
         violated[slot] = violated_count_[slot];
     }

@@ -51,7 +51,7 @@ TEST_CASE("the weighted mean of the annealed samples is a consistent estimate of
             tilted.beta[0] = beta;
             std::vector<int> violated;
             backend->draw_tilted(tilted.theta, slots, 11);
-            backend->anneal(tilted.theta, tilted.beta, slots, 16 * f.variable_count, 11, tilted.log_weights, violated, tilted.found);
+            backend->anneal(tilted.theta, tilted.beta, slots, 16 * f.variable_count, false, 0.5f, 11, tilted.log_weights, violated, tilted.found);
             backend->walk_assignments(tilted.assignments);
             tilted.normalise_weights(0);
             double squared_error = 0.0;
@@ -82,7 +82,7 @@ TEST_CASE("the theta step raises the mean satisfied count of the draws") {
     auto mean_violated = [&](uint64_t epoch) {
         backend->draw_tilted(tilted.theta, 512, epoch);
         std::vector<uint8_t> found;
-        backend->anneal(tilted.theta, tilted.beta, 512, 0, epoch, tilted.log_weights, violated, found);   // zero rungs: the raw draws
+        backend->anneal(tilted.theta, tilted.beta, 512, 0, false, 0.5f, epoch, tilted.log_weights, violated, found);   // zero rungs: the raw draws
         double total = 0.0;
         for (int count : violated) total += count;
         return total / 512.0;
@@ -91,7 +91,7 @@ TEST_CASE("the theta step raises the mean satisfied count of the draws") {
     for (int step = 0; step < 40; ++step) {
         const uint64_t epoch = 200 + step;
         backend->draw_tilted(tilted.theta, 512, epoch);
-        backend->anneal(tilted.theta, tilted.beta, 512, 2 * f.variable_count, epoch, tilted.log_weights, violated, tilted.found);
+        backend->anneal(tilted.theta, tilted.beta, 512, 2 * f.variable_count, false, 0.5f, epoch, tilted.log_weights, violated, tilted.found);
         backend->walk_assignments(tilted.assignments);
         tilted.update_group(0, configuration.tilted);
     }
@@ -114,4 +114,27 @@ TEST_CASE("the tilted seed followed by the polish solves a planted instance with
     CHECK(result.seed_seconds > 0.0);
     configuration.tilted.tilted_groups = 3;   // 64 slots do not split into 3 groups
     CHECK_THROWS(solve(planted.formula, configuration));
+}
+
+TEST_CASE("skc rungs drive the annealed samples further down than the raw draw") {
+    auto planted = testing::planted_3sat(100, 4.0, 21);
+    const Formula& f = planted.formula;
+    SolverConfiguration configuration;
+    configuration.tilted.tilted_groups = 1;
+    auto backend = make_cpu_backend();
+    backend->initialise(f, 256, 6);
+    TiltedState tilted(1, 256, f.variable_count);
+    tilted.initialise_group(0, configuration.tilted, 6, 1);
+    tilted.beta[0] = 1.0f;
+    std::vector<int> violated;
+    std::vector<uint8_t> found;
+    auto mean_violated = [&](bool skc_rungs, uint64_t epoch) {
+        backend->draw_tilted(tilted.theta, 256, epoch);
+        backend->anneal(tilted.theta, tilted.beta, 256, 2 * f.variable_count, skc_rungs, 0.5f, epoch,
+                        tilted.log_weights, violated, found);
+        double total = 0.0;
+        for (int count : violated) total += count;
+        return total / 256.0;
+    };
+    CHECK(mean_violated(true, 50) < 0.5 * mean_violated(false, 50));
 }

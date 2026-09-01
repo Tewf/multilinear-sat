@@ -15,6 +15,7 @@
 #include <cstdint>
 
 #include "walk_bookkeeping.hpp"
+#include "walk_rules.hpp"
 
 namespace multilinear_sat {
 
@@ -28,6 +29,7 @@ MULTILINEAR_SAT_INLINE void draw_tilted_slot(const WalkFormula& formula, WalkSlo
 }
 
 MULTILINEAR_SAT_INLINE float anneal_slot(const WalkFormula& formula, WalkSlot& slot, const float* theta, float beta, int rungs,
+                                         bool skc_rungs, float noise,
                                          uint64_t seed, uint64_t epoch, int slot_index, uint8_t* found, uint8_t* saved) {
     float log_weight = 0.0f;
     for (int rung = 1; rung <= rungs; ++rung) {
@@ -38,6 +40,22 @@ MULTILINEAR_SAT_INLINE float anneal_slot(const WalkFormula& formula, WalkSlot& s
         log_weight += beta / static_cast<float>(rungs) * static_cast<float>(formula.clause_count - *slot.violated_count);
         const uint64_t hash_variable = walk_hash(seed, epoch, static_cast<uint64_t>(slot_index), rung, 0);
         const uint64_t hash_accept = walk_hash(seed, epoch, static_cast<uint64_t>(slot_index), rung, 1);
+        if (skc_rungs) {
+            // The Python record's walk mode: the rung is one WalkSAT/SKC step on a violated
+            // row, so the ladder generates elites while the same weights are accumulated.
+            // The record measured those weights as biased, so this mode is an elite
+            // generator, not an estimator. A satisfied slot stays put; `found` above has
+            // already saved it.
+            if (*slot.violated_count > 0) {
+                const int row = slot.violated_list[hash_variable % static_cast<uint64_t>(*slot.violated_count)];
+                const int32_t* row_literals = formula.literals + formula.clause_offsets[row];
+                const int length = formula.clause_offsets[row + 1] - formula.clause_offsets[row];
+                const int index = choose_skc(formula, slot, row_literals, length, noise, hash_accept,
+                                             walk_hash(seed, epoch, static_cast<uint64_t>(slot_index), rung, 2));
+                flip_variable(formula, slot, variable_of(row_literals[index]));
+            }
+            continue;
+        }
         const int variable = static_cast<int>(hash_variable % static_cast<uint64_t>(formula.variable_count));
         int make = 0, breaks = 0;
         flip_effect(formula, slot, variable, make, breaks);

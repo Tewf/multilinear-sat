@@ -107,6 +107,7 @@ inline Arguments parse_arguments(int argc, char** argv) {
         else if (flag == "--beta-max") c.tilted.beta_max = std::stof(value(i));
         else if (flag == "--ess-floor-fraction") c.tilted.ess_floor_fraction = std::stof(value(i));
         else if (flag == "--tilted-luby-unit-steps") c.tilted.tilted_luby_unit_steps = std::stoi(value(i));
+        else if (flag == "--tilted-skc-rungs") c.tilted.tilted_skc_rungs = true;
         else if (flag == "--no-model") arguments.print_model = false;
         else if (flag == "--verbose") c.verbose = true;
         else if (flag == "--backend") c.backend = parse_backend(value(i));

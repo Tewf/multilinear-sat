@@ -56,7 +56,7 @@ public:
     // assignment, which saved_assignment then returns. walk_assignments downloads the whole
     // batch's assignments (batch x variables, 1 = true) in one copy.
     virtual void draw_tilted(const std::vector<float>& theta, int slots_per_group, uint64_t epoch) = 0;
-    virtual void anneal(const std::vector<float>& theta, const std::vector<float>& beta, int slots_per_group, int rungs, uint64_t epoch,
+    virtual void anneal(const std::vector<float>& theta, const std::vector<float>& beta, int slots_per_group, int rungs, bool skc_rungs, float noise, uint64_t epoch,
                         std::vector<float>& log_weights, std::vector<int>& violated, std::vector<uint8_t>& found) = 0;
     virtual void walk_assignments(std::vector<uint8_t>& assignments) const = 0;
     virtual std::vector<int8_t> saved_assignment(int slot) const = 0;

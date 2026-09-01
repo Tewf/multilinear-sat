@@ -108,13 +108,20 @@ TEST_CASE("cpu and cuda tilted draws agree exactly and their annealing ladders a
     std::vector<float> cpu_weights, cuda_weights;
     std::vector<int> cpu_violated, cuda_violated;
     std::vector<uint8_t> cpu_found, cuda_found;
-    cpu->anneal(theta, beta, batch / groups, 200, 3, cpu_weights, cpu_violated, cpu_found);
-    cuda->anneal(theta, beta, batch / groups, 200, 3, cuda_weights, cuda_violated, cuda_found);
+    cpu->anneal(theta, beta, batch / groups, 200, false, 0.5f, 3, cpu_weights, cpu_violated, cpu_found);
+    cuda->anneal(theta, beta, batch / groups, 200, false, 0.5f, 3, cuda_weights, cuda_violated, cuda_found);
     // logf differs in the last bits between host and device, so one acceptance in a few
     // thousand may go the other way and the chains diverge from there: the weights agree
     // closely on most slots and the counts stay in the same range.
     int weight_disagreements = 0;
     for (int slot = 0; slot < batch; ++slot) weight_disagreements += std::fabs(cpu_weights[slot] - cuda_weights[slot]) > 1e-3f * std::fabs(cpu_weights[slot]) + 1e-2f;
     CHECK(weight_disagreements <= 8);
+    CHECK(cpu_found == cuda_found);
+    // The SKC rung takes no acceptance, so that mode has no logf and must agree exactly.
+    cpu->draw_tilted(theta, batch / groups, 4);
+    cuda->draw_tilted(theta, batch / groups, 4);
+    cpu->anneal(theta, beta, batch / groups, 200, true, 0.5f, 5, cpu_weights, cpu_violated, cpu_found);
+    cuda->anneal(theta, beta, batch / groups, 200, true, 0.5f, 5, cuda_weights, cuda_violated, cuda_found);
+    CHECK(cpu_violated == cuda_violated);
     CHECK(cpu_found == cuda_found);
 }

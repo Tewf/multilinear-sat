@@ -30,7 +30,8 @@ inline void run_tilted_seed_phase(RunState& state, int64_t steps) {
     for (int64_t step = 0; step < steps && !state.stop; ++step) {
         const uint64_t epoch = ++state.epoch;
         state.backend.draw_tilted(tilted.theta, slots_per_group, epoch);
-        state.backend.anneal(tilted.theta, tilted.beta, slots_per_group, rungs, epoch, tilted.log_weights, state.violated, tilted.found);
+        state.backend.anneal(tilted.theta, tilted.beta, slots_per_group, rungs, parameters.tilted_skc_rungs,
+                             configuration.walk.walk_noise, epoch, tilted.log_weights, state.violated, tilted.found);
         record_annealed_samples(state, tilted);
         state.check_limits();
         if (state.stop) break;

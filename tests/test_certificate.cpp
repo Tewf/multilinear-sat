@@ -60,7 +60,7 @@ public:
     std::vector<int8_t> walk_assignment(int) const override { return std::vector<int8_t>(variables_, -1); }
     void walk_flips_done(std::vector<int32_t>& flips) const override { flips.assign(1, 0); }
     void draw_tilted(const std::vector<float>&, int, uint64_t) override {}
-    void anneal(const std::vector<float>&, const std::vector<float>&, int, int, uint64_t, std::vector<float>& log_weights,
+    void anneal(const std::vector<float>&, const std::vector<float>&, int, int, bool, float, uint64_t, std::vector<float>& log_weights,
                 std::vector<int>& violated, std::vector<uint8_t>& found) override {
         log_weights.assign(1, 0.0f); violated.assign(1, 0); found.assign(1, 0);
     }

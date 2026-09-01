@@ -47,6 +47,9 @@ struct TiltedParameters {
     float beta_max = 5.0f;
     float ess_floor_fraction = 0.25f;                // raise beta while ESS >= this * slots per group, else hold
     int tilted_luby_unit_steps = 50;                 // a group's restart budget = luby(i) * this, in steps
+    bool tilted_skc_rungs = false;                   // the Python record's walk mode: each rung is one WalkSAT/SKC
+                                                     // step on a violated row, an elite generator whose weights
+                                                     // estimate nothing; the cross-entropy arm prices it
 };
 
 struct SolverConfiguration {

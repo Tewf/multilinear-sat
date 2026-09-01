@@ -16,14 +16,14 @@ __global__ void draw_tilted_kernel(WalkFormula formula, WalkArrays arrays, const
     draw_tilted_slot(formula, state, theta + (size_t)(slot / slots_per_group) * formula.variable_count, seed, epoch, slot);
 }
 
-__global__ void anneal_kernel(WalkFormula formula, WalkArrays arrays, const float* theta, const float* beta, int slots_per_group, int rungs,
+__global__ void anneal_kernel(WalkFormula formula, WalkArrays arrays, const float* theta, const float* beta, int slots_per_group, int rungs, bool skc_rungs, float noise,
                               uint64_t seed, uint64_t epoch, int batch_size, float* log_weights, uint8_t* found, uint8_t* saved) {
     const int slot = blockIdx.x * blockDim.x + threadIdx.x;
     if (slot >= batch_size) return;
     WalkSlot state = slot_view(arrays, slot, formula.variable_count, formula.clause_count);
     const int group = slot / slots_per_group;
     found[slot] = 0;
-    log_weights[slot] = anneal_slot(formula, state, theta + (size_t)group * formula.variable_count, beta[group], rungs, seed, epoch, slot,
+    log_weights[slot] = anneal_slot(formula, state, theta + (size_t)group * formula.variable_count, beta[group], rungs, skc_rungs, noise, seed, epoch, slot,
                                     found + slot, saved + (size_t)slot * formula.variable_count);
 }
 
@@ -43,12 +43,12 @@ void CudaBackend::draw_tilted(const std::vector<float>& theta, int slots_per_gro
     check(cudaGetLastError(), "draw_tilted_kernel launch");
 }
 
-void CudaBackend::anneal(const std::vector<float>& theta, const std::vector<float>& beta, int slots_per_group, int rungs, uint64_t epoch,
+void CudaBackend::anneal(const std::vector<float>& theta, const std::vector<float>& beta, int slots_per_group, int rungs, bool skc_rungs, float noise, uint64_t epoch,
                          std::vector<float>& log_weights, std::vector<int>& violated, std::vector<uint8_t>& found) {
     ensure_tilted_buffers(theta.size(), beta.size());
     upload_into(theta_, theta, "copy theta");
     upload_into(beta_, beta, "copy beta");
-    anneal_kernel<<<blocks_for(batch_size_, tilted_block_size), tilted_block_size>>>(walk_formula(), walk_arrays(), theta_, beta_, slots_per_group, rungs,
+    anneal_kernel<<<blocks_for(batch_size_, tilted_block_size), tilted_block_size>>>(walk_formula(), walk_arrays(), theta_, beta_, slots_per_group, rungs, skc_rungs, noise,
                                                                                     seed_, epoch, batch_size_, log_weights_, found_, saved_);
     check(cudaGetLastError(), "anneal_kernel launch");
     download_into(log_weights, log_weights_, batch_size_, "copy log weights (or the anneal kernel failed)");
