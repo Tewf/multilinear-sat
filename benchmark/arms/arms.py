@@ -27,6 +27,10 @@ SEED_FLAGS = {
     "ascent_30": ["--seed-kind", "ascent", "--seed-steps", 30],
     "ascent_50": ["--seed-kind", "ascent", "--seed-steps", 50],
     "ascent_200": ["--seed-kind", "ascent", "--seed-steps", 200],
+    # the cross-entropy loop with the walk as elite generator (--tilted-skc-rungs, 2026-09-01):
+    # 50 loop steps of 2n SKC rungs per unit run is 100n elite flips, the shape of the Python
+    # record's walk-mode loop, now at the batched kernel's price
+    "tilted_walk_loop": ["--seed-kind", "tilted", "--tilted-skc-rungs", "--seed-steps", 50],
 }
 ARMS = {
     "base": {},
@@ -53,6 +57,7 @@ ARMS = {
     # skc cross first pencilled in is dropped unrun.
     "ascent_10+polish_100n": dict(seed="ascent_10", polish_per_variable=100),
     "batch_16384+polish_20n": dict(batch=16384, polish_per_variable=20),
+    "tilted_walk_loop": dict(seed="tilted_walk_loop"),
 }
 # The tilted seed is not an arm: on the sampling-walk records its expected time is 94x a
 # uniform start's on the same uf250 runs, far outside the brief's 2x; dominance.py reads that
@@ -88,6 +93,12 @@ STAGES = [
     ("long_walk", ["polish_100n"], ["n1000-r4.20", "n5000-r4.20"]),
     ("two_factor_uf250", ["batch_16384+polish_20n"], ["uf250-1065"]),
     ("two_factor_n1000", ["ascent_10+polish_100n"], ["n1000-r4.20"]),
+    # the hand-off's remaining n = 5000 question: the long walk with and without the 10-step
+    # ascent, whose gain grew with n on every family it was priced on (2026-09-01)
+    ("long_walk_ascent", ["ascent_10+polish_100n"], ["n5000-r4.20"]),
+    # the hand-off's remaining seed question: the cross-entropy loop at n >= 1000, where the
+    # Python walk-mode loop's p = 0.35 lost 17x per unit of cost on a launch-bound kernel
+    ("cross_entropy_loop", ["tilted_walk_loop"], ["n1000-r4.20"]),
 ]
 N5000 = ["n5000-r4.20", "n5000-r4.26"]
 ONE_FACTOR_ARMS_NOT_RUN_AT_N5000 = [arm for stage, stage_arms, _ in STAGES if stage in ("seeds", "rule_and_batch", "schedule_and_polish", "rigorous") for arm in stage_arms]
