@@ -17,6 +17,9 @@ void CpuBackend::begin_walk(const std::vector<WalkSlotPlan>& plan, const WalkPar
     const int table_length = formula_->max_occurrence_count() + 1;
     probsat_weight_ = probsat_weight_table(table_length, walk);
     metropolis_threshold_ = metropolis_threshold_table(table_length, walk);
+    xnf_binary_clause_weight_ = xnf_weight_table(table_length, walk.xnf_cb, walk.xnf_binary_clause_weight);
+    xnf_clause_weight_ = xnf_weight_table(table_length, walk.xnf_cb, walk.xnf_clause_weight);
+    xnf_parity_weight_ = xnf_weight_table(table_length, walk.xnf_cb, walk.xnf_parity_weight);
     const WalkFormula formula = walk_formula_of(*formula_);
     const WalkArrays arrays = walk_arrays();
 #pragma omp parallel for schedule(static)
@@ -32,7 +35,8 @@ void CpuBackend::walk(const WalkParameters& walk, std::vector<int>& violated) {
     violated.resize(batch_size_);
     const WalkFormula formula = walk_formula_of(*formula_);
     const WalkArrays arrays = walk_arrays();
-    const WalkTables tables{probsat_weight_.data(), metropolis_threshold_.data()};
+    const WalkTables tables{probsat_weight_.data(), metropolis_threshold_.data(), xnf_binary_clause_weight_.data(),
+                            xnf_clause_weight_.data(), xnf_parity_weight_.data()};
 #pragma omp parallel for schedule(dynamic, 16)
     for (int slot = 0; slot < batch_size_; ++slot) {
         walk_slot(formula, slot_view(arrays, slot, variable_count_, clause_count_), tables, plan_[slot], walk.walk_noise,

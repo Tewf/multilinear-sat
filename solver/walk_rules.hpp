@@ -8,7 +8,10 @@
 //   schoening   Schoning (FOCS 1999): a uniform variable of the row;
 //   metropolis  a uniform variable of the whole formula, accepted with probability
 //               min(1, exp(beta (make - break))): a symmetric proposal, so the chain has
-//               exp(beta S) as its stationary law, which is what the annealed weights need.
+//               exp(beta S) as its stationary law, which is what the annealed weights need;
+//   xnf         xnfSAT (Nawrocki, Liu, Frohlich, Heule, Biere, SAT 2021): a variable with
+//               score cb^-wb, wb the break count weighted per row kind (binary clause,
+//               longer clause, parity), as the product of three integer tables.
 // The real-valued weights and acceptance probabilities are integer tables built on the
 // host (walk_tables.hpp), so the two backends draw the same variable from the same hash.
 #pragma once
@@ -20,8 +23,11 @@
 namespace multilinear_sat {
 
 struct WalkTables {
-    const uint32_t* probsat_weight;        // indexed by break count
-    const uint32_t* metropolis_threshold;  // indexed by the loss break - make, when positive
+    const uint32_t* probsat_weight;           // indexed by break count
+    const uint32_t* metropolis_threshold;     // indexed by the loss break - make, when positive
+    const uint32_t* xnf_binary_clause_weight; // indexed by the kind's break count; the product
+    const uint32_t* xnf_clause_weight;        // of the three entries is xnf's score
+    const uint32_t* xnf_parity_weight;
 };
 
 MULTILINEAR_SAT_INLINE int choose_skc(const WalkFormula& formula, const WalkSlot& slot, const int32_t* row_literals, int length,
@@ -42,6 +48,26 @@ MULTILINEAR_SAT_INLINE int choose_probsat(const WalkFormula& formula, const Walk
     uint64_t remaining = hash % total;
     for (int i = 0; i < length; ++i) {
         const uint64_t w = weight[break_count(formula, slot, variable_of(row_literals[i]))];
+        if (remaining < w) return i;
+        remaining -= w;
+    }
+    return length - 1;
+}
+
+MULTILINEAR_SAT_INLINE uint64_t xnf_weight_of(const WalkFormula& formula, const WalkSlot& slot, const WalkTables& tables, int variable) {
+    int binary_clauses, longer_clauses, parities;
+    split_break_count(formula, slot, variable, binary_clauses, longer_clauses, parities);
+    return static_cast<uint64_t>(tables.xnf_binary_clause_weight[binary_clauses]) *
+           tables.xnf_clause_weight[longer_clauses] * tables.xnf_parity_weight[parities];
+}
+
+MULTILINEAR_SAT_INLINE int choose_xnf(const WalkFormula& formula, const WalkSlot& slot, const int32_t* row_literals, int length,
+                                      const WalkTables& tables, uint64_t hash) {
+    uint64_t total = 0;
+    for (int i = 0; i < length; ++i) total += xnf_weight_of(formula, slot, tables, variable_of(row_literals[i]));
+    uint64_t remaining = hash % total;
+    for (int i = 0; i < length; ++i) {
+        const uint64_t w = xnf_weight_of(formula, slot, tables, variable_of(row_literals[i]));
         if (remaining < w) return i;
         remaining -= w;
     }
@@ -76,6 +102,7 @@ MULTILINEAR_SAT_INLINE bool walk_one_step(const WalkFormula& formula, WalkSlot& 
         int index;
         if (rule == WalkRule::Schoening) index = static_cast<int>(hash_1 % static_cast<uint64_t>(length));
         else if (rule == WalkRule::ProbSat) index = choose_probsat(formula, slot, row_literals, length, tables.probsat_weight, hash_1);
+        else if (rule == WalkRule::Xnf) index = choose_xnf(formula, slot, row_literals, length, tables, hash_1);
         else index = choose_skc(formula, slot, row_literals, length, noise, hash_1, walk_hash(seed, epoch, static_cast<uint64_t>(slot_index), step, 2));
         variable = variable_of(row_literals[index]);
     }

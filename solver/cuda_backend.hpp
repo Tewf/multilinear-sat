@@ -46,6 +46,7 @@ private:
     int32_t *violated_list_ = nullptr, *violated_position_ = nullptr, *violated_count_ = nullptr, *flips_done_ = nullptr;
     WalkSlotPlan* plan_ = nullptr;
     uint32_t *probsat_weight_ = nullptr, *metropolis_threshold_ = nullptr;
+    uint32_t *xnf_binary_clause_weight_ = nullptr, *xnf_clause_weight_ = nullptr, *xnf_parity_weight_ = nullptr;
     float *theta_ = nullptr, *beta_ = nullptr, *log_weights_ = nullptr;
     uint8_t *found_ = nullptr, *saved_ = nullptr;
     size_t theta_capacity_ = 0, beta_capacity_ = 0;

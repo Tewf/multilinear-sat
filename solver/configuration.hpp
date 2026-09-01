@@ -7,7 +7,7 @@ namespace multilinear_sat {
 
 enum class BackendKind { Cpu, Cuda, Auto };
 enum class SeedKind { Uniform, AllFalse, Ascent, Tilted };    // where each run's walk starts
-enum class WalkRule { Skc, ProbSat, Schoening, Metropolis };  // how the walk picks a variable
+enum class WalkRule { Skc, ProbSat, Schoening, Metropolis, Xnf };  // how the walk picks a variable
 enum class RestartSchedule { Luby, Fixed };                   // run k's budget: times luby(k), or the same every run
 
 struct StepParameters {
@@ -24,6 +24,11 @@ struct WalkParameters {
     float probsat_cb = 2.06f;         // probsat: a variable with break b has weight (probsat_eps + b)^-probsat_cb
     float probsat_eps = 0.9f;         //          (Balint and Schoning 2012, their 3-SAT values)
     float metropolis_beta = 1.0f;     // metropolis: accept a flip losing d satisfied rows with probability exp(-beta d)
+    float xnf_cb = 2.5f;                    // xnf: a variable with weighted break wb has score xnf_cb^-wb, where wb
+    float xnf_binary_clause_weight = 2.0f;  //      sums this per broken binary clause,
+    float xnf_clause_weight = 3.0f;         //      this per broken longer clause,
+    float xnf_parity_weight = 5.0f;         //      and this per broken parity: xnfSAT's weighted-break rule at its
+                                            //      defaults (Nawrocki, Liu, Frohlich, Heule, Biere, SAT 2021)
     int walk_flips_per_launch = 32;   // flips per slot between two certificate checks (one CUDA launch)
 };
 

@@ -62,7 +62,7 @@ TEST_CASE("flip_variable keeps the counts and the violated list equal to a recou
 TEST_CASE("every rule's walk reports counts the checker confirms after k flips, from every start") {
     auto planted = testing::planted_3sat(100, 4.2, 6);
     const Formula& f = planted.formula;
-    for (WalkRule rule : {WalkRule::Skc, WalkRule::ProbSat, WalkRule::Schoening, WalkRule::Metropolis}) {
+    for (WalkRule rule : {WalkRule::Skc, WalkRule::ProbSat, WalkRule::Schoening, WalkRule::Metropolis, WalkRule::Xnf}) {
         for (SeedKind start : {SeedKind::Uniform, SeedKind::AllFalse, SeedKind::Ascent}) {
             auto backend = make_cpu_backend();
             backend->initialise(f, 16, 11);

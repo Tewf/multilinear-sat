@@ -10,6 +10,8 @@
 #include "planted_instances.hpp"
 #include "solver.hpp"
 #include "walk_bookkeeping.hpp"
+#include "walk_rules.hpp"
+#include "walk_tables.hpp"
 
 using namespace multilinear_sat;
 
@@ -117,4 +119,51 @@ TEST_CASE("the walk and the ascent solve a planted XNF with a certificate, and a
     CHECK(unknown.status == Status::Unknown);
     CHECK(unknown.best_violated == 1);
     CHECK(unknown.runs == 3);
+}
+
+TEST_CASE("the xnf rule's integer weight is cb^-wb within table quantisation, split counts summing to the break count") {
+    auto planted = testing::planted_xnf(40, 3.0, 12, 4, 21);
+    const Formula& f = planted.formula;
+    const WalkFormula wf = walk_formula_of(f);
+    const WalkParameters walk;   // xnfSAT's defaults: cb 2.5, weights 2 / 3 / 5
+    const int length = f.max_occurrence_count() + 1;
+    const auto binary = xnf_weight_table(length, walk.xnf_cb, walk.xnf_binary_clause_weight);
+    const auto longer = xnf_weight_table(length, walk.xnf_cb, walk.xnf_clause_weight);
+    const auto parity = xnf_weight_table(length, walk.xnf_cb, walk.xnf_parity_weight);
+    const WalkTables tables{nullptr, nullptr, binary.data(), longer.data(), parity.data()};
+    std::vector<uint8_t> assignment(f.variable_count), true_count(f.clause_count());
+    std::vector<int32_t> list(f.clause_count()), position(f.clause_count());
+    int32_t count = 0;
+    WalkSlot slot{assignment.data(), true_count.data(), list.data(), position.data(), &count};
+    uint64_t state = 9;
+    for (int trial = 0; trial < 3; ++trial) {
+        for (int v = 0; v < f.variable_count; ++v) assignment[v] = testing::next_random(state) & 1;
+        count = 0;
+        recount_slot(wf, slot);
+        for (int v = 0; v < f.variable_count; ++v) {
+            int binary_clauses, longer_clauses, parities;
+            split_break_count(wf, slot, v, binary_clauses, longer_clauses, parities);
+            CHECK(binary_clauses + longer_clauses + parities == break_count(wf, slot, v));
+            if (binary[binary_clauses] > 1 && longer[longer_clauses] > 1 && parity[parities] > 1) {
+                const double weighted_break = 2.0 * binary_clauses + 3.0 * longer_clauses + 5.0 * parities;
+                const double score = static_cast<double>(xnf_weight_of(wf, slot, tables, v)) / 65536.0 / 65536.0 / 65536.0;
+                CHECK(score == doctest::Approx(std::pow(2.5, -weighted_break)).epsilon(1e-3));
+            }
+        }
+    }
+}
+
+TEST_CASE("the xnf rule walks a planted xnf to a certificate") {
+    auto planted = testing::planted_xnf(60, 2.5, 15, 4, 3);
+    SolverConfiguration c;
+    c.backend = BackendKind::Cpu;
+    c.batch_size = 32;
+    c.seed = 2;
+    c.seed_kind = SeedKind::Uniform;
+    c.polish_flips = 20000;
+    c.walk.walk_rule = WalkRule::Xnf;
+    c.time_limit_seconds = 30.0;
+    const SolveResult result = solve(planted.formula, c);
+    CHECK(result.status == Status::Satisfiable);
+    CHECK(result.best_violated == 0);
 }

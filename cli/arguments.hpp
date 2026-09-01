@@ -20,7 +20,7 @@ inline const char* usage() {
     return "usage: multilinear-sat <file.cnf|file.xnf> [--time-limit S] [--iteration-limit N] [--run-limit N] [--seed N]\n"
            "         [--batch-size B] [--backend cpu|cuda|auto] [--step-size X] [--momentum X] [--kick-sigma X]\n"
            "         [--kick-decay X] [--focused-kick 0|1] [--seed-kind uniform|all-false|ascent|tilted] [--seed-steps N]\n"
-           "         [--polish-flips N] [--restart-schedule luby|fixed] [--stall-patience N] [--walk-rule skc|probsat|schoening|metropolis]\n"
+           "         [--polish-flips N] [--restart-schedule luby|fixed] [--stall-patience N] [--walk-rule skc|probsat|schoening|metropolis|xnf]\n"
            "         [--walk-noise X] [--probsat-cb X] [--probsat-eps X] [--metropolis-beta X] [--walk-flips-per-launch N]\n"
            "         [--rigorous-fraction X] [--prior-satisfiable X] [--beta-prior-a X] [--beta-prior-b X]\n"
            "         [--tilted-groups N] [--tilted-rungs-per-variable X] [--tilted-learning-rate X]\n"
@@ -42,7 +42,8 @@ inline WalkRule parse_walk_rule(const std::string& rule) {
     if (rule == "probsat") return WalkRule::ProbSat;
     if (rule == "schoening") return WalkRule::Schoening;
     if (rule == "metropolis") return WalkRule::Metropolis;
-    throw std::invalid_argument("unknown walk rule " + rule + " (skc, probsat, schoening or metropolis)");
+    if (rule == "xnf") return WalkRule::Xnf;
+    throw std::invalid_argument("unknown walk rule " + rule + " (skc, probsat, schoening, metropolis or xnf)");
 }
 
 inline RestartSchedule parse_restart_schedule(const std::string& schedule) {
@@ -87,6 +88,10 @@ inline Arguments parse_arguments(int argc, char** argv) {
         else if (flag == "--probsat-cb") c.walk.probsat_cb = std::stof(value(i));
         else if (flag == "--probsat-eps") c.walk.probsat_eps = std::stof(value(i));
         else if (flag == "--metropolis-beta") c.walk.metropolis_beta = std::stof(value(i));
+        else if (flag == "--xnf-cb") c.walk.xnf_cb = std::stof(value(i));
+        else if (flag == "--xnf-binary-clause-weight") c.walk.xnf_binary_clause_weight = std::stof(value(i));
+        else if (flag == "--xnf-clause-weight") c.walk.xnf_clause_weight = std::stof(value(i));
+        else if (flag == "--xnf-parity-weight") c.walk.xnf_parity_weight = std::stof(value(i));
         else if (flag == "--walk-flips-per-launch") c.walk.walk_flips_per_launch = std::stoi(value(i));
         else if (flag == "--rigorous-fraction") c.rigorous_fraction = std::stof(value(i));
         else if (flag == "--prior-satisfiable") c.prior_satisfiable = std::stod(value(i));

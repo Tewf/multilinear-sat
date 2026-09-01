@@ -54,7 +54,7 @@ TEST_CASE("cpu and cuda walks agree bit for bit under every rule, from every sta
     for (int with_parities = 0; with_parities < 2; ++with_parities) {
         auto planted = with_parities ? testing::planted_xnf(150, 3.8, 40, 5, 13) : testing::planted_3sat(200, 4.2, 12);
         const int batch = 64;
-        for (WalkRule rule : {WalkRule::Skc, WalkRule::ProbSat, WalkRule::Schoening, WalkRule::Metropolis}) {
+        for (WalkRule rule : {WalkRule::Skc, WalkRule::ProbSat, WalkRule::Schoening, WalkRule::Metropolis, WalkRule::Xnf}) {
             for (SeedKind start : {SeedKind::Uniform, SeedKind::AllFalse, SeedKind::Ascent}) {
                 auto cpu = make_cpu_backend();
                 auto cuda = make_cuda_backend();

@@ -38,6 +38,7 @@ private:
     std::vector<int32_t> violated_list_, violated_position_, violated_count_, flips_done_;
     std::vector<WalkSlotPlan> plan_;
     std::vector<uint32_t> probsat_weight_, metropolis_threshold_;
+    std::vector<uint32_t> xnf_binary_clause_weight_, xnf_clause_weight_, xnf_parity_weight_;
 };
 
 }  // namespace multilinear_sat

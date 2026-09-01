@@ -49,6 +49,9 @@ void CudaBackend::allocate_walk() {
     plan_ = static_cast<WalkSlotPlan*>(allocate(batch_size_ * sizeof(WalkSlotPlan), "allocate walk plan"));
     table_length_ = formula_->max_occurrence_count() + 1;
     probsat_weight_ = static_cast<uint32_t*>(allocate(table_length_ * sizeof(uint32_t), "allocate probsat weights"));
+    xnf_binary_clause_weight_ = static_cast<uint32_t*>(allocate(table_length_ * sizeof(uint32_t), "allocate xnf binary clause weights"));
+    xnf_clause_weight_ = static_cast<uint32_t*>(allocate(table_length_ * sizeof(uint32_t), "allocate xnf clause weights"));
+    xnf_parity_weight_ = static_cast<uint32_t*>(allocate(table_length_ * sizeof(uint32_t), "allocate xnf parity weights"));
     metropolis_threshold_ = static_cast<uint32_t*>(allocate(table_length_ * sizeof(uint32_t), "allocate metropolis thresholds"));
     log_weights_ = static_cast<float*>(allocate(batch_size_ * sizeof(float), "allocate log weights"));
     found_ = static_cast<uint8_t*>(allocate(batch_size_, "allocate found flags"));
@@ -60,12 +63,15 @@ void CudaBackend::begin_walk(const std::vector<WalkSlotPlan>& plan, const WalkPa
     upload_into(plan_, plan, "copy walk plan");
     upload_into(probsat_weight_, probsat_weight_table(table_length_, walk), "copy probsat weights");
     upload_into(metropolis_threshold_, metropolis_threshold_table(table_length_, walk), "copy metropolis thresholds");
+    upload_into(xnf_binary_clause_weight_, xnf_weight_table(table_length_, walk.xnf_cb, walk.xnf_binary_clause_weight), "copy xnf binary clause weights");
+    upload_into(xnf_clause_weight_, xnf_weight_table(table_length_, walk.xnf_cb, walk.xnf_clause_weight), "copy xnf clause weights");
+    upload_into(xnf_parity_weight_, xnf_weight_table(table_length_, walk.xnf_cb, walk.xnf_parity_weight), "copy xnf parity weights");
     begin_walk_kernel<<<blocks_for(batch_size_, walk_block_size), walk_block_size>>>(walk_formula(), walk_arrays(), plan_, points_, seed_, epoch, batch_size_);
     check(cudaGetLastError(), "begin_walk_kernel launch");
 }
 
 void CudaBackend::walk(const WalkParameters& walk, std::vector<int>& violated) {
-    const WalkTables tables{probsat_weight_, metropolis_threshold_};
+    const WalkTables tables{probsat_weight_, metropolis_threshold_, xnf_binary_clause_weight_, xnf_clause_weight_, xnf_parity_weight_};
     walk_kernel<<<blocks_for(batch_size_, walk_block_size), walk_block_size>>>(walk_formula(), walk_arrays(), plan_, tables, walk.walk_noise,
                                                                               walk.walk_flips_per_launch, seed_, walk_epoch_, batch_size_);
     check(cudaGetLastError(), "walk_kernel launch");

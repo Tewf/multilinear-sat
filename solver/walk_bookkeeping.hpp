@@ -129,6 +129,24 @@ MULTILINEAR_SAT_INLINE int break_count(const WalkFormula& formula, const WalkSlo
     return breaks;
 }
 
+// The break counts split by the row kinds the xnf rule weighs differently: binary clauses,
+// longer clauses, parities.
+MULTILINEAR_SAT_INLINE void split_break_count(const WalkFormula& formula, const WalkSlot& slot, int variable,
+                                              int& binary_clauses, int& longer_clauses, int& parities) {
+    binary_clauses = longer_clauses = parities = 0;
+    for (int o = formula.occurrence_offsets[variable]; o < formula.occurrence_offsets[variable + 1]; ++o) {
+        const int row = formula.occurrence_clauses[o];
+        const int count = slot.true_count[row];
+        if (formula.clause_is_parity[row]) {
+            parities += count & 1;
+        } else if (count == 1 && literal_true(slot.assignment, formula.occurrence_literals[o])) {
+            const bool binary = formula.clause_offsets[row + 1] - formula.clause_offsets[row] == 2;
+            binary_clauses += binary;
+            longer_clauses += !binary;
+        }
+    }
+}
+
 // Flips the variable and brings the counts and the violated list up to date.
 MULTILINEAR_SAT_INLINE void flip_variable(const WalkFormula& formula, WalkSlot& slot, int variable) {
     slot.assignment[variable] ^= 1;
