@@ -23,7 +23,7 @@ anywhere; `CITATION.cff` leaves its repository field blank until it is.
 | Directory | Role |
 |---|---|
 | `solver/`, `cli/`, `tests/` | the library (formula with parity rows, energies, hash randomness, the walk, the tilted seed, both backends, the run loop, the posteriors), its DIMACS and XNF command line, and the doctest suite |
-| [`gaussian_surrogate/`](gaussian_surrogate/README.md) | the Python research record of the objective study: does the variance of the satisfied-clause count help the ascent (it lands closer and pays 3 to 86x per step), the tilted loop, the seeds priced with a launch-bound kernel; its findings in `findings.md` and `findings-tilted/` |
+| [`gaussian_surrogate/`](gaussian_surrogate/README.md) | the Python research record of the objective study: does the variance of the satisfied-clause count help the ascent (it lands closer and pays 3 to 86x per step), the tilted loop, the seeds priced with a launch-bound kernel; its findings in `findings.md`, `findings-tilted/` and `findings-fidelity.md` (no surrogate approximates the exact count; the seeds act through basin geometry) |
 | [`literature/`](literature/README.md) | seven reviews, each a folder of thesis steps with verified references, and the index |
 | [`method/`](method/README.md) | the method as built, the two design notes (the design as proposed), and `algorithm.md`, the surviving variant written as pseudocode with the number behind each choice |
 | [`benchmark/`](benchmark/README.md) | every measurement with its provenance (command, seed, commit, binary hash, GPU state), the findings of the walk, and `arms/`: the variants priced on one protocol, the dominance front and the rejected arms with their numbers |

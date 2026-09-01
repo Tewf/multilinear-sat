@@ -3,7 +3,7 @@
 The Python research record of the objective study, in PyTorch, which asks one question of the continuous
 relaxation: does the *variance* of the satisfied-clause count help gradient ascent find a
 satisfying assignment, or is its mean enough? The C++ library in `../solver` does not depend on it; the origin and derivation are in `method/`, the
-results in `findings.md` and `findings-tilted/`, and what the library then measured of the same
+results in `findings.md`, `findings-tilted/` and `findings-fidelity.md`, and what the library then measured of the same
 seeds is `../benchmark/findings-walk/`.
 
 Variables x in {-1, 1}^n are relaxed to independent means p in [-1, 1]^n. For a clause j
