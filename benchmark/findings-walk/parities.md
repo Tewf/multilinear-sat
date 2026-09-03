@@ -76,8 +76,8 @@ even lower the floor. The residue tracks the instance, not the budget: the shape
 efficiency lever, not the missing solve. The gap to xnfsat, which solves three of these, is
 not the budget shape either - its single chain also runs about 6x faster per flip than this
 solver's (1e7/s against 1.6e6/s), so implementation throughput and the last-rows barrier are
-what remain, not the number of chains. Records:
-`work/2026-09-01_shaped-encodings/out/2026-09-03-budget-shape/summary.txt` (local).
+what remain, not the number of chains. The raw per-instance cells are kept as a local archive
+and not committed; the floors quoted here are the record.
 
 **A records caveat found on the way.** Before commit `bb322b7`, `walk_rule_name` had no case
 for `WalkRule::Xnf` and serialised it as `metropolis`, so every `--walk-rule xnf` row in
