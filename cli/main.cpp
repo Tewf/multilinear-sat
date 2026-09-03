@@ -26,7 +26,7 @@ static const char* seed_kind_name(SeedKind kind) {
 }
 
 static const char* walk_rule_name(WalkRule rule) {
-    return rule == WalkRule::Skc ? "skc" : rule == WalkRule::ProbSat ? "probsat" : rule == WalkRule::Schoening ? "schoening" : "metropolis";
+    return rule == WalkRule::Skc ? "skc" : rule == WalkRule::ProbSat ? "probsat" : rule == WalkRule::Schoening ? "schoening" : rule == WalkRule::Xnf ? "xnf" : "metropolis";
 }
 
 static void print_json(const SolveResult& r, const SolverConfiguration& c, bool satisfiable) {
