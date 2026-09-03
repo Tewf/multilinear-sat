@@ -46,8 +46,8 @@ solvers there is not the variable score. Second, the shape matches the n = 5000 
 [../arms/front.md](../arms/front.md): xnfsat spends its five seconds as one uninterrupted
 chain of about 5e7 flips where each of our 1024 slots gets about 1e6 across its Luby runs,
 and Brent equations, like n = 5000, look like formulas that pay for one long walk rather
-than many short ones. The unmeasured next lever is the budget shape (fewer slots, far longer
-runs), not the rule.
+than many short ones. The next lever is the budget shape (fewer slots, far longer runs), not the rule - measured
+2026-09-03 in the section below: a real efficiency lever, but it closes no instance.
 
 Verification on matmul_2x2x2 at rank 7 through the toolkit's `decide-rank-by-sat --solver`
 route, which reads the model back and re-multiplies it: given the binary itself the toolkit
@@ -59,3 +59,28 @@ bug on the way (a model of the mutilated formula was refused); the toolkit's own
 xnfsat at 0 of 5 and yalsat at 1 of 5 in 60 s on this fixture, so no route holds a verified
 model of it. On an XNF read correctly the solver's own checker certifies every model it
 reports, which the brute-force doctest cases on tiny XNFs cover.
+
+## The budget shape is a real efficiency lever and still closes nothing (2026-09-03)
+
+The lever the previous section left unmeasured, tested: the ten MM-Challenge-1 XNFs from all
+false, the xnf rule, a 60 s cap, three shapes of the same flip budget - the GPU's 4096 short
+Luby chains against a few long fixed-schedule walks on the CPU (8 chains, and 1). None solves.
+What moves is the floor and the flips it costs to reach it: on seven of ten instances a CPU
+long walk reaches fewer violated rows than the 4096-slot batch while spending **10 to 40x
+fewer flips** (the batch ~1.1e9, the eight-chain walk ~3e7). The clearest cell is
+`MM-23-2-2-2-2-A`: the single long chain reaches **2 violated rows of 56 700** on 1e8 flips
+where the batch sits at 5 on 1.05e9. So the shape reading of the n = 5000 boundary holds -
+fewer, longer walks descend far more per flip - but the last two to seven rows do not close,
+and on the three hardest instances (`2-2-2-4-A`, `4-B`, `4-4-4-4-1`) the long shape does not
+even lower the floor. The residue tracks the instance, not the budget: the shape is a real
+efficiency lever, not the missing solve. The gap to xnfsat, which solves three of these, is
+not the budget shape either - its single chain also runs about 6x faster per flip than this
+solver's (1e7/s against 1.6e6/s), so implementation throughput and the last-rows barrier are
+what remain, not the number of chains. Records:
+`work/2026-09-01_shaped-encodings/out/2026-09-03-budget-shape/summary.txt` (local).
+
+**A records caveat found on the way.** Before commit `bb322b7`, `walk_rule_name` had no case
+for `WalkRule::Xnf` and serialised it as `metropolis`, so every `--walk-rule xnf` row in
+`parity_challenge.jsonl` carries `walk_rule: metropolis`. The rule was applied (skc, metropolis
+and xnf give three distinct floors, 22 / 107 / 18 on `MM-23-2-2-2-2-A`), so the prose above and
+in the earlier sections is right; only the machine-readable label was wrong, and is fixed.
